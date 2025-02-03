@@ -22,6 +22,7 @@ def generate_code():
         file.write(code)
 
     return output_file
+    
 
 def commit_and_push(filename):
     """Commits and pushes the generated file to GitHub."""
