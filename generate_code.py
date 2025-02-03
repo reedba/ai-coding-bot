@@ -23,7 +23,6 @@ def generate_code():
 
     return output_file
     
-
 def commit_and_push(filename):
     """Commits and pushes the generated file to GitHub."""
     subprocess.run(["git", "config", "--global", "user.name", "github-actions[bot]"])
