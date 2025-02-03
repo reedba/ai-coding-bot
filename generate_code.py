@@ -7,7 +7,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_code():
     """Generates Python code using OpenAI's API and writes it to a file."""
-    prompt = "Generate a Python method that uses bubble sort"
+    prompt = "I am currently working on learning DSA and need you to act as my tutor. I need you to create a new DSA problem with explanation and solution within python. Lets start wit strings and arrays"
     
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -16,10 +16,17 @@ def generate_code():
     
     code = response["choices"][0]["message"]["content"]
     
+    # Debugging: Print the response to ensure it's correct
+    print("Generated code:", code)
+    
     # Save the generated code to a fixed file
     output_file = "generated_script.py"
     with open(output_file, "w") as file:
         file.write(code)
+
+    # Debugging: Confirm the file was written
+    with open(output_file, "r") as file:
+        print("File content:", file.read())
 
     return output_file
 

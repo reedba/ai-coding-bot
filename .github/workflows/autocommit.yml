@@ -28,4 +28,15 @@ jobs:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         python generate_code.py
-        
+
+    - name: Display generated script content
+      run: |
+        cat generated_script.py
+
+    - name: Check git status
+      run: |
+        git status
+
+    - name: Show git log
+      run: |
+        git log -1
