@@ -9,12 +9,13 @@ def generate_code():
     """Generates Python code using OpenAI's API and writes it to a file."""
     prompt = "Generate a Python script that prints 'Hello, World!'"
     
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}]
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        max_tokens=100
     )
     
-    code = response["choices"][0]["message"]["content"]
+    code = response["choices"][0]["text"]
     
     # Save the generated code to a fixed file
     output_file = "generated_script.py"
@@ -22,7 +23,7 @@ def generate_code():
         file.write(code)
 
     return output_file
-    
+
 def commit_and_push(filename):
     """Commits and pushes the generated file to GitHub."""
     subprocess.run(["git", "config", "--global", "user.name", "github-actions[bot]"])
@@ -34,4 +35,3 @@ def commit_and_push(filename):
 if __name__ == "__main__":
     file = generate_code()
     commit_and_push(file)
-
