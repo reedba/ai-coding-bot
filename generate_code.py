@@ -7,7 +7,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_code():
     """Generates Python code using OpenAI's API and writes it to a file."""
-    prompt = "Generate a Python script that prints 'Hello, World!'"
+    prompt = "Generate a Python method that uses bubble sort"
     
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
