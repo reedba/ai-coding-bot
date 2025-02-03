@@ -9,13 +9,12 @@ def generate_code():
     """Generates Python code using OpenAI's API and writes it to a file."""
     prompt = "Generate a Python script that prints 'Hello, World!'"
     
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=prompt,
-        max_tokens=100
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": prompt}]
     )
     
-    code = response["choices"][0]["text"]
+    code = response["choices"][0]["message"]["content"]
     
     # Save the generated code to a fixed file
     output_file = "generated_script.py"
