@@ -27,4 +27,4 @@ jobs:
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
-        python generate_code.pyh
+        python generate_code.py
