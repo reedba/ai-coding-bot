@@ -1,30 +1,39 @@
-Problem: 
-
-Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards. 
+Problem: Given a string, find the first non-repeating character and return its index. If no unique character exists, return -1.
 
 Example:
-Input: "racecar" 
-Output: True 
+Input: "leetcode"
+Output: 0
 
-Input: "hello" 
-Output: False
+Input: "loveleetcode"
+Output: 2
 
-Explanation: 
-To solve this problem, we can compare the original string with its reverse. If they are the same, then the string is a palindrome. We can ignore any spaces, special characters, or letter case by converting the string to lowercase and removing any non-alphanumeric characters. 
+Explanation:
+In the first example, the only non-repeating character is 'l' at index 0.
+In the second example, the first non-repeating character is 'v' at index 2.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    # Remove non-alphanumeric characters and convert to lowercase
-    s = ''.join(filter(str.isalnum, s)).lower()
+def firstUniqChar(s: str) -> int:
+    char_count = {}
     
-    # Compare the original string with its reverse
-    return s == s[::-1]
+    # Count the frequency of each character in the string
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+    
+    # find the index of the first non-repeating character
+    for i in range(len(s)):
+        if char_count[s[i]] == 1:
+            return i
+    
+    return -1
 
-# Test cases
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
+# Test the function with the given examples
+print(firstUniqChar("leetcode"))  # Output: 0
+print(firstUniqChar("loveleetcode"))  # Output: 2
 ```
 
-This function first removes any non-alphanumeric characters using the `filter()` function with `str.isalnum`, and then converts the string to lowercase using `lower()`. It then compares the original string `s` with its reverse using slicing `s[::-1]` to check if it is a palindrome.
+This solution uses a dictionary to keep track of the frequency of each character in the string. Then, it iterates through the string to find the index of the first non-repeating character by checking the frequency in the dictionary. Finally, it returns the index or -1 if no unique character is found.
