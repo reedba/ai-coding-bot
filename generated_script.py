@@ -1,33 +1,30 @@
-Problem: Write a function that takes in a string and returns the most common character in the string. If there are multiple characters with the same frequency, return the first character encountered.
+Problem: 
 
-Explanation:
-To solve this problem, we can iterate through the string and store the frequency of each character in a dictionary. We then loop through the dictionary to find the character with the highest frequency.
+Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards. 
+
+Example:
+Input: "racecar" 
+Output: True 
+
+Input: "hello" 
+Output: False
+
+Explanation: 
+To solve this problem, we can compare the original string with its reverse. If they are the same, then the string is a palindrome. We can ignore any spaces, special characters, or letter case by converting the string to lowercase and removing any non-alphanumeric characters. 
 
 Solution in Python:
-```python
-def most_common_character(s):
-    char_frequency = {}
-    
-    for char in s:
-        if char in char_frequency:
-            char_frequency[char] += 1
-        else:
-            char_frequency[char] = 1
-    
-    max_freq_char = ''
-    max_freq = 0
-    for char, freq in char_frequency.items():
-        if freq > max_freq:
-            max_freq = freq
-            max_freq_char = char
-            
-    return max_freq_char
 
-# Test the function
-test_string = "hello"
-print(most_common_character(test_string))  # Output: 'l'
+```python
+def is_palindrome(s):
+    # Remove non-alphanumeric characters and convert to lowercase
+    s = ''.join(filter(str.isalnum, s)).lower()
+    
+    # Compare the original string with its reverse
+    return s == s[::-1]
+
+# Test cases
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))    # Output: False
 ```
 
-In this solution, we first create an empty dictionary `char_frequency` to store the frequency of each character in the input string `s`. We then iterate through each character in `s` and update the frequency in the `char_frequency` dictionary.
-
-Finally, we loop through the dictionary to find the character with the maximum frequency and return that character as the most common character.
+This function first removes any non-alphanumeric characters using the `filter()` function with `str.isalnum`, and then converts the string to lowercase using `lower()`. It then compares the original string `s` with its reverse using slicing `s[::-1]` to check if it is a palindrome.
