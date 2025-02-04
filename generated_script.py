@@ -1,39 +1,29 @@
-Problem: Given a string, find the first non-repeating character and return its index. If no unique character exists, return -1.
-
-Example:
-Input: "leetcode"
-Output: 0
-
-Input: "loveleetcode"
-Output: 2
+Problem:
+Create a function that takes in a list of strings and returns the longest common prefix among all the strings. If there is no common prefix, return an empty string.
 
 Explanation:
-In the first example, the only non-repeating character is 'l' at index 0.
-In the second example, the first non-repeating character is 'v' at index 2.
+The common prefix is the longest string that is a prefix of all the strings in the list. For example, for the input ["flower", "flour", "flask"], the common prefix is "fl".
 
 Solution in Python:
 
 ```python
-def firstUniqChar(s: str) -> int:
-    char_count = {}
-    
-    # Count the frequency of each character in the string
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-    
-    # find the index of the first non-repeating character
-    for i in range(len(s)):
-        if char_count[s[i]] == 1:
-            return i
-    
-    return -1
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
 
-# Test the function with the given examples
-print(firstUniqChar("leetcode"))  # Output: 0
-print(firstUniqChar("loveleetcode"))  # Output: 2
+    shortest_str = min(strs, key=len)
+    
+    for i, char in enumerate(shortest_str):
+        for string in strs:
+            if string[i] != char:
+                return shortest_str[:i]
+    
+    return shortest_str
+
+# Test the function
+print(longest_common_prefix(["flower", "flour", "flask"]))  # Output: "fl"
+print(longest_common_prefix(["dog", "racecar", "car"]))  # Output: ""
+print(longest_common_prefix([]))  # Output: ""
 ```
 
-This solution uses a dictionary to keep track of the frequency of each character in the string. Then, it iterates through the string to find the index of the first non-repeating character by checking the frequency in the dictionary. Finally, it returns the index or -1 if no unique character is found.
+In this solution, we first find the shortest string in the list. Then, we iterate through each character of the shortest string and compare it with the corresponding characters in other strings. If we find a mismatch, we return the prefix up to that point. If no mismatches are found, we return the entire shortest string as the common prefix.
