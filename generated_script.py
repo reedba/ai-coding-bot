@@ -1,29 +1,25 @@
-Problem:
-Create a function that takes in a list of strings and returns the longest common prefix among all the strings. If there is no common prefix, return an empty string.
+Problem: 
+Given a string, check if it is a palindrome or not. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. The input string will only contain lowercase letters and no spaces.
+
+Example:
+Input: "racecar"
+Output: True
+
+Input: "hello"
+Output: False
 
 Explanation:
-The common prefix is the longest string that is a prefix of all the strings in the list. For example, for the input ["flower", "flour", "flask"], the common prefix is "fl".
+To solve this problem, we can check if the string is equal to its reverse. If it is, then it is a palindrome. We can reverse the string using Python's slicing syntax. So, we can compare the original string with its reverse to determine if it is a palindrome or not.
 
 Solution in Python:
 
 ```python
-def longest_common_prefix(strs):
-    if not strs:
-        return ""
+def is_palindrome(s):
+    return s == s[::-1]
 
-    shortest_str = min(strs, key=len)
-    
-    for i, char in enumerate(shortest_str):
-        for string in strs:
-            if string[i] != char:
-                return shortest_str[:i]
-    
-    return shortest_str
-
-# Test the function
-print(longest_common_prefix(["flower", "flour", "flask"]))  # Output: "fl"
-print(longest_common_prefix(["dog", "racecar", "car"]))  # Output: ""
-print(longest_common_prefix([]))  # Output: ""
+# Test cases
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))    # False
 ```
 
-In this solution, we first find the shortest string in the list. Then, we iterate through each character of the shortest string and compare it with the corresponding characters in other strings. If we find a mismatch, we return the prefix up to that point. If no mismatches are found, we return the entire shortest string as the common prefix.
+In this solution, the `is_palindrome` function takes a string `s` as input and returns a boolean value indicating whether the string is a palindrome or not. It does this by comparing the original string with its reverse using slicing syntax `s[::-1]`. If they are equal, then the string is a palindrome and the function returns `True`, otherwise it returns `False`.
