@@ -1,25 +1,36 @@
-Problem: 
-Given a string, check if it is a palindrome or not. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. The input string will only contain lowercase letters and no spaces.
+Sure, here's a DSA problem related to strings and arrays:
+
+Problem:
+Given a string, write a function in Python that returns the longest substring without repeating characters.
 
 Example:
-Input: "racecar"
-Output: True
-
-Input: "hello"
-Output: False
+Input: "abcabcbb"
+Output: "abc"
 
 Explanation:
-To solve this problem, we can check if the string is equal to its reverse. If it is, then it is a palindrome. We can reverse the string using Python's slicing syntax. So, we can compare the original string with its reverse to determine if it is a palindrome or not.
+In the given input string "abcabcbb", the longest substring without repeating characters is "abc", as it does not contain any repeating characters.
 
-Solution in Python:
-
+Solution:
 ```python
-def is_palindrome(s):
-    return s == s[::-1]
+def longest_substring(input_str):
+    seen = {}
+    start = 0
+    max_len = 0
+    max_start = 0
+    
+    for i, char in enumerate(input_str):
+        if char in seen and seen[char] >= start:
+            start = seen[char] + 1
+        seen[char] = i
+        if i - start + 1 > max_len:
+            max_len = i - start + 1
+            max_start = start
+    
+    return input_str[max_start:max_start + max_len]
 
-# Test cases
-print(is_palindrome("racecar"))  # True
-print(is_palindrome("hello"))    # False
+# Test the function with the given example
+input_str = "abcabcbb"
+print(longest_substring(input_str))  # Output: "abc"
 ```
 
-In this solution, the `is_palindrome` function takes a string `s` as input and returns a boolean value indicating whether the string is a palindrome or not. It does this by comparing the original string with its reverse using slicing syntax `s[::-1]`. If they are equal, then the string is a palindrome and the function returns `True`, otherwise it returns `False`.
+In this solution, we are using a dictionary `seen` to keep track of the index of each character we have seen so far. We also use two pointers `start` and `max_start` to keep track of the starting index of the current substring without repeating characters and the starting index of the longest substring found so far. We iterate over the input string, updating the `start` pointer when we encounter a repeating character, and updating the `max_len` and `max_start` if we find a longer substring without repeating characters. Finally, we return the longest substring found.
