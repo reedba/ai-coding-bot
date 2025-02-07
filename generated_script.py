@@ -1,36 +1,30 @@
-Sure, here's a DSA problem related to strings and arrays:
+Problem: 
 
-Problem:
-Given a string, write a function in Python that returns the longest substring without repeating characters.
+Given an array of integers, rotate the array to the right by k steps, where k is a non-negative integer.
 
 Example:
-Input: "abcabcbb"
-Output: "abc"
+Input: nums = [1,2,3,4,5,6,7], k = 3
+Output: [5,6,7,1,2,3,4]
 
 Explanation:
-In the given input string "abcabcbb", the longest substring without repeating characters is "abc", as it does not contain any repeating characters.
+After rotating the array to the right by 3 steps, the array becomes [5,6,7,1,2,3,4].
 
-Solution:
+Solution in Python:
+
 ```python
-def longest_substring(input_str):
-    seen = {}
-    start = 0
-    max_len = 0
-    max_start = 0
+def rotate_array(nums, k):
+    n = len(nums)
+    k = k % n  # handling the case where k is greater than the length of the array
     
-    for i, char in enumerate(input_str):
-        if char in seen and seen[char] >= start:
-            start = seen[char] + 1
-        seen[char] = i
-        if i - start + 1 > max_len:
-            max_len = i - start + 1
-            max_start = start
+    nums[:] = nums[-k:] + nums[:-k]  # concatenate the two parts of the array after rotation
     
-    return input_str[max_start:max_start + max_len]
+    return nums
 
-# Test the function with the given example
-input_str = "abcabcbb"
-print(longest_substring(input_str))  # Output: "abc"
+# Example
+nums = [1,2,3,4,5,6,7]
+k = 3
+result = rotate_array(nums, k)
+print(result)  # Output: [5,6,7,1,2,3,4]
 ```
 
-In this solution, we are using a dictionary `seen` to keep track of the index of each character we have seen so far. We also use two pointers `start` and `max_start` to keep track of the starting index of the current substring without repeating characters and the starting index of the longest substring found so far. We iterate over the input string, updating the `start` pointer when we encounter a repeating character, and updating the `max_len` and `max_start` if we find a longer substring without repeating characters. Finally, we return the longest substring found.
+In this solution, we first calculate the effective rotation value (k % n) to handle cases where k is greater than the length of the array. Then, we concatenate the two parts of the array after rotation to get the final rotated array.
