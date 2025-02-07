@@ -21,13 +21,13 @@ def generate_code():
     # Debugging: Print the response to ensure it's correct
     print("Generated code:", code)
     
-    # Save the generated code to a fixed file
+    # Save the generated code to a fixed file with UTF-8 encoding
     output_file = "generated_script.py"
-    with open(output_file, "w") as file:
+    with open(output_file, "w", encoding="utf-8") as file:
         file.write(code)
 
     # Debugging: Confirm the file was written
-    with open(output_file, "r") as file:
+    with open(output_file, "r", encoding="utf-8") as file:
         print("File content:", file.read())
 
     return output_file
