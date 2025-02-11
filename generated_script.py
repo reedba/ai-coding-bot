@@ -1,30 +1,29 @@
-Problem: 
-
-Given an array of integers, rotate the array to the right by k steps, where k is a non-negative integer.
+Problem: Given a string containing only lowercase letters, write a function to count the frequency of each letter in the string and return a dictionary with the letter as the key and its frequency as the value.
 
 Example:
-Input: nums = [1,2,3,4,5,6,7], k = 3
-Output: [5,6,7,1,2,3,4]
+Input: "hello"
+Output: {'h': 1, 'e': 1, 'l': 2, 'o': 1}
 
 Explanation:
-After rotating the array to the right by 3 steps, the array becomes [5,6,7,1,2,3,4].
+In the input string "hello", the letter 'h' appears once, 'e' appears once, 'l' appears twice, and 'o' appears once. The function should output a dictionary mapping each unique letter to its frequency.
 
 Solution in Python:
 
 ```python
-def rotate_array(nums, k):
-    n = len(nums)
-    k = k % n  # handling the case where k is greater than the length of the array
+def count_letter_frequency(s):
+    freq_dict = {}
     
-    nums[:] = nums[-k:] + nums[:-k]  # concatenate the two parts of the array after rotation
+    for letter in s:
+        if letter in freq_dict:
+            freq_dict[letter] += 1
+        else:
+            freq_dict[letter] = 1
     
-    return nums
+    return freq_dict
 
-# Example
-nums = [1,2,3,4,5,6,7]
-k = 3
-result = rotate_array(nums, k)
-print(result)  # Output: [5,6,7,1,2,3,4]
+# Test the function
+input_string = "hello"
+print(count_letter_frequency(input_string))  # Output: {'h': 1, 'e': 1, 'l': 2, 'o': 1}
 ```
 
-In this solution, we first calculate the effective rotation value (k % n) to handle cases where k is greater than the length of the array. Then, we concatenate the two parts of the array after rotation to get the final rotated array.
+In the solution above, we iterate through each character in the input string, update the frequency count in the dictionary, and finally return the dictionary mapping each unique letter to its frequency.
