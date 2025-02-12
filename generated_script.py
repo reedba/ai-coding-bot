@@ -1,29 +1,32 @@
-Problem: Given a string containing only lowercase letters, write a function to count the frequency of each letter in the string and return a dictionary with the letter as the key and its frequency as the value.
+Sure! Here's a problem for you to work on:
+
+Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards. The function should return True if the input string is a palindrome and False otherwise.
 
 Example:
-Input: "hello"
-Output: {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+Input: "racecar"
+Output: True
 
-Explanation:
-In the input string "hello", the letter 'h' appears once, 'e' appears once, 'l' appears twice, and 'o' appears once. The function should output a dictionary mapping each unique letter to its frequency.
+Input: "hello"
+Output: False
 
 Solution in Python:
 
 ```python
-def count_letter_frequency(s):
-    freq_dict = {}
+def is_palindrome(s):
+    s = s.lower()  # convert the input string to lowercase
+    left, right = 0, len(s) - 1  # initialize two pointers at the beginning and end of the string
     
-    for letter in s:
-        if letter in freq_dict:
-            freq_dict[letter] += 1
-        else:
-            freq_dict[letter] = 1
+    while left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
     
-    return freq_dict
+    return True
 
-# Test the function
-input_string = "hello"
-print(count_letter_frequency(input_string))  # Output: {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+# Test cases
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))  # False
 ```
 
-In the solution above, we iterate through each character in the input string, update the frequency count in the dictionary, and finally return the dictionary mapping each unique letter to its frequency.
+You can run this code to test the function and see if it correctly identifies palindromes in strings. Let me know if you need any further explanation or help with this problem!
