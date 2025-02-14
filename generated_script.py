@@ -1,16 +1,23 @@
-Problem: Reverse a String
+Problem: Write a Python function to check if a string is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
 
-Explanation: Write a function that takes a string as input and returns the string reversed.
+Explanation: In this problem, we need to check if a given string is a palindrome or not. To do this, we can compare the original string with its reverse. If the two strings are the same, then the given string is a palindrome.
 
-Solution in Python:
+Solution:
 
 ```python
-def reverse_string(s):
-    return s[::-1]
+def is_palindrome(s):
+    s = s.lower()  # Convert string to lowercase for case-insensitive comparison
+    s = ''.join(e for e in s if e.isalnum())  # Remove non-alphanumeric characters
+
+    # Compare original string with its reverse
+    return s == s[::-1]
 
 # Test the function
-input_str = "hello"
-print(reverse_string(input_str))  # Output: "olleh"
+print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))  # Output: False
 ```
 
-In this solution, we are utilizing Python's slicing feature to reverse the input string. `s[::-1]` returns a new string with elements in reverse order.
+In the solution, we first convert the string to lowercase using `lower()` method to make the comparison case-insensitive. Then, we remove non-alphanumeric characters using a generator expression and `join()` method. Finally, we compare the original string with its reverse using slicing.
+
+The function `is_palindrome` returns `True` if the string is a palindrome and `False` otherwise. We test the function with a few examples to verify its correctness.
