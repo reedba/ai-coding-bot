@@ -1,23 +1,33 @@
-Problem: Write a Python function to check if a string is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
+Problem:
 
-Explanation: In this problem, we need to check if a given string is a palindrome or not. To do this, we can compare the original string with its reverse. If the two strings are the same, then the given string is a palindrome.
+Given a list of strings, write a function to find and return the longest common prefix among all strings. If there is no common prefix, return an empty string.
+
+Example:
+Input: ["flower", "flow", "flight"]
+Output: "fl"
+
+Explanation:
+In the given list of strings, the longest common prefix among all strings is "fl".
 
 Solution:
 
 ```python
-def is_palindrome(s):
-    s = s.lower()  # Convert string to lowercase for case-insensitive comparison
-    s = ''.join(e for e in s if e.isalnum())  # Remove non-alphanumeric characters
-
-    # Compare original string with its reverse
-    return s == s[::-1]
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+    
+    min_len = min(map(len, strs))
+    
+    for i in range(min_len):
+        for j in range(1, len(strs)):
+            if strs[j][i] != strs[0][i]:
+                return strs[0][:i]
+    
+    return strs[0][:min_len]
 
 # Test the function
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))  # Output: False
+input_strings = ["flower", "flow", "flight"]
+print(longest_common_prefix(input_strings))  # Output: "fl"
 ```
 
-In the solution, we first convert the string to lowercase using `lower()` method to make the comparison case-insensitive. Then, we remove non-alphanumeric characters using a generator expression and `join()` method. Finally, we compare the original string with its reverse using slicing.
-
-The function `is_palindrome` returns `True` if the string is a palindrome and `False` otherwise. We test the function with a few examples to verify its correctness.
+In this solution, we iterate through the list of strings and compare each character at the same index in all strings. We stop the comparison as soon as we find a character that doesn't match. The longest common prefix is then the substring up to that point. If all characters match up to the minimum length of all strings, we return the entire string at index 0.
