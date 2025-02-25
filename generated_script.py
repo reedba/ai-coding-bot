@@ -1,29 +1,33 @@
-Problem:
-Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters that read the same forward and backward (ignoring spaces, capitalization, and punctuation).
+Problem: Given a string, reverse the string in-place without using any additional data structures.
 
-Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Explanation: In this problem, we are tasked with reversing a string in-place, meaning we need to modify the original string itself without using any additional data structures such as arrays or lists.
 
-Input: "racecar"
-Output: True
-
-Input: "hello world"
-Output: False
-
-Explanation:
-To solve this problem, we can first remove all non-alphanumeric characters from the input string and convert it to lowercase. Then we can compare the string with its reverse to check if it is a palindrome.
-
-Solution:
+Solution in Python:
 ```python
-def is_palindrome(s):
-    s = ''.join(c.lower() for c in s if c.isalnum())
-    return s == s[::-1]
+def reverse_string(s):
+    # convert string to a list of characters
+    s = list(s)
+    
+    # two pointers approach to reverse the string in-place
+    left, right = 0, len(s) - 1
+    while left < right:
+        s[left], s[right] = s[right], s[left]
+        left += 1
+        right -= 1
 
-# Test cases
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello world"))  # Output: False
-``` 
+    # convert back to string and return
+    return "".join(s)
 
-This function first removes all non-alphanumeric characters from the input string and converts it to lowercase using list comprehension. Then it compares the modified string with its reverse using slicing to determine if it is a palindrome.
+# Example
+input_str = "hello"
+output_str = reverse_string(input_str)
+print(output_str)  # Output: "olleh"
+```
+
+Explanation of the solution:
+1. We first convert the input string `s` into a list of characters to make it easier to modify.
+2. We then use a two-pointer approach where we have a `left` pointer starting from the beginning of the string and a `right` pointer starting from the end of the string.
+3. We swap the characters at the `left` and `right` pointers and move the pointers towards each other until they meet in the middle, effectively reversing the string in-place.
+4. Finally, we convert the list of characters back to a string using the `join` method and return the reversed string.
+
+This solution has a time complexity of O(n) where n is the length of the input string, as we iterate through half of the string to reverse it.
