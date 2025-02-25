@@ -1,33 +1,38 @@
-Problem: Given a string, reverse the string in-place without using any additional data structures.
+Problem:
+Given a string s, return the length of the longest substring containing only unique characters.
 
-Explanation: In this problem, we are tasked with reversing a string in-place, meaning we need to modify the original string itself without using any additional data structures such as arrays or lists.
+Example:
+Input: s = "abcabcbb"
+Output: 3 (The longest substring without repeating characters is "abc", which has a length of 3)
+
+Input: s = "bbbbb"
+Output: 1 (The longest substring without repeating characters is "b", which has a length of 1)
 
 Solution in Python:
+
 ```python
-def reverse_string(s):
-    # convert string to a list of characters
-    s = list(s)
+def longest_unique_substring(s):
+    n = len(s)
+    max_length = 0
+    start = 0
+    char_map = {}
     
-    # two pointers approach to reverse the string in-place
-    left, right = 0, len(s) - 1
-    while left < right:
-        s[left], s[right] = s[right], s[left]
-        left += 1
-        right -= 1
+    for i in range(n):
+        if s[i] in char_map:
+            start = max(start, char_map[s[i]] + 1)
+        char_map[s[i]] = i
+        max_length = max(max_length, i - start + 1)
+    
+    return max_length
 
-    # convert back to string and return
-    return "".join(s)
-
-# Example
-input_str = "hello"
-output_str = reverse_string(input_str)
-print(output_str)  # Output: "olleh"
+# Test the function with given examples
+print(longest_unique_substring("abcabcbb"))  # Output: 3
+print(longest_unique_substring("bbbbb"))  # Output: 1
 ```
 
-Explanation of the solution:
-1. We first convert the input string `s` into a list of characters to make it easier to modify.
-2. We then use a two-pointer approach where we have a `left` pointer starting from the beginning of the string and a `right` pointer starting from the end of the string.
-3. We swap the characters at the `left` and `right` pointers and move the pointers towards each other until they meet in the middle, effectively reversing the string in-place.
-4. Finally, we convert the list of characters back to a string using the `join` method and return the reversed string.
-
-This solution has a time complexity of O(n) where n is the length of the input string, as we iterate through half of the string to reverse it.
+Explanation:
+- The function `longest_unique_substring` takes a string `s` as input and returns the length of the longest substring without repeating characters.
+- We maintain a `start` index to keep track of the start of the current substring and a `char_map` dictionary to store the index of the last occurrence of each character.
+- We iterate through the string `s`, updating the `start` index if we encounter a repeating character. We also update the `char_map` with the current character's index.
+- At each iteration, we update `max_length` with the maximum length of the current substring without repeating characters.
+- Finally, we return the `max_length` as the result.
