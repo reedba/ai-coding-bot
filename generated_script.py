@@ -1,34 +1,26 @@
-Problem: Given a string, return the most common character in the string.
+Problem: Reverse a String
 
-Explanation:
-To solve this problem, we can iterate through each character in the given string and keep track of the frequency of each character using a dictionary. Once we have found the frequency of each character, we can then find the character with the highest frequency.
+Explanation: Create a function that takes a string as input and returns the string reversed.
 
 Solution in Python:
 
 ```python
-def most_common_char(s):
-    char_freq = {}
+def reverseString(s):
+    # Convert the string to a list of characters
+    s_list = list(s)
     
-    # Count the frequency of each character
-    for char in s:
-        if char in char_freq:
-            char_freq[char] += 1
-        else:
-            char_freq[char] = 1
+    # Use two pointers to swap characters from both ends of the list
+    left, right = 0, len(s_list) - 1
+    while left < right:
+        s_list[left], s_list[right] = s_list[right], s_list[left]
+        left += 1
+        right -= 1
     
-    # Find the character with the highest frequency
-    max_freq = 0
-    most_common_char = ''
-    for char, freq in char_freq.items():
-        if freq > max_freq:
-            max_freq = freq
-            most_common_char = char
-    
-    return most_common_char
+    # Convert the list back to a string and return
+    return ''.join(s_list)
 
 # Test the function
-s = "hello world"
-print(most_common_char(s))  # Output: 'l'
+input_str = "hello"
+output_str = reverseString(input_str)
+print(output_str)  # Output: "olleh"
 ```
-
-This solution iterates through each character in the input string and counts the frequency of each character using a dictionary. Then, it finds the character with the highest frequency and returns it.
