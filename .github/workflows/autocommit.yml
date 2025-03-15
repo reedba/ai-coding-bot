@@ -29,14 +29,10 @@ jobs:
       run: |
         python generate_code.py
 
-    - name: Display generated script content
+    - name: Commit and push changes
       run: |
-        cat generated_script.py
-
-    - name: Check git status
-      run: |
-        git status
-
-    - name: Show git log
-      run: |
-        git log -1
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions@github.com"
+        git add generated_script.py
+        git commit -m "Updated generated script"
+        git push
