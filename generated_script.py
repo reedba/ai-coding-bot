@@ -1,36 +1,32 @@
-Problem: Given a string s, find the length of the longest substring without repeating characters.
+Problem: 
 
-Example:
-Input: s = "abcabcbb"
-Output: 3
-Explanation: The longest substring without repeating characters is "abc", which has a length of 3.
+Given a string of lowercase alphabets, write a Python function to find the longest substring with all unique characters.
 
-Solution (Python):
+Explanation:
+
+For example, if input string is "abcabcbb", the output should be "abc" as it is the longest substring with unique characters.
+
+Solution:
 
 ```python
-def longest_substring(s):
+def longest_unique_substring(s):
     start = 0
     max_length = 0
-    char_map = {}
-
-    for end in range(len(s)):
-        if s[end] in char_map:
-            start = max(start, char_map[s[end]] + 1)
+    seen = {}
+    
+    for i in range(len(s)):
+        if s[i] in seen and start <= seen[s[i]]:
+            start = seen[s[i]] + 1
+        else:
+            max_length = max(max_length, i - start + 1)
         
-        char_map[s[end]] = end
-        max_length = max(max_length, end - start + 1)
-
-    return max_length
+        seen[s[i]] = i
+        
+    return s[start:start+max_length]
 
 # Test the function
 s = "abcabcbb"
-print(longest_substring(s))  # Output: 3
+print(longest_unique_substring(s))  # Output: "abc"
 ```
 
-Explanation:
-- We use a two-pointer approach, with `start` and `end` pointers to keep track of the current substring we are checking.
-- We also use a dictionary `char_map` to store the index of the last occurrence of each character.
-- If a character is already in `char_map`, we update the `start` pointer to the maximum of its current position and the position stored in `char_map` (plus 1).
-- We update `char_map` with the current index of the character.
-- At each step, we calculate the length of the current substring and update `max_length` if necessary.
-- Finally, we return the length of the longest substring without repeating characters.
+This function uses a sliding window approach to keep track of the longest substring with unique characters. It iterates through the string and updates the start index based on the current character's previous position in the seen dictionary. The max_length is updated accordingly. Finally, it returns the longest unique substring.
