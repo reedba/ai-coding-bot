@@ -1,32 +1,33 @@
-Problem: 
+Problem: Given a string, write a function to determine if the string is a palindrome or not. A palindrome is a string that is the same forwards and backwards. 
 
-Given a string of lowercase alphabets, write a Python function to find the longest substring with all unique characters.
+Example:
+Input: "racecar"
+Output: True
+
+Input: "hello"
+Output: False
 
 Explanation:
+To determine if a string is a palindrome, we can compare the original string with its reversed version. If they are the same, then the string is a palindrome.
 
-For example, if input string is "abcabcbb", the output should be "abc" as it is the longest substring with unique characters.
-
-Solution:
+Solution in Python:
 
 ```python
-def longest_unique_substring(s):
-    start = 0
-    max_length = 0
-    seen = {}
+def is_palindrome(s):
+    # Remove any whitespace and convert all characters to lowercase
+    s = s.replace(" ", "").lower()
     
-    for i in range(len(s)):
-        if s[i] in seen and start <= seen[s[i]]:
-            start = seen[s[i]] + 1
-        else:
-            max_length = max(max_length, i - start + 1)
-        
-        seen[s[i]] = i
-        
-    return s[start:start+max_length]
+    # Reverse the string
+    reversed_s = s[::-1]
+    
+    # Compare the original string and the reversed string
+    if s == reversed_s:
+        return True
+    else:
+        return False
 
-# Test the function
-s = "abcabcbb"
-print(longest_unique_substring(s))  # Output: "abc"
+# Test cases
+print(is_palindrome("racecar")) # Output: True
+print(is_palindrome("hello")) # Output: False
+print(is_palindrome("A man a plan a canal Panama")) # Output: True
 ```
-
-This function uses a sliding window approach to keep track of the longest substring with unique characters. It iterates through the string and updates the start index based on the current character's previous position in the seen dictionary. The max_length is updated accordingly. Finally, it returns the longest unique substring.
