@@ -1,33 +1,34 @@
-Problem: Given a string, write a function to determine if the string is a palindrome or not. A palindrome is a string that is the same forwards and backwards. 
+Problem: Given a string, return the first non-repeating character in the string. If there are no non-repeating characters, return -1.
 
 Example:
-Input: "racecar"
-Output: True
-
-Input: "hello"
-Output: False
+Input: "leetcode"
+Output: "l"
 
 Explanation:
-To determine if a string is a palindrome, we can compare the original string with its reversed version. If they are the same, then the string is a palindrome.
+In the given input string, the character 'l' is the first non-repeating character (appears only once) in the string.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    # Remove any whitespace and convert all characters to lowercase
-    s = s.replace(" ", "").lower()
+def firstNonRepeatingChar(s):
+    count = {}
     
-    # Reverse the string
-    reversed_s = s[::-1]
+    for char in s:
+        if char in count:
+            count[char] += 1
+        else:
+            count[char] = 1
+            
+    for char in s:
+        if count[char] == 1:
+            return char
     
-    # Compare the original string and the reversed string
-    if s == reversed_s:
-        return True
-    else:
-        return False
+    return -1
 
-# Test cases
-print(is_palindrome("racecar")) # Output: True
-print(is_palindrome("hello")) # Output: False
-print(is_palindrome("A man a plan a canal Panama")) # Output: True
+# Test the function
+input_string = "leetcode"
+output = firstNonRepeatingChar(input_string)
+print(output)  # Output: "l"
 ```
+
+In this solution, we first create a dictionary `count` to store the frequency of each character in the input string. Then, we iterate through the input string to update the frequency count. Finally, we iterate through the string again and return the first character with frequency of 1. If no such character exists, we return -1.
