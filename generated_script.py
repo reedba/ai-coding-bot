@@ -1,26 +1,24 @@
-Problem: Given a string, write a function to check if it is a palindrome (a word, phrase, number, or other sequence of characters which reads the same backward as forward).
+Problem:
+Given an array of integers, write a function that returns the maximum product of any three numbers in the array.
 
-Input: "racecar"
-Output: True
+Example:
+Input: [3, 5, 2, 6, 4]
+Output: 120 (5 * 6 * 4)
 
-Input: "hello"
-Output: False
+Explanation:
+To find the maximum product of three numbers in the array, we need to consider all possible combinations of three numbers. We can achieve this by sorting the array and then multiplying the maximum three numbers, or by finding the maximum and minimum numbers in the array and considering the product of those numbers with the maximum number.
 
-Explanation: 
-To solve this problem, we can check if the string is equal to its reverse. We can achieve this by using string slicing in Python.
-
-Solution:
+Solution in Python:
 
 ```python
-def is_palindrome(s):
-    return s == s[::-1]
+def max_product_of_three(nums):
+    nums.sort()
+    n = len(nums)
+    return max(nums[0]*nums[1]*nums[n-1], nums[n-1]*nums[n-2]*nums[n-3])
 
-# Test cases
-print(is_palindrome("racecar")) # True
-print(is_palindrome("hello")) # False
-print(is_palindrome("level")) # True
+# Example
+nums = [3, 5, 2, 6, 4]
+print(max_product_of_three(nums))  # Output: 120
 ```
 
-In this solution, the function `is_palindrome` takes a string `s` as input and returns True if the string is equal to its reverse (i.e., a palindrome), and False otherwise. The `[::-1]` syntax is used to reverse the string `s`.
-
-The test cases show the function in action, with "racecar" and "level" returning True (as they are palindromes) and "hello" returning False.
+This solution sorts the array in ascending order and then calculates the maximum product in two ways: by multiplying the minimum two numbers with the maximum number, or by multiplying the three maximum numbers in the array. Finally, it returns the maximum of these two products as the result.
