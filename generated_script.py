@@ -1,34 +1,26 @@
-Problem: Given a string, return the first non-repeating character in the string. If there are no non-repeating characters, return -1.
+Problem: Given a string, write a function to check if it is a palindrome (a word, phrase, number, or other sequence of characters which reads the same backward as forward).
 
-Example:
-Input: "leetcode"
-Output: "l"
+Input: "racecar"
+Output: True
 
-Explanation:
-In the given input string, the character 'l' is the first non-repeating character (appears only once) in the string.
+Input: "hello"
+Output: False
 
-Solution in Python:
+Explanation: 
+To solve this problem, we can check if the string is equal to its reverse. We can achieve this by using string slicing in Python.
+
+Solution:
 
 ```python
-def firstNonRepeatingChar(s):
-    count = {}
-    
-    for char in s:
-        if char in count:
-            count[char] += 1
-        else:
-            count[char] = 1
-            
-    for char in s:
-        if count[char] == 1:
-            return char
-    
-    return -1
+def is_palindrome(s):
+    return s == s[::-1]
 
-# Test the function
-input_string = "leetcode"
-output = firstNonRepeatingChar(input_string)
-print(output)  # Output: "l"
+# Test cases
+print(is_palindrome("racecar")) # True
+print(is_palindrome("hello")) # False
+print(is_palindrome("level")) # True
 ```
 
-In this solution, we first create a dictionary `count` to store the frequency of each character in the input string. Then, we iterate through the input string to update the frequency count. Finally, we iterate through the string again and return the first character with frequency of 1. If no such character exists, we return -1.
+In this solution, the function `is_palindrome` takes a string `s` as input and returns True if the string is equal to its reverse (i.e., a palindrome), and False otherwise. The `[::-1]` syntax is used to reverse the string `s`.
+
+The test cases show the function in action, with "racecar" and "level" returning True (as they are palindromes) and "hello" returning False.
