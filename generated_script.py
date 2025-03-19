@@ -1,24 +1,23 @@
-Problem:
-Given an array of integers, write a function that returns the maximum product of any three numbers in the array.
+Problem: Given a string, write a Python function to reverse the string in-place.
 
-Example:
-Input: [3, 5, 2, 6, 4]
-Output: 120 (5 * 6 * 4)
+Explanation: In this problem, we are asked to reverse a given string in-place, which means we cannot create a new string and must manipulate the original string itself.
 
-Explanation:
-To find the maximum product of three numbers in the array, we need to consider all possible combinations of three numbers. We can achieve this by sorting the array and then multiplying the maximum three numbers, or by finding the maximum and minimum numbers in the array and considering the product of those numbers with the maximum number.
-
-Solution in Python:
-
+Solution:
 ```python
-def max_product_of_three(nums):
-    nums.sort()
-    n = len(nums)
-    return max(nums[0]*nums[1]*nums[n-1], nums[n-1]*nums[n-2]*nums[n-3])
+def reverse_string(s):
+    string_list = list(s)
+    left, right = 0, len(s) - 1
+    
+    while left < right:
+        string_list[left], string_list[right] = string_list[right], string_list[left]
+        left += 1
+        right -= 1
+    
+    return ''.join(string_list)
 
-# Example
-nums = [3, 5, 2, 6, 4]
-print(max_product_of_three(nums))  # Output: 120
+# Test the function
+s = 'hello'
+print(reverse_string(s))  # Output: 'olleh'
 ```
 
-This solution sorts the array in ascending order and then calculates the maximum product in two ways: by multiplying the minimum two numbers with the maximum number, or by multiplying the three maximum numbers in the array. Finally, it returns the maximum of these two products as the result.
+In the solution, we first convert the input string `s` into a list of characters for easier manipulation. We then use two pointers, `left` and `right`, starting from the beginning and end of the string respectively, and swap the characters at these positions. We continue this process until `left` is no longer less than `right`, at which point we have successfully reversed the string in-place. Finally, we convert the list back to a string and return the reversed string.
