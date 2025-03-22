@@ -1,46 +1,24 @@
-Problem:
+Problem: Given a string, return a list of all unique characters in the string.
 
-Given a string, write a function that returns the first non-repeating character in the string. If there are no non-repeating characters, return -1.
-
-Example:
-Input: "hello"
-Output: "h"
-
-Input: "leetcode"
-Output: "l"
-
-Input: "aaaaa"
-Output: -1
-
-Explanation:
-In the first example, the first non-repeating character is "h".
-In the second example, the first non-repeating character is "l".
-In the third example, all characters are repeating, so there is no non-repeating character.
+Explanation: We are given a string, and we need to find and return a list of all unique characters present in the string. For example, if the input string is "hello", the output should be ['h', 'e', 'l', 'o'].
 
 Solution in Python:
 
 ```python
-def first_non_repeating_char(s):
-    char_count = {}
+def unique_characters(string):
+    unique_chars = []
+    seen_chars = set() # to keep track of characters we have already seen
     
-    # Count occurrences of each character in the string
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
+    for char in string:
+        if char not in seen_chars:
+            unique_chars.append(char)
+            seen_chars.add(char)
     
-    # Find the first non-repeating character
-    for char in s:
-        if char_count[char] == 1:
-            return char
-    
-    return -1
+    return unique_chars
 
-# Test cases
-print(first_non_repeating_char("hello"))  # Output: "h"
-print(first_non_repeating_char("leetcode"))  # Output: "l"
-print(first_non_repeating_char("aaaaa"))  # Output: -1
+# Test the function
+input_string = "hello"
+print(unique_characters(input_string)) # Output: ['h', 'e', 'l', 'o']
 ```
 
-This solution first creates a dictionary to store the count of each character in the input string. Then, it loops through the string again to find the first character with a count of 1, indicating that it is a non-repeating character. If no such character is found, it returns -1.
+This solution iterates through each character in the input string and adds it to the `unique_chars` list only if it has not been seen before (i.e., not present in the `seen_chars` set). This ensures that each unique character is added only once to the final list.
