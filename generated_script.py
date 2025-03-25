@@ -1,28 +1,23 @@
-Problem: 
+Problem: Given an array of integers, find the maximum sum of subarray within the array.
 
-Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward or forward (ignoring spaces, punctuation, and capitalization).
+Explanation: To solve this problem, we can use the Kadane's algorithm. The algorithm involves iterating through the array and keeping track of the maximum sum of subarray ending at each element. We update the maximum sum by taking the maximum of the current element and the sum of the element with the maximum sum ending at the previous element.
 
-Input: 
-String s
+Solution in Python:
 
-Output:
-True if s is a palindrome, False otherwise
-
-Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
-
-Explanation:
-To check if a string is a palindrome, we can remove all the non-alphanumeric characters and convert the string to lowercase. Then we can compare the string to its reverse to see if they are equal.
-
-Solution:
 ```python
-def is_palindrome(s: str) -> bool:
-    s = ''.join(c.lower() for c in s if c.isalnum())
+def max_subarray_sum(nums):
+    max_sum = nums[0]
+    current_sum = nums[0]
+
+    for i in range(1, len(nums)):
+        current_sum = max(nums[i], current_sum + nums[i])
+        max_sum = max(max_sum, current_sum)
     
-    return s == s[::-1]
-    
+    return max_sum
+
 # Test the function
-test_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(test_string))  # Output: True
+nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+print(max_subarray_sum(nums))  # Output should be 6 (sum of [4, -1, 2, 1])
 ```
+
+In this solution, we iterate through the array and update the current sum and maximum sum accordingly. The `max_subarray_sum` function returns the final maximum sum of the subarray.
