@@ -1,23 +1,24 @@
-Problem: Given an array of integers, find the maximum sum of subarray within the array.
+Problem:
 
-Explanation: To solve this problem, we can use the Kadane's algorithm. The algorithm involves iterating through the array and keeping track of the maximum sum of subarray ending at each element. We update the maximum sum by taking the maximum of the current element and the sum of the element with the maximum sum ending at the previous element.
+Given a string, write a function to reverse the order of words in the string.
+
+Explanation:
+
+For example, given the input string "hello world", the output should be "world hello".
 
 Solution in Python:
 
 ```python
-def max_subarray_sum(nums):
-    max_sum = nums[0]
-    current_sum = nums[0]
-
-    for i in range(1, len(nums)):
-        current_sum = max(nums[i], current_sum + nums[i])
-        max_sum = max(max_sum, current_sum)
-    
-    return max_sum
+def reverse_words(s):
+    words = s.split()  # split the string by spaces to get individual words
+    reversed_words = words[::-1]  # reverse the order of words
+    reversed_string = ' '.join(reversed_words)  # join the reversed words back into a string
+    return reversed_string
 
 # Test the function
-nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-print(max_subarray_sum(nums))  # Output should be 6 (sum of [4, -1, 2, 1])
+input_string = "hello world"
+output_string = reverse_words(input_string)
+print(output_string)  # Output: "world hello"
 ```
 
-In this solution, we iterate through the array and update the current sum and maximum sum accordingly. The `max_subarray_sum` function returns the final maximum sum of the subarray.
+In this solution, we first split the input string into individual words using the `split()` method. We then reverse the order of the words using list slicing and join them back together using the `join()` method to form the final reversed string.
