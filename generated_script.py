@@ -1,24 +1,39 @@
 Problem:
 
-Given a string, write a function to reverse the order of words in the string.
+Given a string, return the first non-repeating character in it and its index. If it doesn't exist, return -1.
+
+Example:
+Input: "hello"
+Output: ('h', 0)
+
+Input: "leetcode"
+Output: ('l', 1)
+
+Input: "loveleetcode"
+Output: ('v', 2)
 
 Explanation:
 
-For example, given the input string "hello world", the output should be "world hello".
+To solve this problem, we can iterate through the string and store the count of each character in a dictionary. Then, we can iterate through the string again and find the first character with a count of 1.
 
 Solution in Python:
 
-```python
-def reverse_words(s):
-    words = s.split()  # split the string by spaces to get individual words
-    reversed_words = words[::-1]  # reverse the order of words
-    reversed_string = ' '.join(reversed_words)  # join the reversed words back into a string
-    return reversed_string
+def first_non_repeating_char(s):
+    char_count = {}
+    
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+    
+    for i, char in enumerate(s):
+        if char_count[char] == 1:
+            return (char, i)
+    
+    return -1
 
-# Test the function
-input_string = "hello world"
-output_string = reverse_words(input_string)
-print(output_string)  # Output: "world hello"
-```
-
-In this solution, we first split the input string into individual words using the `split()` method. We then reverse the order of the words using list slicing and join them back together using the `join()` method to form the final reversed string.
+# Test cases
+print(first_non_repeating_char("hello"))  # Output: ('h', 0)
+print(first_non_repeating_char("leetcode"))  # Output: ('l', 1)
+print(first_non_repeating_char("loveleetcode"))  # Output: ('v', 2)
