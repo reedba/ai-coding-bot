@@ -1,39 +1,23 @@
 Problem:
-
-Given a string, return the first non-repeating character in it and its index. If it doesn't exist, return -1.
+Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, or sequence that reads the same backward as forward. Ignore case sensitivity and remove all non-alphanumeric characters before checking if the string is a palindrome.
 
 Example:
-Input: "hello"
-Output: ('h', 0)
-
-Input: "leetcode"
-Output: ('l', 1)
-
-Input: "loveleetcode"
-Output: ('v', 2)
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-
-To solve this problem, we can iterate through the string and store the count of each character in a dictionary. Then, we can iterate through the string again and find the first character with a count of 1.
+After removing all non-alphanumeric characters and converting the string to lowercase, the input string becomes "amanaplanacanalpanama" which is a palindrome.
 
 Solution in Python:
 
-def first_non_repeating_char(s):
-    char_count = {}
-    
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-    
-    for i, char in enumerate(s):
-        if char_count[char] == 1:
-            return (char, i)
-    
-    return -1
+```python
+def is_palindrome(s):
+    s = ''.join(filter(str.isalnum, s)).lower()
+    return s == s[::-1]
 
-# Test cases
-print(first_non_repeating_char("hello"))  # Output: ('h', 0)
-print(first_non_repeating_char("leetcode"))  # Output: ('l', 1)
-print(first_non_repeating_char("loveleetcode"))  # Output: ('v', 2)
+# Test the function
+print(is_palindrome("A man, a plan, a canal, Panama")) # Output: True
+print(is_palindrome("race a car")) # Output: False
+```
+
+In the solution, we first remove all non-alphanumeric characters from the input string using the filter function and convert it to lowercase. Then, we check if the modified string is equal to its reverse by comparing it with `s[::-1]`, which is the string reversed. If the two strings are equal, we return True indicating that the input string is a palindrome. Otherwise, we return False.
