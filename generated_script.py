@@ -1,29 +1,33 @@
-Problem:
-Given a string, write a function that returns True if the string is a palindrome, and False otherwise. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces and punctuation).
+Problem: Reverse a String
 
-Example:
-Input: "racecar"
-Output: True
+Explanation: Write a Python program to reverse a given string. For example, if the input string is "hello", the output should be "olleh".
 
-Input: "hello"
-Output: False
-
-Explanation:
-To solve this problem, we can compare the input string with its reverse. If they are the same, then the string is a palindrome. We can ignore spaces and punctuation by using the isalpha() method to check if a character is a letter or not.
-
-Solution in Python:
+Solution:
 
 ```python
-def is_palindrome(s):
-    s = s.lower()
-    s = ''.join(char for char in s if char.isalpha())
+def reverse_string(input_str):
+    # Convert the input string to a list of characters
+    str_list = list(input_str)
     
-    return s == s[::-1]
+    # Initialize two pointers to the start and end of the list
+    left = 0
+    right = len(str_list) - 1
+    
+    # Swap characters from the beginning and end of the list
+    while left < right:
+        str_list[left], str_list[right] = str_list[right], str_list[left]
+        left += 1
+        right -= 1
+    
+    # Convert the list back to a string
+    reversed_str = ''.join(str_list)
+    
+    return reversed_str
 
-# Test cases
-print(is_palindrome("racecar"))  # True
-print(is_palindrome("hello"))    # False
-print(is_palindrome("A man, a plan, a canal, Panama"))  # True
+# Test the function with an example
+input_str = "hello"
+output_str = reverse_string(input_str)
+print(output_str)  # Output: olleh
 ```
 
-In the solution above, the string is first converted to lowercase and then all non-alphabetic characters are removed using a list comprehension. Finally, the function checks if the modified string is equal to its reverse using slicing. The function returns True if the string is a palindrome and False otherwise.
+In this solution, we first convert the input string to a list of characters. We then use two pointers (one pointing to the start of the list and the other pointing to the end) to swap characters until we reach the middle of the list. Finally, we convert the list back to a string and return the reversed string.
