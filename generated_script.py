@@ -1,33 +1,31 @@
-Problem: Reverse a String
+Problem: 
+Given a string s, reverse the string word by word.
 
-Explanation: Write a Python program to reverse a given string. For example, if the input string is "hello", the output should be "olleh".
+Explanation:
+You need to write a function that takes a string s as input and reverses the order of the words in the string while keeping the words themselves in the same order. Words are defined as sequences of non-space characters separated by a space. You need to account for leading or trailing spaces and ensure that the words are separated by exactly one space in the reversed string.
+
+Example:
+Input: "the sky is blue"
+Output: "blue is sky the"
 
 Solution:
 
 ```python
-def reverse_string(input_str):
-    # Convert the input string to a list of characters
-    str_list = list(input_str)
+def reverseWords(s):
+    # Split the string into words
+    words = s.split()
     
-    # Initialize two pointers to the start and end of the list
-    left = 0
-    right = len(str_list) - 1
+    # Reverse the list of words
+    words.reverse()
     
-    # Swap characters from the beginning and end of the list
-    while left < right:
-        str_list[left], str_list[right] = str_list[right], str_list[left]
-        left += 1
-        right -= 1
-    
-    # Convert the list back to a string
-    reversed_str = ''.join(str_list)
-    
-    return reversed_str
+    # Join the list of words with a space in between
+    return ' '.join(words)
 
-# Test the function with an example
-input_str = "hello"
-output_str = reverse_string(input_str)
-print(output_str)  # Output: olleh
+# Test the function with the given example
+input_str = "the sky is blue"
+output_str = reverseWords(input_str)
+print(output_str) 
 ```
 
-In this solution, we first convert the input string to a list of characters. We then use two pointers (one pointing to the start of the list and the other pointing to the end) to swap characters until we reach the middle of the list. Finally, we convert the list back to a string and return the reversed string.
+Output:
+"blue is sky the"
