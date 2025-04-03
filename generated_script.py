@@ -1,5 +1,5 @@
-Problem: 
-Given a string, determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. 
+Problem:
+Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
 
 Example:
 Input: "racecar"
@@ -9,16 +9,26 @@ Input: "hello"
 Output: False
 
 Explanation:
-To solve this problem, we can compare the original string with its reverse. If they are the same, then the string is a palindrome. We can use Python's slicing technique to reverse the string.
+To check if a string is a palindrome, we can compare the characters at the beginning and end of the string. If they are the same, we move towards the center of the string until we have checked all characters. If at any point the characters do not match, the string is not a palindrome.
 
 Solution in Python:
+
 ```python
 def is_palindrome(s):
-    return s == s[::-1]
+    left, right = 0, len(s) - 1
+    
+    while left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    
+    return True
 
 # Test cases
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))    # False
+print(is_palindrome("madam"))    # True
 ```
 
-In this solution, the `[::-1]` slicing syntax reverses the given string `s`. Then we compare the reversed string with the original string using the `==` operator to determine if it is a palindrome or not.
+This function takes a string `s` as input and uses two pointers `left` and `right` to compare the characters at the beginning and end of the string. If the characters do not match, the function returns False. If all characters match, the function returns True, indicating that the string is a palindrome.
