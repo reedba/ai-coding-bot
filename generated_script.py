@@ -1,34 +1,32 @@
-Problem:
-Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
-
-Example:
-Input: "racecar"
-Output: True
-
-Input: "hello"
-Output: False
+Problem: Given a string, write a function to return the first non-repeating character in the string. If all characters in the string are repeating, return -1.
 
 Explanation:
-To check if a string is a palindrome, we can compare the characters at the beginning and end of the string. If they are the same, we move towards the center of the string until we have checked all characters. If at any point the characters do not match, the string is not a palindrome.
+- We need to iterate through the string and keep track of the frequency of each character.
+- After that, we can iterate through the string again to find the first character with a frequency of 1.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    left, right = 0, len(s) - 1
-    
-    while left < right:
-        if s[left] != s[right]:
-            return False
-        left += 1
-        right -= 1
-    
-    return True
 
-# Test cases
-print(is_palindrome("racecar"))  # True
-print(is_palindrome("hello"))    # False
-print(is_palindrome("madam"))    # True
+def firstNonRepeatingChar(s):
+    char_freq = {}
+    
+    # Count the frequency of each character in the string
+    for char in s:
+        char_freq[char] = char_freq.get(char, 0) + 1
+    
+    # Find the first non-repeating character
+    for char in s:
+        if char_freq[char] == 1:
+            return char
+    
+    return -1
+
+# Test the function
+print(firstNonRepeatingChar("leetcode")) # Output: "l"
+print(firstNonRepeatingChar("loveleetcode")) # Output: "v"
+print(firstNonRepeatingChar("aabbcc")) # Output: -1
+
 ```
 
-This function takes a string `s` as input and uses two pointers `left` and `right` to compare the characters at the beginning and end of the string. If the characters do not match, the function returns False. If all characters match, the function returns True, indicating that the string is a palindrome.
+In this solution, we first count the frequency of each character in the input string `s`. Then, we iterate through the string again to find the first character with a frequency of 1 and return it. If all characters are repeating, we return -1.
