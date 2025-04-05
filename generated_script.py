@@ -1,32 +1,19 @@
-Problem: Given a string, write a function to return the first non-repeating character in the string. If all characters in the string are repeating, return -1.
+Problem: Given a string, determine if it is a palindrome.
 
-Explanation:
-- We need to iterate through the string and keep track of the frequency of each character.
-- After that, we can iterate through the string again to find the first character with a frequency of 1.
+Explanation: A palindrome is a string that reads the same forwards and backwards. For example, "racecar" is a palindrome. Your task is to write a function that takes a string as input and returns True if it is a palindrome, and False otherwise. Ignore spaces, punctuation, and capitalization when checking for palindromes.
 
-Solution in Python:
+Solution:
 
 ```python
+def is_palindrome(s):
+    s = s.lower() # Convert the string to lowercase
+    s = ''.join(filter(str.isalnum, s)) # Remove non-alphanumeric characters
+    return s == s[::-1] # Check if the string is equal to its reverse
 
-def firstNonRepeatingChar(s):
-    char_freq = {}
-    
-    # Count the frequency of each character in the string
-    for char in s:
-        char_freq[char] = char_freq.get(char, 0) + 1
-    
-    # Find the first non-repeating character
-    for char in s:
-        if char_freq[char] == 1:
-            return char
-    
-    return -1
-
-# Test the function
-print(firstNonRepeatingChar("leetcode")) # Output: "l"
-print(firstNonRepeatingChar("loveleetcode")) # Output: "v"
-print(firstNonRepeatingChar("aabbcc")) # Output: -1
-
+# Test cases
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))    # False
+print(is_palindrome("A man, a plan, a canal, Panama"))  # True
 ```
 
-In this solution, we first count the frequency of each character in the input string `s`. Then, we iterate through the string again to find the first character with a frequency of 1 and return it. If all characters are repeating, we return -1.
+In this solution, we first convert the input string to lowercase using the `lower()` method. We then remove all non-alphanumeric characters using the `filter()` function and `isalnum()` method. Finally, we check if the modified string is equal to its reverse using slicing (`[::-1]`). If the two strings are equal, we return True, indicating that the input string is a palindrome.
