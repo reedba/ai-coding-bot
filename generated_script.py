@@ -1,33 +1,21 @@
-Problem: 
-Given a string, return the most common character in the string. If there are multiple characters that are equally common, return the first character that appears in the string.
+Sure! Here's a DSA problem related to strings and arrays:
+
+Problem:
+Given a string, write a Python function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards. The function should return True if the given string is a palindrome, and False otherwise.
 
 Explanation:
-To solve this problem, we will iterate through each character in the string and keep track of the frequency of each character using a dictionary. Once we have the frequencies of all characters, we will find the character with the highest frequency and return it.
+To solve this problem, we can compare the original string with its reverse. If the reversed string is the same as the original string, then the given string is a palindrome.
 
-Solution:
+Solution in Python:
 ```python
-def most_common_char(s):
-    freq = {}
-    
-    for char in s:
-        if char in freq:
-            freq[char] += 1
-        else:
-            freq[char] = 1
-    
-    max_freq = 0
-    most_common_char = ''
-    
-    for char, count in freq.items():
-        if count > max_freq:
-            max_freq = count
-            most_common_char = char
-    
-    return most_common_char
+def is_palindrome(s):
+    return s == s[::-1]
 
-# Test the function
-s = "hello world"
-print(most_common_char(s))  # Output: 'l'
+# Test cases
+print(is_palindrome("racecar")) # Output: True
+print(is_palindrome("hello"))   # Output: False
 ```
 
-In this solution, we iterate through each character in the input string 's' and update the frequency of each character in the 'freq' dictionary. We then find the character with the highest frequency and return it as the most common character in the string.
+In the above solution, the `s[::-1]` notation is used to reverse the given string `s`. The function `is_palindrome` compares the original string `s` with its reverse, and returns True or False based on the comparison.
+
+Let me know if you have any questions or need further explanation!
