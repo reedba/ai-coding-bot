@@ -1,21 +1,41 @@
-Sure! Here's a DSA problem related to strings and arrays:
+Problem: Given a string, create a function that returns the longest substring without repeating characters.
 
-Problem:
-Given a string, write a Python function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards. The function should return True if the given string is a palindrome, and False otherwise.
+Example:
+Input: "abcabcbb"
+Output: "abc"
 
 Explanation:
-To solve this problem, we can compare the original string with its reverse. If the reversed string is the same as the original string, then the given string is a palindrome.
+In the input string "abcabcbb", the longest substring without repeating characters is "abc".
 
 Solution in Python:
-```python
-def is_palindrome(s):
-    return s == s[::-1]
 
-# Test cases
-print(is_palindrome("racecar")) # Output: True
-print(is_palindrome("hello"))   # Output: False
+```python
+def longest_substring(s):
+    if not s:
+        return 0
+    
+    start = 0
+    max_length = 0
+    seen = {}
+    
+    for end in range(len(s)):
+        if s[end] in seen and start <= seen[s[end]]:
+            start = seen[s[end]] + 1
+        else:
+            max_length = max(max_length, end - start + 1)
+        
+        seen[s[end]] = end
+    
+    return max_length
+
+# Test the function with the example
+input_string = "abcabcbb"
+output = longest_substring(input_string)
+print(output) # Output: 3 (corresponding to "abc")
 ```
 
-In the above solution, the `s[::-1]` notation is used to reverse the given string `s`. The function `is_palindrome` compares the original string `s` with its reverse, and returns True or False based on the comparison.
+This function uses a sliding window approach to keep track of the longest substring without repeating characters. It iterates through the input string `s` and uses a dictionary `seen` to store the index of each character seen so far.
 
-Let me know if you have any questions or need further explanation!
+The `start` pointer is used to keep track of the start of the current substring without repeating characters, and `max_length` is updated whenever a longer substring is found. If a repeating character is encountered, the `start` pointer is moved to the index of the previous occurrence of the character + 1.
+
+Overall, the function has a time complexity of O(n) where n is the length of the input string `s`.
