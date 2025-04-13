@@ -1,41 +1,21 @@
-Problem: Given a string, create a function that returns the longest substring without repeating characters.
+Problem: Given a string, write a function to determine if it is a palindrome (a word, phrase, number, or other sequence of characters that reads the same forward and backward).
 
 Example:
-Input: "abcabcbb"
-Output: "abc"
+Input: "racecar"
+Output: True
 
-Explanation:
-In the input string "abcabcbb", the longest substring without repeating characters is "abc".
+Explanation: The string "racecar" is a palindrome because it reads the same forwards and backwards.
 
 Solution in Python:
 
 ```python
-def longest_substring(s):
-    if not s:
-        return 0
-    
-    start = 0
-    max_length = 0
-    seen = {}
-    
-    for end in range(len(s)):
-        if s[end] in seen and start <= seen[s[end]]:
-            start = seen[s[end]] + 1
-        else:
-            max_length = max(max_length, end - start + 1)
-        
-        seen[s[end]] = end
-    
-    return max_length
+def is_palindrome(s):
+    s = s.lower().replace(" ", "") # Convert the string to lowercase and remove spaces
+    return s == s[::-1] # Check if the string is equal to its reverse
 
-# Test the function with the example
-input_string = "abcabcbb"
-output = longest_substring(input_string)
-print(output) # Output: 3 (corresponding to "abc")
-```
+# Test the function
+input_string = "A man a plan a canal Panama"
+print(is_palindrome(input_string)) # Output: True
+``` 
 
-This function uses a sliding window approach to keep track of the longest substring without repeating characters. It iterates through the input string `s` and uses a dictionary `seen` to store the index of each character seen so far.
-
-The `start` pointer is used to keep track of the start of the current substring without repeating characters, and `max_length` is updated whenever a longer substring is found. If a repeating character is encountered, the `start` pointer is moved to the index of the previous occurrence of the character + 1.
-
-Overall, the function has a time complexity of O(n) where n is the length of the input string `s`.
+In this solution, we first convert the input string to lowercase and remove any spaces using the `replace()` method. Then, we use slicing (`[::-1]`) to reverse the string and check if it is equal to the original string. If they are equal, the function returns `True`, indicating that the input is a palindrome.
