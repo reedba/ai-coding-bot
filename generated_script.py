@@ -1,39 +1,22 @@
-Problem: 
-Given a string, return the first non-repeating character in the string. If there are no non-repeating characters, return -1.
+Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
 
 Example:
-Input: "leetcode"
-Output: "l"
-
-Input: "loveleetcode"
-Output: "v"
-
-Input: "aabbcc"
-Output: -1
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-To solve this problem, we can iterate through the string and use a dictionary to keep track of the frequency of each character. After populating the dictionary, we can iterate through the string again and return the first character with a frequency of 1.
+To solve this problem, we can first remove all non-alphanumeric characters from the input string and convert it to lowercase. Then we can compare the string with its reverse to check if it is a palindrome.
 
 Solution in Python:
 
 ```python
-def firstNonRepeatingChar(s):
-    count = {}
-    
-    for char in s:
-        if char in count:
-            count[char] += 1
-        else:
-            count[char] = 1
-    
-    for char in s:
-        if count[char] == 1:
-            return char
-    
-    return -1
+def is_palindrome(s):
+    s = ''.join(e for e in s if e.isalnum()).lower()  # remove non-alphanumeric characters and convert to lowercase
+    return s == s[::-1]  # check if the string is equal to its reverse
 
-# Test cases
-print(firstNonRepeatingChar("leetcode")) # Output: "l"
-print(firstNonRepeatingChar("loveleetcode")) # Output: "v"
-print(firstNonRepeatingChar("aabbcc")) # Output: -1
+# Test the function with the given example
+input_str = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_str))  # Output: True
 ```
+
+This function takes a string as input, removes all non-alphanumeric characters and converts it to lowercase. It then checks if the modified string is equal to its reverse, returning True if it is a palindrome and False if it is not.
