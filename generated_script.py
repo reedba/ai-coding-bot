@@ -1,22 +1,27 @@
-Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a string that reads the same forwards as backwards, ignoring spaces, capitalization and punctuation.
-
-Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Problem: Given a string, return the longest substring without repeating characters.
 
 Explanation:
-In the given string "A man, a plan, a canal, Panama", if we remove spaces, punctuation and convert all letters to lowercase, the string becomes "amanaplanacanalpanama" which is a palindrome.
+For example, given the string "abcabcbb", the longest substring without repeating characters is "abc", with a length of 3.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    s = ''.join(c.lower() for c in s if c.isalnum())
-    return s == s[::-1]
+def longest_substring(s):
+    start = 0
+    max_len = 0
+    char_index = {}
 
-# Test the function with the example input
-input_str = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_str))  # Output: True
+    for end in range(len(s)):
+        if s[end] in char_index:
+            start = max(start, char_index[s[end]] + 1)
+        char_index[s[end]] = end
+        max_len = max(max_len, end - start + 1)
+
+    return max_len
+
+# Test the function with the example string
+s = "abcabcbb"
+print(longest_substring(s))  # Output: 3
 ```
 
-In this solution, the `is_palindrome` function takes a string `s` as input. It first filters out non-alphanumeric characters using a list comprehension and converts all letters to lowercase. Then, it checks if the filtered string is equal to its reverse (achieved by slicing with `[::-1]`). If they are equal, the function returns True, indicating that the input string is a palindrome.
+This solution uses a sliding window technique to keep track of the longest substring without repeating characters. The `char_index` dictionary is used to store the index of the last occurrence of each character. The `start` variable is updated to the index after the last occurrence of the current character whenever a repeating character is encountered. The maximum length of the substring is continuously updated as the window slides through the string.
