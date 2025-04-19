@@ -1,27 +1,24 @@
-Problem: Given a string, return the longest substring without repeating characters.
+Problem:
+Given a string, determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
 
-Explanation:
-For example, given the string "abcabcbb", the longest substring without repeating characters is "abc", with a length of 3.
+Example:
+Input: "A man, a plan, a canal, Panama"
+Output: True
+Explanation: The string reads the same forward and backward when ignoring spaces, punctuation, and capitalization.
 
-Solution in Python:
-
+Solution:
 ```python
-def longest_substring(s):
-    start = 0
-    max_len = 0
-    char_index = {}
+def is_palindrome(s):
+    s = ''.join([c.lower() for c in s if c.isalnum()]) # Remove spaces, punctuation, and convert to lowercase
+    return s == s[::-1]
 
-    for end in range(len(s)):
-        if s[end] in char_index:
-            start = max(start, char_index[s[end]] + 1)
-        char_index[s[end]] = end
-        max_len = max(max_len, end - start + 1)
-
-    return max_len
-
-# Test the function with the example string
-s = "abcabcbb"
-print(longest_substring(s))  # Output: 3
+# Test the function
+input_str = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_str)) # Output: True
 ```
 
-This solution uses a sliding window technique to keep track of the longest substring without repeating characters. The `char_index` dictionary is used to store the index of the last occurrence of each character. The `start` variable is updated to the index after the last occurrence of the current character whenever a repeating character is encountered. The maximum length of the substring is continuously updated as the window slides through the string.
+Explanation:
+1. The function `is_palindrome` takes a string `s` as input.
+2. The input string is cleaned by removing spaces, punctuation, and converting to lowercase using list comprehension.
+3. The cleaned string is compared with its reversed version using slicing (`[::-1]`) to check if it is a palindrome.
+4. The function returns `True` if the string is a palindrome, `False` otherwise.
