@@ -1,26 +1,30 @@
-Problem:
+Problem: Given a list of strings, write a function that returns the longest common prefix of all the strings.
 
-Given a string, write a Python function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
+Explanation: The longest common prefix is the prefix that is shared among all the strings in the list. For example, if the list of strings is ["flower", "flow", "flight"], the longest common prefix is "fl".
 
-Explanation:
-
-To solve this problem, we can compare the original string with its reverse. If they are the same, then the string is a palindrome.
-
-Solution:
+Solution in Python:
 
 ```python
-def is_palindrome(s):
-    s = s.lower() # Convert string to lowercase for case-insensitivity
-    s = ''.join(e for e in s if e.isalnum()) # Remove non-alphanumeric characters
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
     
-    return s == s[::-1] # Check if the string is the same forwards and backwards
+    # Find the minimum length string in the list
+    min_len_str = min(strs, key=len)
+    
+    # Loop through the characters of the minimum length string
+    for i in range(len(min_len_str)):
+        for j in range(len(strs)):
+            # If the characters at index i of all strings do not match, return the prefix
+            if strs[j][i] != min_len_str[i]:
+                return min_len_str[:i]
+    
+    # If all characters match, return the minimum length string
+    return min_len_str
 
 # Test the function
-input_string = "A man, a plan, a canal, Panama"
-if is_palindrome(input_string):
-    print(f"{input_string} is a palindrome.")
-else:
-    print(f"{input_string} is not a palindrome.")
+strings = ["flower", "flow", "flight"]
+print(longest_common_prefix(strings))  # Output: "fl"
 ```
 
-In this solution, we first convert the input string to lowercase and remove non-alphanumeric characters using a list comprehension. Then, we compare the original string with its reverse (using slicing notation `s[::-1]`) to determine if the string is a palindrome.
+This function finds the longest common prefix by checking the characters at each index of the minimum length string with the corresponding index of all other strings in the list. It returns the prefix when it encounters a character that does not match across all strings.
