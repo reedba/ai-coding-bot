@@ -1,34 +1,31 @@
-Sure! Here is a problem involving strings and arrays:
+Problem: Given a string, reverse all the words within the string.
 
-Problem:
-You are given a string s consisting of lowercase letters and an array of integers arr. Your task is to find the number of occurrences of each character in the string and return a new string where each character is repeated according to its frequency as specified in the arr array. For example, if s = "ab" and arr = [3, 1], then the output should be "aaabb".
+Example:
+Input: "Hello World"
+Output: "olleH dlroW"
 
 Explanation:
-In the given example, the character 'a' occurs 3 times in the string s and 'b' occurs 1 time. Therefore, the new string should have 'a' repeated 3 times followed by 'b' repeated 1 time.
+To solve this problem, we can first split the input string into individual words, then reverse each word separately, and finally join the reversed words back together to form the final output string.
 
-Solution (in Python):
+Solution in Python:
+
 ```python
-def repeat_characters(s, arr):
-    freq = {}
-    for char in s:
-        if char in freq:
-            freq[char] += 1
-        else:
-            freq[char] = 1
+def reverse_words(input_str):
+    # Split the input string into individual words
+    words = input_str.split()
     
-    new_string = ''
-    for char, count in freq.items():
-        new_string += char * count
+    # Reverse each word in the list
+    reversed_words = [word[::-1] for word in words]
     
-    return new_string
+    # Join the reversed words back together to form the final output string
+    output_str = " ".join(reversed_words)
+    
+    return output_str
 
-# Test the function with the example
-s = "ab"
-arr = [3, 1]
-output = repeat_characters(s, arr)
-print(output)  # Output: "aaabb"
+# Test the function with the example input
+input_str = "Hello World"
+output = reverse_words(input_str)
+print(output)  # Output: "olleH dlroW"
 ```
 
-In this solution, we first create a frequency dictionary `freq` to count the occurrences of each character in the string `s`. Then, we iterate through the dictionary to build the new string by repeating each character according to its frequency. Finally, we return the new string as the output.
-
-I hope this problem helps you in practicing strings and arrays in DSA! Let me know if you need any further clarification or if you have any other questions.
+This solution first splits the input string into individual words using the `split()` method, then reverses each word using list comprehension and the slicing technique `[::-1]`, and finally joins the reversed words back together to form the final output string.
