@@ -1,31 +1,43 @@
-Problem: Given a string, reverse all the words within the string.
+Problem:
+Given a string, write a function that returns the first non-repeating character in the string. If all characters in the string are repeated, return None.
 
 Example:
-Input: "Hello World"
-Output: "olleH dlroW"
+Input: "leetcode"
+Output: "l"
 
-Explanation:
-To solve this problem, we can first split the input string into individual words, then reverse each word separately, and finally join the reversed words back together to form the final output string.
+Input: "loveleetcode"
+Output: "v"
 
-Solution in Python:
+Input: "aabbcc"
+Output: None
+
+Solution:
 
 ```python
-def reverse_words(input_str):
-    # Split the input string into individual words
-    words = input_str.split()
+def first_non_repeating_character(s):
+    char_count = {}
     
-    # Reverse each word in the list
-    reversed_words = [word[::-1] for word in words]
+    # Count occurences of each character in the string
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
     
-    # Join the reversed words back together to form the final output string
-    output_str = " ".join(reversed_words)
+    # Find the first non-repeating character
+    for char in s:
+        if char_count[char] == 1:
+            return char
     
-    return output_str
+    return None
 
-# Test the function with the example input
-input_str = "Hello World"
-output = reverse_words(input_str)
-print(output)  # Output: "olleH dlroW"
+# Test the function
+print(first_non_repeating_character("leetcode")) # Output: "l"
+print(first_non_repeating_character("loveleetcode")) # Output: "v"
+print(first_non_repeating_character("aabbcc")) # Output: None
 ```
 
-This solution first splits the input string into individual words using the `split()` method, then reverses each word using list comprehension and the slicing technique `[::-1]`, and finally joins the reversed words back together to form the final output string.
+Explanation:
+- We first count the occurence of each character in the string using a dictionary.
+- Then, we iterate through the string again and return the first character with a count of 1.
+- If no such character is found, we return None.
