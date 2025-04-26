@@ -1,43 +1,23 @@
-Problem:
-Given a string, write a function that returns the first non-repeating character in the string. If all characters in the string are repeated, return None.
+Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
 
-Example:
-Input: "leetcode"
-Output: "l"
+Explanation: To check if a string is a palindrome, we can compare the string with its reverse. If the reversed string is the same as the original string, then the string is a palindrome.
 
-Input: "loveleetcode"
-Output: "v"
-
-Input: "aabbcc"
-Output: None
-
-Solution:
-
+Solution in Python:
 ```python
-def first_non_repeating_character(s):
-    char_count = {}
+def is_palindrome(s):
+    # Remove spaces and convert to lowercase
+    s = s.replace(" ", "").lower()
     
-    # Count occurences of each character in the string
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-    
-    # Find the first non-repeating character
-    for char in s:
-        if char_count[char] == 1:
-            return char
-    
-    return None
+    # Compare the string with its reverse
+    if s == s[::-1]:
+        return True
+    else:
+        return False
 
 # Test the function
-print(first_non_repeating_character("leetcode")) # Output: "l"
-print(first_non_repeating_character("loveleetcode")) # Output: "v"
-print(first_non_repeating_character("aabbcc")) # Output: None
+print(is_palindrome("A man a plan a canal Panama"))  # Output: True
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))  # Output: False
 ```
 
-Explanation:
-- We first count the occurence of each character in the string using a dictionary.
-- Then, we iterate through the string again and return the first character with a count of 1.
-- If no such character is found, we return None.
+This function first removes spaces and converts the string to lowercase. Then, it compares the string with its reverse using slicing. If they are the same, it returns True, indicating that the string is a palindrome.
