@@ -1,23 +1,23 @@
-Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
+Problem: Given a string, implement a function to check if it is a palindrome. A palindrome is a word or phrase that is the same forwards and backwards, ignoring spaces, punctuation, and capitalization.
 
-Explanation: To check if a string is a palindrome, we can compare the string with its reverse. If the reversed string is the same as the original string, then the string is a palindrome.
+Explanation: To solve this problem, we can first remove all non-alphanumeric characters and convert the string to lowercase. Then, we can compare the original string with its reversed version to determine if it is a palindrome.
 
 Solution in Python:
+
 ```python
 def is_palindrome(s):
-    # Remove spaces and convert to lowercase
-    s = s.replace(" ", "").lower()
-    
-    # Compare the string with its reverse
-    if s == s[::-1]:
-        return True
-    else:
-        return False
+    s = ''.join([c.lower() for c in s if c.isalnum()]) # Remove non-alphanumeric characters and convert to lowercase
+    return s == s[::-1] # Compare original string with reversed string
 
 # Test the function
-print(is_palindrome("A man a plan a canal Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))  # Output: False
+input_str = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_str)) # Output: True
+
+input_str = "racecar"
+print(is_palindrome(input_str)) # Output: True
+
+input_str = "hello world"
+print(is_palindrome(input_str)) # Output: False
 ```
 
-This function first removes spaces and converts the string to lowercase. Then, it compares the string with its reverse using slicing. If they are the same, it returns True, indicating that the string is a palindrome.
+In this solution, we use list comprehension to filter out non-alphanumeric characters and convert all characters to lowercase. We then compare the original string with its reverse using slicing. If the two strings are the same, the function returns True, indicating that the input string is a palindrome.
