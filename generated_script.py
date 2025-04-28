@@ -1,23 +1,41 @@
-Problem: Given a string, implement a function to check if it is a palindrome. A palindrome is a word or phrase that is the same forwards and backwards, ignoring spaces, punctuation, and capitalization.
+Problem:
+Given an array of strings, write a function that returns the longest common prefix among all strings. If there is no common prefix, return an empty string.
 
-Explanation: To solve this problem, we can first remove all non-alphanumeric characters and convert the string to lowercase. Then, we can compare the original string with its reversed version to determine if it is a palindrome.
+Example:
+Input: ["flower", "flow", "flight"]
+Output: "fl"
+
+Explanation:
+In the above example, the longest common prefix among all strings is "fl".
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    s = ''.join([c.lower() for c in s if c.isalnum()]) # Remove non-alphanumeric characters and convert to lowercase
-    return s == s[::-1] # Compare original string with reversed string
+def longestCommonPrefix(strs):
+    if not strs:
+        return ""
+    
+    # Sort the array of strings
+    strs.sort()
+    
+    # Find the common prefix between the first and last string
+    prefix = ""
+    for c in strs[0]:
+        if strs[-1].startswith(prefix + c):
+            prefix += c
+        else:
+            break
+    
+    return prefix
 
-# Test the function
-input_str = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_str)) # Output: True
-
-input_str = "racecar"
-print(is_palindrome(input_str)) # Output: True
-
-input_str = "hello world"
-print(is_palindrome(input_str)) # Output: False
+# Test the function with example input
+input_list = ["flower", "flow", "flight"]
+print(longestCommonPrefix(input_list))
 ```
 
-In this solution, we use list comprehension to filter out non-alphanumeric characters and convert all characters to lowercase. We then compare the original string with its reverse using slicing. If the two strings are the same, the function returns True, indicating that the input string is a palindrome.
+Output:
+```
+fl
+``` 
+
+In the above solution, we first sort the array of strings to make it easier to compare the first and last strings to find the common prefix. We then iterate through the characters of the first string and check if the prefix + character is a prefix of the last string. If it is, we add the character to the prefix, if not, we break out of the loop and return the prefix found so far.
