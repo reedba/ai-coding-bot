@@ -1,41 +1,23 @@
+Sure! Here's a new DSA problem involving strings and arrays:
+
 Problem:
-Given an array of strings, write a function that returns the longest common prefix among all strings. If there is no common prefix, return an empty string.
+Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
 
 Example:
-Input: ["flower", "flow", "flight"]
-Output: "fl"
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-In the above example, the longest common prefix among all strings is "fl".
+In the given input, the string reads the same forward and backward when ignoring spaces, punctuation, and capitalization. Therefore, the output is True.
 
 Solution in Python:
 
 ```python
-def longestCommonPrefix(strs):
-    if not strs:
-        return ""
-    
-    # Sort the array of strings
-    strs.sort()
-    
-    # Find the common prefix between the first and last string
-    prefix = ""
-    for c in strs[0]:
-        if strs[-1].startswith(prefix + c):
-            prefix += c
-        else:
-            break
-    
-    return prefix
+def is_palindrome(s):
+    s = ''.join(char.lower() for char in s if char.isalnum())
+    return s == s[::-1]
 
-# Test the function with example input
-input_list = ["flower", "flow", "flight"]
-print(longestCommonPrefix(input_list))
+# Test the function
+input_str = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_str)) # Output: True
 ```
-
-Output:
-```
-fl
-``` 
-
-In the above solution, we first sort the array of strings to make it easier to compare the first and last strings to find the common prefix. We then iterate through the characters of the first string and check if the prefix + character is a prefix of the last string. If it is, we add the character to the prefix, if not, we break out of the loop and return the prefix found so far.
