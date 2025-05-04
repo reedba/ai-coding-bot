@@ -1,26 +1,35 @@
-Problem: 
-Given a string, write a Python function to reverse the characters in the string in-place.
+Problem:
+
+Given a string and a target character, write a function to return the index of the first occurrence of the target character in the string. If the target character is not found in the string, return -1.
+
+Example:
+Input: str = "hello", target = "e"
+Output: 1
+
+Input: str = "hello", target = "a"
+Output: -1
 
 Explanation:
-The goal of this problem is to reverse a given string without using any additional space. We are to modify the original string directly.
+In the first example, the target character "e" is found at index 1 in the string "hello".
+In the second example, the target character "a" is not found in the string "hello", so the output is -1.
 
-Solution:
+Solution in Python:
 
 ```python
-def reverse_string(s):
-    s = list(s) # convert string to list of characters
-    left, right = 0, len(s)-1
-    while left < right:
-        s[left], s[right] = s[right], s[left] # swap characters at left and right indices
-        left += 1
-        right -= 1
-    return ''.join(s) # convert list back to string
+def first_occurrence_index(s, target):
+    for i in range(len(s)):
+        if s[i] == target:
+            return i
+    return -1
 
-# Testing the function
-s = "hello"
-print(reverse_string(s)) # Output: "olleh"
+# Test cases
+str1 = "hello"
+target1 = "e"
+print(first_occurrence_index(str1, target1)) # Output: 1
+
+str2 = "hello"
+target2 = "a"
+print(first_occurrence_index(str2, target2)) # Output: -1
 ```
 
-In this solution, we first convert the input string to a list of characters. We then use two pointers (left and right) to traverse the list from both ends and swap the characters at the left and right indices. Finally, we convert the list back to a string and return the reversed string.
-
-This solution has a time complexity of O(n) and space complexity of O(1), as we are modifying the original string in-place without using any additional space.
+This function iterates through each character in the given string and checks if it matches the target character. If a match is found, it returns the index of that character. If no match is found, it returns -1.
