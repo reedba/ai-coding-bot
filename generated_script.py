@@ -1,28 +1,27 @@
-Problem: 
-Given a string s, find the length of the longest substring without repeating characters.
+Problem: Given an array of strings, write a function that returns the average length of all strings in the array. 
 
-Explanation:
-For example, given the input string "abcabcbb", the longest substring without repeating characters is "abc", which has a length of 3. Another example would be the input string "pwwkew", the longest substring without repeating characters is "wke", which has a length of 3.
+Explanation: We need to calculate the average length of all strings in the given array. To solve this problem, we can iterate through the array and calculate the total length of all strings. Then, we divide this total length by the number of strings in the array to get the average length.
 
 Solution in Python:
+
 ```python
-def longest_substring_without_repeating_chars(s):
-    n = len(s)
-    start = 0
-    max_length = 0
-    char_index = {}
+def average_length_of_strings(str_array):
+    total_length = 0
+    num_strings = len(str_array)
+    
+    # Calculate total length of all strings
+    for string in str_array:
+        total_length += len(string)
+    
+    # Calculate average length
+    average_length = total_length / num_strings
+    
+    return average_length
 
-    for i in range(n):
-        if s[i] in char_index:
-            start = max(start, char_index[s[i]] + 1)
-        char_index[s[i]] = i
-        max_length = max(max_length, i - start + 1)
-
-    return max_length
-
-# Test the function with examples
-print(longest_substring_without_repeating_chars("abcabcbb"))  # Output: 3
-print(longest_substring_without_repeating_chars("pwwkew"))    # Output: 3
+# Test the function
+strings = ["hello", "world", "python"]
+result = average_length_of_strings(strings)
+print(result)  # Output: 5.0
 ```
 
-This solution uses a sliding window technique to keep track of the current substring without repeating characters. We maintain a dictionary `char_index` to store the most recent index of each character we have seen in the string `s`. The `start` variable is used to keep track of the start of the current substring without repetition, and `max_length` stores the length of the longest such substring found so far.
+In this solution, we first initialize variables `total_length` and `num_strings` to keep track of the total length of all strings and the number of strings in the array respectively. We then calculate the total length by iterating through each string in the array and adding its length to the `total_length` variable. Finally, we calculate the average length by dividing the `total_length` by the `num_strings` and return the result.
