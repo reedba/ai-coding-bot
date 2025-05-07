@@ -1,27 +1,35 @@
-Problem: Given an array of strings, write a function that returns the average length of all strings in the array. 
+Sure! Here's a DSA problem related to strings and arrays:
 
-Explanation: We need to calculate the average length of all strings in the given array. To solve this problem, we can iterate through the array and calculate the total length of all strings. Then, we divide this total length by the number of strings in the array to get the average length.
+Problem:
+Given a list of strings, return the longest common prefix among them. If there is no common prefix, return an empty string.
+
+Example:
+Input: ["flower","flow","flight"]
+Output: "fl"
+
+Explanation:
+In the above example, the common prefix among the strings "flower", "flow", and "flight" is "fl".
 
 Solution in Python:
 
-```python
-def average_length_of_strings(str_array):
-    total_length = 0
-    num_strings = len(str_array)
+```
+def longestCommonPrefix(strs):
+    if not strs:
+        return ""
     
-    # Calculate total length of all strings
-    for string in str_array:
-        total_length += len(string)
+    prefix = strs[0]
+    for i in range(1, len(strs)):
+        while strs[i].find(prefix) != 0:
+            prefix = prefix[:-1]
+            if not prefix:
+                return ""
     
-    # Calculate average length
-    average_length = total_length / num_strings
-    
-    return average_length
+    return prefix
 
-# Test the function
-strings = ["hello", "world", "python"]
-result = average_length_of_strings(strings)
-print(result)  # Output: 5.0
+# Test the function with the example input
+input_list = ["flower","flow","flight"]
+output = longestCommonPrefix(input_list)
+print(output)  # Output: "fl"
 ```
 
-In this solution, we first initialize variables `total_length` and `num_strings` to keep track of the total length of all strings and the number of strings in the array respectively. We then calculate the total length by iterating through each string in the array and adding its length to the `total_length` variable. Finally, we calculate the average length by dividing the `total_length` by the `num_strings` and return the result.
+I hope this problem and solution helps you in your DSA learning journey! Let me know if you need further explanation or have any other questions.
