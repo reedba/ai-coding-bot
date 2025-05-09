@@ -1,18 +1,32 @@
-Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
+Problem:
+Given a list of strings, write a function to return the longest common prefix among them. If there is no common prefix, return an empty string.
+
+Example:
+Input: ["flower","flow","flight"]
+Output: "fl"
 
 Explanation:
-To solve this problem, we can first remove all non-alphanumeric characters from the input string and convert it to lowercase. Then, we can compare the string with its reverse to check if it is a palindrome.
+In the given list of strings, "fl" is the longest common prefix.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    s = ''.join(char.lower() for char in s if char.isalnum())  # Remove non-alphanumeric characters and convert to lowercase
-    return s == s[::-1]  # Check if the string is equal to its reverse
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+
+    prefix = strs[0]
+    for s in strs:
+        while s[:len(prefix)] != prefix:
+            prefix = prefix[:-1]
+            if not prefix:
+                return ""
+    
+    return prefix
 
 # Test the function
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("race a car"))  # Output: False
+input_strings = ["flower","flow","flight"]
+print(longest_common_prefix(input_strings)) # Output: "fl"
 ```
 
-In the above solution, we use list comprehension to create a new string `s` with only alphanumeric characters in lowercase. Then, we check if this new string is equal to its reverse using slicing. The function returns `True` if the input string is a palindrome, and `False` otherwise.
+In this solution, we first check if the input list is empty. Then, we initialize the prefix as the first string in the list. We iterate through the list of strings and compare the prefix with each string. If the prefix does not match the beginning of a string, we reduce the prefix by one character. This process continues until we find the longest common prefix among all the strings.
