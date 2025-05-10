@@ -1,32 +1,37 @@
 Problem:
-Given a list of strings, write a function to return the longest common prefix among them. If there is no common prefix, return an empty string.
+Given a string, write a Python function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore spaces, punctuation, and capitalization.
 
 Example:
-Input: ["flower","flow","flight"]
-Output: "fl"
+Input: "A man, a plan, a canal, Panama"
+Output: True
+
+Input: "racecar"
+Output: True
+
+Input: "hello"
+Output: False
 
 Explanation:
-In the given list of strings, "fl" is the longest common prefix.
+To solve this problem, we can first remove all non-alphanumeric characters and convert the string to lowercase. Then, we can compare the characters from the start of the string with the characters from the end of the string to determine if it is a palindrome.
 
-Solution in Python:
-
+Solution:
 ```python
-def longest_common_prefix(strs):
-    if not strs:
-        return ""
-
-    prefix = strs[0]
-    for s in strs:
-        while s[:len(prefix)] != prefix:
-            prefix = prefix[:-1]
-            if not prefix:
-                return ""
+def is_palindrome(s):
+    s = ''.join(char.lower() for char in s if char.isalnum())
+    left, right = 0, len(s) - 1
     
-    return prefix
+    while left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    
+    return True
 
-# Test the function
-input_strings = ["flower","flow","flight"]
-print(longest_common_prefix(input_strings)) # Output: "fl"
+# Test cases
+print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))  # Output: False
 ```
 
-In this solution, we first check if the input list is empty. Then, we initialize the prefix as the first string in the list. We iterate through the list of strings and compare the prefix with each string. If the prefix does not match the beginning of a string, we reduce the prefix by one character. This process continues until we find the longest common prefix among all the strings.
+This function will remove all non-alphanumeric characters, convert the string to lowercase, and then check if it is a palindrome by comparing characters from the start and end of the string.
