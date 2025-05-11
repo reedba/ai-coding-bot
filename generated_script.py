@@ -1,37 +1,43 @@
 Problem:
-Given a string, write a Python function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore spaces, punctuation, and capitalization.
+Given a string containing only lowercase English letters, write a function to find the longest substring with at most K distinct characters.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Input: s = "abcbbbbcccbdddadacb", K = 2
+Output: 10
+Explanation: The longest substring with at most 2 distinct characters is "bcbbbbcccb".
 
-Input: "racecar"
-Output: True
-
-Input: "hello"
-Output: False
-
-Explanation:
-To solve this problem, we can first remove all non-alphanumeric characters and convert the string to lowercase. Then, we can compare the characters from the start of the string with the characters from the end of the string to determine if it is a palindrome.
-
-Solution:
+Python Solution:
 ```python
-def is_palindrome(s):
-    s = ''.join(char.lower() for char in s if char.isalnum())
-    left, right = 0, len(s) - 1
-    
-    while left < right:
-        if s[left] != s[right]:
-            return False
-        left += 1
-        right -= 1
-    
-    return True
+def longest_substring(s, K):
+    if not s:
+        return 0
 
-# Test cases
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))  # Output: False
+    left, right = 0, 0
+    max_length = 0
+    char_count = {}
+    
+    while right < len(s):
+        char_count[s[right]] = char_count.get(s[right], 0) + 1
+        
+        while len(char_count) > K:
+            char_count[s[left]] -= 1
+            if char_count[s[left]] == 0:
+                del char_count[s[left]]
+            left += 1
+        
+        max_length = max(max_length, right - left + 1)
+        right += 1
+    
+    return max_length
+
+s = "abcbbbbcccbdddadacb"
+K = 2
+print(longest_substring(s, K))
 ```
 
-This function will remove all non-alphanumeric characters, convert the string to lowercase, and then check if it is a palindrome by comparing characters from the start and end of the string.
+Explanation:
+- Initialize left pointer, right pointer, maximum length, and a dictionary to store the count of each character.
+- Iterate through the string using the right pointer and update the character count in the dictionary.
+- Move the left pointer to shrink the window if the number of distinct characters exceeds K.
+- Update the maximum length with the current window size.
+- Return the maximum length of the substring with at most K distinct characters.
