@@ -1,43 +1,36 @@
-Problem:
-Given a string containing only lowercase English letters, write a function to find the longest substring with at most K distinct characters.
+Problem: Given a string, return the first non-repeating character in that string. If there are no non-repeating characters, return -1.
 
-Example:
-Input: s = "abcbbbbcccbdddadacb", K = 2
-Output: 10
-Explanation: The longest substring with at most 2 distinct characters is "bcbbbbcccb".
+Explanation: In this problem, we are asked to find the first non-repeating character in a given string. A non-repeating character is a character that appears only once in the string.
 
-Python Solution:
+Solution:
+
 ```python
-def longest_substring(s, K):
-    if not s:
-        return 0
-
-    left, right = 0, 0
-    max_length = 0
-    char_count = {}
+def first_non_repeating_char(s):
+    freq = {}
     
-    while right < len(s):
-        char_count[s[right]] = char_count.get(s[right], 0) + 1
-        
-        while len(char_count) > K:
-            char_count[s[left]] -= 1
-            if char_count[s[left]] == 0:
-                del char_count[s[left]]
-            left += 1
-        
-        max_length = max(max_length, right - left + 1)
-        right += 1
+    # Count frequency of each character in the string
+    for char in s:
+        if char in freq:
+            freq[char] += 1
+        else:
+            freq[char] = 1
     
-    return max_length
+    # Find the first non-repeating character
+    for char in s:
+        if freq[char] == 1:
+            return char
+    
+    return -1
 
-s = "abcbbbbcccbdddadacb"
-K = 2
-print(longest_substring(s, K))
+# Test the function
+s = "leetcode"
+print(first_non_repeating_char(s))  # Output: "l"
+
+s = "loveleetcode"
+print(first_non_repeating_char(s))  # Output: "v"
+
+s = "aabbcc"
+print(first_non_repeating_char(s))  # Output: -1
 ```
 
-Explanation:
-- Initialize left pointer, right pointer, maximum length, and a dictionary to store the count of each character.
-- Iterate through the string using the right pointer and update the character count in the dictionary.
-- Move the left pointer to shrink the window if the number of distinct characters exceeds K.
-- Update the maximum length with the current window size.
-- Return the maximum length of the substring with at most K distinct characters.
+In this solution, we first create a dictionary `freq` to store the frequency of each character in the input string `s`. Then, we iterate over the string to find the first character with a frequency of 1, which indicates a non-repeating character. If no such character is found, we return -1.
