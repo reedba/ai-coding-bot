@@ -1,23 +1,36 @@
-Sure! Here is a problem for you to work on:
-
 Problem:
-Given a string s, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters which reads the same backward as forward. Ignore capitalization, spaces, and punctuation.
 
 Example:
-Input: s = "A man, a plan, a canal: Panama"
+Input: "A man, a plan, a canal, Panama"
 Output: True
 
-Explanation:
-In this example, the string s can be modified to "amanaplanacanalpanama" after removing spaces, punctuation, and converting all characters to lowercase. This modified string reads the same forward and backward, so the function should return True.
+Input: "racecar"
+Output: True
 
-Solution in Python:
+Input: "hello"
+Output: False
+
+Solution (in Python):
+
 ```python
 def is_palindrome(s):
+    # Remove spaces, punctuation, and convert to lowercase
     s = ''.join(char.lower() for char in s if char.isalnum())
+    
+    # Check if string is palindrome
     return s == s[::-1]
 
-s = "A man, a plan, a canal: Panama"
-print(is_palindrome(s))  # Output: True
+# Test the function
+print(is_palindrome("A man, a plan, a canal, Panama"))  # True
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))  # False
 ```
 
-You can test this function with different input strings to see if it correctly identifies palindromes. Let me know if you have any questions or need further explanation!
+Explanation:
+
+1. The `is_palindrome` function takes a string `s` as input.
+2. We remove spaces and punctuation from the input string by using a list comprehension that iterates over each character in the string and only keeps alphanumeric characters.
+3. We convert all characters to lowercase to ignore case sensitivity.
+4. We then check if the cleaned version of the string is equal to its reverse (using slicing with `[::-1]`). If they are equal, the input string is a palindrome and the function returns True, otherwise, it returns False.
+5. We test the function with a few examples to demonstrate its functionality.
