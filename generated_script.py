@@ -1,22 +1,30 @@
-Problem: 
-Given a string, write a Python function to check if it is a palindrome, ignoring any non-alphanumeric characters.
+Problem:
+
+Given two strings, s1 and s2, write a function to determine if s2 is a rotation of s1.
+
+Example:
+s1 = "waterbottle"
+s2 = "erbottlewat"
 
 Explanation:
-A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. In this problem, we want to check if a given string is a palindrome after ignoring any non-alphanumeric characters (such as spaces, punctuation, etc.).
+s2 is a rotation of s1 if we can split s1 into two parts, x and y, such that s1 = xy and s2 = yx. In the example above, s1 can be split into "water" and "bottle", and s2 can be rearranged to "bottle" and "water". Thus, s2 is a rotation of s1.
 
 Solution:
 
 ```python
-def is_palindrome(s):
-    # Convert the string to lowercase and remove non-alphanumeric characters
-    clean_s = ''.join(char.lower() for char in s if char.isalnum())
-    
-    # Check if the cleaned string is equal to its reverse
-    return clean_s == clean_s[::-1]
+def is_rotation(s1, s2):
+    if len(s1) != len(s2):
+        return False
+    return s2 in s1 + s1
 
-# Test the function with some inputs
-print(is_palindrome("A man, a plan, a canal: Panama")) # Output: True
-print(is_palindrome("race a car")) # Output: False
+s1 = "waterbottle"
+s2 = "erbottlewat"
+print(is_rotation(s1, s2))  # Output: True
+
+s1 = "hello"
+s2 = "world"
+print(is_rotation(s1, s2))  # Output: False
 ```
 
-In this solution, we first clean the input string by converting it to lowercase and removing any non-alphanumeric characters using a list comprehension. Then, we check if the cleaned string is equal to its reverse (using Python's string slicing). If the two are equal, we return True (indicating that the input string is a palindrome), otherwise we return False.
+Explanation:
+The function `is_rotation` first checks if the lengths of both strings are equal, as a rotation can only occur if they are of the same length. It then checks if s2 is a substring of s1 concatenated with itself. If so, it returns True, indicating that s2 is a rotation of s1. Otherwise, it returns False.
