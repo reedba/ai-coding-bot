@@ -1,25 +1,34 @@
-Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore spaces, punctuation, and capitalization when checking for palindromes.
+Problem: 
+
+Given a list of strings, find the longest common prefix among them. If there is no common prefix, return an empty string.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True (since the string reads the same backward as forward after ignoring spaces, punctuation, and capitalization)
+Input: ["flower", "flow", "flight"]
+Output: "fl"
 
 Explanation:
-To check if a string is a palindrome, we can first remove all non-alphanumeric characters and convert all characters to lowercase. Then, we can compare the string with its reversed version to see if they are equal.
+The common prefix among the strings "flower", "flow", and "flight" is "fl". 
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    # Remove non-alphanumeric characters and convert to lowercase
-    s = ''.join(c for c in s if c.isalnum()).lower()
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
     
-    # Compare the string with its reversed version
-    return s == s[::-1]
+    prefix = strs[0]
+    
+    for s in strs[1:]:
+        while prefix:
+            if s.startswith(prefix):
+                break
+            prefix = prefix[:-1]
+    
+    return prefix
 
-# Test the function
-input_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_string))  # Output: True
+# Test the function with example input
+input_list = ["flower", "flow", "flight"]
+print(longest_common_prefix(input_list))  # Output: "fl"
 ```
 
-This solution will correctly identify whether a given string is a palindrome, ignoring spaces, punctuation, and capitalization.
+This function takes a list of strings as input and iterates over each string to find the longest common prefix among them. It does this by initially setting the prefix to the first string in the list, then iterates over the rest of the strings checking if they start with the prefix. If a string does not start with the prefix, the function shortens the prefix by removing the last character and continues until a common prefix is found.
