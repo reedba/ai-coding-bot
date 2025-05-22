@@ -1,34 +1,39 @@
-Problem: 
+Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. 
 
-Given a list of strings, find the longest common prefix among them. If there is no common prefix, return an empty string.
+Input: A string
+Output: True if the string is a palindrome, False otherwise
 
 Example:
-Input: ["flower", "flow", "flight"]
-Output: "fl"
+Input: "racecar"
+Output: True
 
-Explanation:
-The common prefix among the strings "flower", "flow", and "flight" is "fl". 
+Input: "hello"
+Output: False
 
 Solution in Python:
 
 ```python
-def longest_common_prefix(strs):
-    if not strs:
-        return ""
+def is_palindrome(s):
+    # Convert the string to lowercase and remove all non-alphanumeric characters
+    s = ''.join(e for e in s.lower() if e.isalnum())
     
-    prefix = strs[0]
-    
-    for s in strs[1:]:
-        while prefix:
-            if s.startswith(prefix):
-                break
-            prefix = prefix[:-1]
-    
-    return prefix
+    # Two pointers approach to check if the string is a palindrome
+    left, right = 0, len(s) - 1
+    while left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
 
-# Test the function with example input
-input_list = ["flower", "flow", "flight"]
-print(longest_common_prefix(input_list))  # Output: "fl"
+# Test the function
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))    # Output: False
+print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
 ```
 
-This function takes a list of strings as input and iterates over each string to find the longest common prefix among them. It does this by initially setting the prefix to the first string in the list, then iterates over the rest of the strings checking if they start with the prefix. If a string does not start with the prefix, the function shortens the prefix by removing the last character and continues until a common prefix is found.
+Explanation:
+- The function `is_palindrome` takes a string `s` as input and first converts it to lowercase and removes all non-alphanumeric characters using a list comprehension.
+- We then use a two pointers approach to check if the string is a palindrome. We initialize two pointers `left` (starting from the beginning) and `right` (starting from the end) and compare the characters at these indexes. If they are not equal, we return False. If we reach the middle of the string without any mismatches, the string is a palindrome and we return True.
+
+The given solution efficiently checks if a given string is a palindrome in Python using a two-pointers approach.
