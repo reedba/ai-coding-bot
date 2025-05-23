@@ -1,39 +1,34 @@
-Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. 
-
-Input: A string
-Output: True if the string is a palindrome, False otherwise
+Problem: Given a string, write a function that returns the most common character in the string. If there are multiple characters with the same highest frequency, return the character that appears first in the string.
 
 Example:
-Input: "racecar"
-Output: True
-
 Input: "hello"
-Output: False
+Output: 'l'
+
+Explanation:
+In the input string "hello", the character 'l' appears the most frequently with a frequency of 2.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    # Convert the string to lowercase and remove all non-alphanumeric characters
-    s = ''.join(e for e in s.lower() if e.isalnum())
+def most_common_char(s):
+    char_count = {}
+    max_count = 0
+    most_common_char = ""
     
-    # Two pointers approach to check if the string is a palindrome
-    left, right = 0, len(s) - 1
-    while left < right:
-        if s[left] != s[right]:
-            return False
-        left += 1
-        right -= 1
-    return True
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+        
+        if char_count[char] > max_count:
+            max_count = char_count[char]
+            most_common_char = char
+            
+    return most_common_char
 
-# Test the function
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
+# Test the function with input "hello"
+print(most_common_char("hello"))  # Output: 'l'
 ```
 
-Explanation:
-- The function `is_palindrome` takes a string `s` as input and first converts it to lowercase and removes all non-alphanumeric characters using a list comprehension.
-- We then use a two pointers approach to check if the string is a palindrome. We initialize two pointers `left` (starting from the beginning) and `right` (starting from the end) and compare the characters at these indexes. If they are not equal, we return False. If we reach the middle of the string without any mismatches, the string is a palindrome and we return True.
-
-The given solution efficiently checks if a given string is a palindrome in Python using a two-pointers approach.
+In this solution, we iterate through the input string and maintain a dictionary to keep track of the frequency of each character. We update the most common character and its frequency as we iterate through the input string. Finally, we return the most common character.
