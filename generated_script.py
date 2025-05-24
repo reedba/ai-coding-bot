@@ -1,34 +1,19 @@
-Problem: Given a string, write a function that returns the most common character in the string. If there are multiple characters with the same highest frequency, return the character that appears first in the string.
+Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. Ignore capitalization, punctuation, and spacing when determining if a string is a palindrome.
 
 Example:
-Input: "hello"
-Output: 'l'
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-In the input string "hello", the character 'l' appears the most frequently with a frequency of 2.
+In the given string, if we ignore all the non-alphanumeric characters and spaces, we get "amanaplanacanalpanama" which is a palindrome when read in reverse.
 
 Solution in Python:
-
 ```python
-def most_common_char(s):
-    char_count = {}
-    max_count = 0
-    most_common_char = ""
+def is_palindrome(s):
+    s = ''.join(e for e in s if e.isalnum()).lower() # Remove non-alphanumeric characters and convert to lowercase
+    return s == s[::-1] # Check if the string is equal to its reverse
     
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-        
-        if char_count[char] > max_count:
-            max_count = char_count[char]
-            most_common_char = char
-            
-    return most_common_char
-
-# Test the function with input "hello"
-print(most_common_char("hello"))  # Output: 'l'
+# Test the function
+input_string = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_string)) # Output: True
 ```
-
-In this solution, we iterate through the input string and maintain a dictionary to keep track of the frequency of each character. We update the most common character and its frequency as we iterate through the input string. Finally, we return the most common character.
