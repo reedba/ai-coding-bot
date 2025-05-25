@@ -1,19 +1,31 @@
-Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. Ignore capitalization, punctuation, and spacing when determining if a string is a palindrome.
+Problem: Given a list of strings, write a function to find the longest common prefix amongst all strings. If there is no common prefix, return an empty string.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Input: ["flower", "flow", "flight"]
+Output: "fl"
 
-Explanation:
-In the given string, if we ignore all the non-alphanumeric characters and spaces, we get "amanaplanacanalpanama" which is a palindrome when read in reverse.
+Explanation: The longest common prefix amongst the strings "flower", "flow", and "flight" is "fl".
 
 Solution in Python:
+
 ```python
-def is_palindrome(s):
-    s = ''.join(e for e in s if e.isalnum()).lower() # Remove non-alphanumeric characters and convert to lowercase
-    return s == s[::-1] # Check if the string is equal to its reverse
+def longestCommonPrefix(strs):
+    if not strs:
+        return ""
     
+    prefix = strs[0]
+    
+    for i in range(1, len(strs)):
+        while strs[i].find(prefix) != 0:
+            prefix = prefix[0: len(prefix) - 1]
+            if len(prefix) == 0:
+                return ""
+    
+    return prefix
+
 # Test the function
-input_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_string)) # Output: True
+input_strings = ["flower", "flow", "flight"]
+print(longestCommonPrefix(input_strings))  # Output: "fl"
 ```
+
+This function first initializes the prefix as the first string in the list. Then, it checks each string in the list to see if the prefix is a substring of that string. If not, it gradually shortens the prefix until it finds the common prefix. Finally, it returns the longest common prefix found among all strings.
