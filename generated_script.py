@@ -1,31 +1,26 @@
-Problem: Given a list of strings, write a function to find the longest common prefix amongst all strings. If there is no common prefix, return an empty string.
+Sure, I can help with that!
 
-Example:
-Input: ["flower", "flow", "flight"]
-Output: "fl"
+Problem:
+Given a string, write a Python function to reverse the order of words in the string. For example, if the input string is "hello world", the output should be "world hello".
 
-Explanation: The longest common prefix amongst the strings "flower", "flow", and "flight" is "fl".
+Explanation:
+To solve this problem, we can follow these steps:
+1. Split the input string into a list of words using the split() method.
+2. Reverse the list of words using the reverse() method.
+3. Join the reversed list of words back into a string using the join() method.
 
 Solution in Python:
-
 ```python
-def longestCommonPrefix(strs):
-    if not strs:
-        return ""
-    
-    prefix = strs[0]
-    
-    for i in range(1, len(strs)):
-        while strs[i].find(prefix) != 0:
-            prefix = prefix[0: len(prefix) - 1]
-            if len(prefix) == 0:
-                return ""
-    
-    return prefix
+def reverse_words(input_string):
+    words = input_string.split()
+    words.reverse()
+    reversed_string = ' '.join(words)
+    return reversed_string
 
 # Test the function
-input_strings = ["flower", "flow", "flight"]
-print(longestCommonPrefix(input_strings))  # Output: "fl"
+input_string = "hello world"
+output_string = reverse_words(input_string)
+print(output_string)  # Output: world hello
 ```
 
-This function first initializes the prefix as the first string in the list. Then, it checks each string in the list to see if the prefix is a substring of that string. If not, it gradually shortens the prefix until it finds the common prefix. Finally, it returns the longest common prefix found among all strings.
+You can try running this code with different input strings to test the function. Let me know if you have any questions or if you would like me to explain anything further!
