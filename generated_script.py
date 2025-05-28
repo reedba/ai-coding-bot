@@ -1,39 +1,40 @@
-Problem:
-Given a string, write a function to find the longest substring without repeating characters.
+Problem: Given a string, implement a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
 
-Explanation:
-For example, the input "abcabcbb" should return "abc" as the longest substring without repeating characters.
+Explanation: To solve this problem, we can use two pointers approach. We can have one pointer start from the beginning of the string and another pointer start from the end of the string. As we compare the characters at these two pointers, if they are not the same, then the string is not a palindrome. If all characters match at their respective positions, then the string is a palindrome.
 
 Solution:
 
 ```python
-def longest_substring(input_str):
-    # Initialize variables
-    start = 0  # Start index of the current substring
-    max_len = 0  # Length of the longest substring
-    char_index = {}  # Dictionary to store index of characters
+def is_palindrome(input_str):
+    # Convert the string to lowercase and remove spaces
+    input_str = input_str.lower().replace(" ", "")
     
-    # Loop through the input string
-    for i in range(len(input_str)):
-        char = input_str[i]
-        
-        # Check if the character is already in the char_index dictionary
-        if char in char_index and char_index[char] >= start:
-            # Update the start index to the next index of the repeated character
-            start = char_index[char] + 1
-        
-        # Update the index of the character in the char_index dictionary
-        char_index[char] = i
-        
-        # Update the max_len if the current substring is longer
-        max_len = max(max_len, i - start + 1)
+    # Initialize two pointers
+    left_ptr = 0
+    right_ptr = len(input_str) - 1
     
-    # Return the longest substring without repeating characters
-    return input_str[start:start + max_len]
+    # Loop until pointers meet
+    while left_ptr < right_ptr:
+        # Skip non-alphanumeric characters
+        if not input_str[left_ptr].isalnum():
+            left_ptr += 1
+        elif not input_str[right_ptr].isalnum():
+            right_ptr -= 1
+        # Compare characters at both pointers
+        elif input_str[left_ptr] != input_str[right_ptr]:
+            return False
+        else:
+            left_ptr += 1
+            right_ptr -= 1
+    
+    return True
 
-# Test the function
-input_str = "abcabcbb"
-print(longest_substring(input_str))  # Output: "abc"
+# Test the function with some examples
+print(is_palindrome("A man a plan a canal Panama"))
+# Output: True
+
+print(is_palindrome("race a car"))
+# Output: False
 ```
 
-In this solution, we use a sliding window approach to iterate through the input string while keeping track of the start index of the current substring, the length of the longest substring, and the index of each character. We update these variables as we encounter repeating characters to find the longest substring without repeating characters.
+This function first converts the input string to lowercase and removes any spaces. It then initializes two pointers at the beginning and end of the string and iterates through the string, comparing characters at each position. If the characters do not match, it immediately returns False. If all characters match, it returns True. The function also skips non-alphanumeric characters while comparing.
