@@ -1,40 +1,32 @@
-Problem: Given a string, implement a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
+Problem: 
 
-Explanation: To solve this problem, we can use two pointers approach. We can have one pointer start from the beginning of the string and another pointer start from the end of the string. As we compare the characters at these two pointers, if they are not the same, then the string is not a palindrome. If all characters match at their respective positions, then the string is a palindrome.
+Given a string, write a function to determine if it is a palindrome. A palindrome is a word or phrase that reads the same backward as forward.
+
+Example:
+Input: "racecar"
+Output: True
+
+Input: "hello"
+Output: False
+
+Explanation:
+
+A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. In this problem, we are given a string and we need to check if it is a palindrome.
 
 Solution:
 
 ```python
-def is_palindrome(input_str):
-    # Convert the string to lowercase and remove spaces
-    input_str = input_str.lower().replace(" ", "")
+def is_palindrome(s):
+    # Removing all non-alphanumeric characters and converting to lowercase
+    s = ''.join(e for e in s if e.isalnum()).lower()
     
-    # Initialize two pointers
-    left_ptr = 0
-    right_ptr = len(input_str) - 1
-    
-    # Loop until pointers meet
-    while left_ptr < right_ptr:
-        # Skip non-alphanumeric characters
-        if not input_str[left_ptr].isalnum():
-            left_ptr += 1
-        elif not input_str[right_ptr].isalnum():
-            right_ptr -= 1
-        # Compare characters at both pointers
-        elif input_str[left_ptr] != input_str[right_ptr]:
-            return False
-        else:
-            left_ptr += 1
-            right_ptr -= 1
-    
-    return True
+    # Check if the string is equal to its reverse
+    return s == s[::-1]
 
-# Test the function with some examples
-print(is_palindrome("A man a plan a canal Panama"))
-# Output: True
-
-print(is_palindrome("race a car"))
-# Output: False
+# Test cases
+print(is_palindrome("racecar")) # Output: True
+print(is_palindrome("hello"))   # Output: False
+print(is_palindrome("A man, a plan, a canal, Panama")) # Output: True
 ```
 
-This function first converts the input string to lowercase and removes any spaces. It then initializes two pointers at the beginning and end of the string and iterates through the string, comparing characters at each position. If the characters do not match, it immediately returns False. If all characters match, it returns True. The function also skips non-alphanumeric characters while comparing.
+In the solution, we first remove all non-alphanumeric characters and convert the string to lowercase. Then, we check if the string is equal to its reverse using slicing `s[::-1]`. If they are equal, we return True indicating that the string is a palindrome, otherwise we return False.
