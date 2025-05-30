@@ -1,32 +1,29 @@
 Problem: 
 
-Given a string, write a function to determine if it is a palindrome. A palindrome is a word or phrase that reads the same backward as forward.
+Given a string, return the most common character in the string. If there are multiple characters with the same highest frequency, return all of them.
 
 Example:
-Input: "racecar"
-Output: True
-
 Input: "hello"
-Output: False
+Output: ['l']
 
 Explanation:
+In the input string "hello", the most common character is 'l', which appears twice. Therefore, the output is ['l'].
 
-A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. In this problem, we are given a string and we need to check if it is a palindrome.
-
-Solution:
+Solution in Python:
 
 ```python
-def is_palindrome(s):
-    # Removing all non-alphanumeric characters and converting to lowercase
-    s = ''.join(e for e in s if e.isalnum()).lower()
-    
-    # Check if the string is equal to its reverse
-    return s == s[::-1]
+from collections import Counter
 
-# Test cases
-print(is_palindrome("racecar")) # Output: True
-print(is_palindrome("hello"))   # Output: False
-print(is_palindrome("A man, a plan, a canal, Panama")) # Output: True
+def most_common_character(s):
+    freq = Counter(s)
+    max_freq = max(freq.values())
+    result = [char for char, count in freq.items() if count == max_freq]
+    return result
+
+# Test the function with the example input
+input_str = "hello"
+output = most_common_character(input_str)
+print(output)
 ```
 
-In the solution, we first remove all non-alphanumeric characters and convert the string to lowercase. Then, we check if the string is equal to its reverse using slicing `s[::-1]`. If they are equal, we return True indicating that the string is a palindrome, otherwise we return False.
+This code uses the Counter class from the collections module to quickly find the frequency of each character in the input string. Then, it finds the maximum frequency and returns all characters that have that frequency. The result is then printed.
