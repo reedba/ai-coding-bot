@@ -1,25 +1,29 @@
-Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward.
+Problem: Given a string, determine if it is a palindrome (a string that reads the same backward as forward ignoring spaces and punctuation).
 
-Explanation: To check if a string is a palindrome, we can compare the characters at the beginning and end of the string, moving towards the center. If the characters match at each position, the string is a palindrome. We can ignore spaces, punctuation, and capitalization when comparing the characters.
+Input: A string s
+
+Output: True if s is a palindrome, False otherwise
+
+Example:
+Input: "A man, a plan, a canal, Panama"
+Output: True
+
+Explanation:
+To solve this problem, we can first remove all spaces and punctuation from the input string using string manipulation in Python. Then, we can compare the original string with its reversed version (using the `[::-1]` syntax). If they are the same, then the input string is a palindrome.
 
 Solution in Python:
 
 ```python
 def is_palindrome(s):
-    # Convert the string to lowercase and remove spaces and punctuation
-    s = ''.join(ch.lower() for ch in s if ch.isalnum())
+    # Remove spaces and punctuation from the string
+    s = ''.join(e for e in s if e.isalnum()).lower()
     
-    # Compare characters from beginning and end of the string
-    for i in range(len(s) // 2):
-        if s[i] != s[len(s) - i - 1]:
-            return False
-    
-    return True
+    # Compare the original string with its reversed version
+    return s == s[::-1]
 
-# Test the function with some examples
-print(is_palindrome("A man, a plan, a canal, Panama")) # True
-print(is_palindrome("racecar")) # True
-print(is_palindrome("hello")) # False
+# Test the function
+input_string = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_string))  # Output: True
 ```
 
-In this solution, we first convert the input string to lowercase and remove any non-alphanumeric characters using list comprehension. Then, we iterate through the characters from the beginning and end of the string simultaneously, comparing them at each position. If any pair of characters do not match, we return False. If we reach the middle of the string without finding any mismatches, we return True indicating that the string is a palindrome.
+This solution uses list comprehension to remove all non-alphanumeric characters from the input string and converts it to lowercase. Then, it checks if the cleaned string is equal to its reversed version. If they are equal, the function returns True, indicating that the input string is a palindrome.
