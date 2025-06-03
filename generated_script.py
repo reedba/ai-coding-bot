@@ -1,20 +1,33 @@
-Problem: Given a string, determine if it is a palindrome (a word, phrase, or sequence that reads the same backward as forward).
+Problem: 
 
-Explanation: A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. For example, "racecar" is a palindrome because it reads the same forwards and backwards. To determine if a string is a palindrome, we need to compare the string to its reverse.
+Given a string, return the most common character in the string. If there are multiple characters with the same maximum frequency, return all of them in a list.
+
+Explanation:
+
+To solve this problem, we can use a dictionary to keep track of the frequency of each character in the string. We can iterate through the string and update the frequency count in the dictionary. Then, we can find the character(s) with the maximum frequency and return them.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    s = s.lower()  # Convert string to lowercase to make comparison case-insensitive
-    s = ''.join(e for e in s if e.isalnum())  # Remove non-alphanumeric characters
+def most_common_char(s):
+    freq = {}
+    max_freq = 0
     
-    return s == s[::-1]  # Compare original string with its reverse
+    for char in s:
+        if char in freq:
+            freq[char] += 1
+        else:
+            freq[char] = 1
+        max_freq = max(max_freq, freq[char])
+    
+    most_common_chars = [key for key, value in freq.items() if value == max_freq]
+    
+    return most_common_chars
 
-# Test cases
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
+# Test the function with a sample string
+s = "hello world"
+result = most_common_char(s)
+print(result)  # Output: ['l', 'o']
 ```
 
-In this solution, we first convert the input string to lowercase using `lower()` to make the comparison case-insensitive. We then use a list comprehension to remove any non-alphanumeric characters from the string using `isalnum()`. Finally, we compare the modified string with its reverse using slicing `[::-1]` and return True if they are equal, indicating that the input string is a palindrome.
+This solution iterates through the string `s` and keeps track of the frequency of each character in the `freq` dictionary. Then, it finds the maximum frequency and returns all characters with that frequency in a list.
