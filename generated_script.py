@@ -1,33 +1,30 @@
-Problem: 
+Problem: Write a function in Python that takes in a string as input and returns the length of the longest substring without repeating characters.
 
-Given a string, return the most common character in the string. If there are multiple characters with the same maximum frequency, return all of them in a list.
+Explanation: Given a string, we need to find the length of the longest substring that does not contain any repeating characters. For example, for the input string "abcabcbb", the longest substring without repeating characters is "abc" and the length of this substring is 3.
 
-Explanation:
-
-To solve this problem, we can use a dictionary to keep track of the frequency of each character in the string. We can iterate through the string and update the frequency count in the dictionary. Then, we can find the character(s) with the maximum frequency and return them.
-
-Solution in Python:
+Solution:
 
 ```python
-def most_common_char(s):
-    freq = {}
-    max_freq = 0
+def length_of_longest_substring(s):
+    if not s:
+        return 0
     
-    for char in s:
-        if char in freq:
-            freq[char] += 1
-        else:
-            freq[char] = 1
-        max_freq = max(max_freq, freq[char])
+    max_length = 0
+    start = 0
+    seen = {}
     
-    most_common_chars = [key for key, value in freq.items() if value == max_freq]
+    for end in range(len(s)):
+        if s[end] in seen:
+            start = max(start, seen[s[end]] + 1)
+        
+        seen[s[end]] = end
+        max_length = max(max_length, end - start + 1)
     
-    return most_common_chars
+    return max_length
 
-# Test the function with a sample string
-s = "hello world"
-result = most_common_char(s)
-print(result)  # Output: ['l', 'o']
+# Test the function
+input_string = "abcabcbb"
+print(length_of_longest_substring(input_string))  # Output: 3
 ```
 
-This solution iterates through the string `s` and keeps track of the frequency of each character in the `freq` dictionary. Then, it finds the maximum frequency and returns all characters with that frequency in a list.
+In this solution, we use a sliding window approach to traverse the string and keep track of the start and end index of the current substring without repeating characters. We use a dictionary `seen` to store the index of the last occurrence of each character encountered. If we encounter a character that is already in the `seen` dictionary, we update the `start` index to be the maximum of the current `start` index and the index of the repeating character plus 1. We update the `max_length` based on the length of the current substring without repeating characters. Finally, we return the `max_length` as the result.
