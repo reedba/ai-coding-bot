@@ -1,30 +1,33 @@
-Problem: Write a function in Python that takes in a string as input and returns the length of the longest substring without repeating characters.
+Problem:
+Given a list of strings, write a function that returns the longest common prefix among all strings. If there is no common prefix, return an empty string.
 
-Explanation: Given a string, we need to find the length of the longest substring that does not contain any repeating characters. For example, for the input string "abcabcbb", the longest substring without repeating characters is "abc" and the length of this substring is 3.
+Example:
+Input: ["leetcode", "leed", "lee"]
+Output: "lee"
 
-Solution:
+Explanation:
+In the given list of strings, the longest common prefix among all strings is "lee".
+
+Solution in Python:
 
 ```python
-def length_of_longest_substring(s):
-    if not s:
-        return 0
+def longestCommonPrefix(strs):
+    if not strs:
+        return ""
     
-    max_length = 0
-    start = 0
-    seen = {}
+    prefix = strs[0]
     
-    for end in range(len(s)):
-        if s[end] in seen:
-            start = max(start, seen[s[end]] + 1)
-        
-        seen[s[end]] = end
-        max_length = max(max_length, end - start + 1)
+    for string in strs[1:]:
+        i = 0
+        while i < len(prefix) and i < len(string) and prefix[i] == string[i]:
+            i += 1
+        prefix = prefix[:i]
     
-    return max_length
+    return prefix
 
 # Test the function
-input_string = "abcabcbb"
-print(length_of_longest_substring(input_string))  # Output: 3
+input_list = ["leetcode", "leed", "lee"]
+print(longestCommonPrefix(input_list))  # Output: "lee"
 ```
 
-In this solution, we use a sliding window approach to traverse the string and keep track of the start and end index of the current substring without repeating characters. We use a dictionary `seen` to store the index of the last occurrence of each character encountered. If we encounter a character that is already in the `seen` dictionary, we update the `start` index to be the maximum of the current `start` index and the index of the repeating character plus 1. We update the `max_length` based on the length of the current substring without repeating characters. Finally, we return the `max_length` as the result.
+In this solution, we first check if the input list is empty and return an empty string if so. We then initialize the `prefix` variable to the first string in the list. We iterate through the remaining strings in the list and compare each character of the prefix with the corresponding character in the current string. If the characters match, we increment the index `i`, otherwise, we break out of the loop. Finally, we return the `prefix` string which contains the longest common prefix among all strings.
