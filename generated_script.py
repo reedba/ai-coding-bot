@@ -1,31 +1,36 @@
-Alright, here is a DSA problem related to strings and arrays:
-
-Problem: Given an array of integers, return the indices of two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
+Problem: Given a string, write a function to reverse the string in-place. Do not use any extra space for another array. 
 
 Example:
-Input: nums = [2, 7, 11, 15], target = 9
-Output: [0, 1]
-Explanation: The sum of 2 and 7 is 9, so the indices of the two numbers are 0 and 1.
+Input: "hello"
+Output: "olleh"
 
-Solution (Python):
+Explanation: In-place reversal means that the input string should be modified directly. So, you should not create a new string or use any additional data structure to solve this problem. 
+
+Solution in Python:
+
 ```python
-def twoSum(nums, target):
-    num_dict = {}
+def reverse_string(s):
+    # Convert the string to a list to make it mutable
+    s = list(s)
     
-    for i in range(len(nums)):
-        complement = target - nums[i]
-        if complement in num_dict:
-            return [num_dict[complement], i]
-        else:
-            num_dict[nums[i]] = i
+    # Initialize two pointers, one at the beginning and one at the end
+    left, right = 0, len(s) - 1
+    
+    while left < right:
+        # Swap characters at the two pointers
+        s[left], s[right] = s[right], s[left]
+        
+        # Move the pointers towards the center
+        left += 1
+        right -= 1
+        
+    # Convert the list back to string
+    return ''.join(s)
 
-# Input
-nums = [2, 7, 11, 15]
-target = 9
-
-# Output
-result = twoSum(nums, target)
-print(result)
+# Test the function with an example
+input_string = "hello"
+output_string = reverse_string(input_string)
+print(output_string)  # Output: "olleh"
 ```
 
-In this solution, we use a dictionary to store the numbers we have encountered so far. For each number in the array, we calculate its complement (target - current number) and check if the complement is already in the dictionary. If it is, we return the indices of the two numbers that add up to the target. If not, we add the current number to the dictionary.
+This solution uses two pointers to swap characters at the beginning and end of the string until they reach the middle. This approach reverses the string in-place without using any extra space.
