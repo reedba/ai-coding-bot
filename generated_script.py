@@ -1,24 +1,37 @@
 Problem:
-Given a string, implement a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards, ignoring spaces, punctuation, and capitalization.
 
-Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True (since the above string is a palindrome)
+Given a string, return the first non-repeating character in the string.
 
 Explanation:
-To solve this problem, we can first remove any spaces, punctuation, and convert all characters to lowercase. Then, we can compare the string with its reverse to check if it is a palindrome.
+
+You are given a string of lowercase English letters. You need to find and return the first non-repeating character in the string. A non-repeating character is a character that appears only once in the string. If no such character exists, return an empty string.
+
+For example, given the input "leetcode", the output should be "l" because 'l' is the first character that does not repeat in the string.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    s = ''.join([c.lower() for c in s if c.isalnum()])
-    return s == s[::-1]
+def first_non_repeating_character(s):
+    char_count = {}
+
+    # Count the frequency of each character
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+
+    # Find the first non-repeating character
+    for char in s:
+        if char_count[char] == 1:
+            return char
+
+    return ""
 
 # Test the function
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
+input_str = "leetcode"
+output = first_non_repeating_character(input_str)
+print(output)  # Output: l
 ```
 
-In the above solution, the `is_palindrome` function takes a string `s` as input and first removes all non-alphanumeric characters and converts all characters to lowercase. Then, it checks if the cleaned string is equal to its reverse using slicing `s[::-1]`. If they are equal, the function returns `True`, indicating that the input string is a palindrome; otherwise, it returns `False`.
+In this solution, we first count the frequency of each character in the input string using a dictionary. Then, we iterate through the string again and return the first character that has a frequency of 1. If no such character is found, we return an empty string.
