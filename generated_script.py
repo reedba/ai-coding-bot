@@ -1,21 +1,29 @@
-Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore non-alphanumeric characters and case sensitivity.
+Problem: Given a string s, return the length of the longest substring without repeating characters.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
 
-Explanation: The input string, "A man, a plan, a canal, Panama", is a palindrome when non-alphanumeric characters are ignored and case is ignored. When the non-alphanumeric characters and case are removed, the string becomes "amanaplanacanalpanama", which reads the same backward as forward.
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The longest substring without repeating characters is "abc", which has a length of 3.
 
-Solution in Python:
+Solution (Python):
 
 ```python
-def is_palindrome(s):
-    s = ''.join(c.lower() for c in s if c.isalnum())
-    return s == s[::-1]
+def lengthOfLongestSubstring(s: str) -> int:
+    start = maxLength = 0
+    usedChars = {}
 
-# Test the function with the given example
-input_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_string))  # Output: True
+    for i, char in enumerate(s):
+        if char in usedChars and start <= usedChars[char]:
+            start = usedChars[char] + 1
+        else:
+            maxLength = max(maxLength, i - start + 1)
+
+        usedChars[char] = i
+
+    return maxLength
+
+# Test the function
+s = "abcabcbb"
+print(lengthOfLongestSubstring(s))  # Output: 3
 ```
-
-In the solution code, we first clean up the input string by removing non-alphanumeric characters and converting all characters to lowercase. Then, we check if the cleaned up string is equal to its reverse. If they are equal, then the input string is a palindrome and the function returns True.
