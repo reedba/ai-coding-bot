@@ -1,27 +1,40 @@
-Problem:
-Given a string, write a function in Python to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
+Problem: 
+
+Given an array of integers, return a new array where each element is the product of all the elements in the original array except the element at that index.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Input: [1, 2, 3, 4]
+Output: [24, 12, 8, 6]
 
 Explanation:
-In the given example, the input string is "A man, a plan, a canal, Panama". If we remove spaces, punctuation, and consider only lowercase characters, the string becomes "amanaplanacanalpanama", which is a palindrome.
+- For index 0, the product of all the elements except 1 is 2 * 3 * 4 = 24
+- For index 1, the product of all the elements except 2 is 1 * 3 * 4 = 12
+- For index 2, the product of all the elements except 3 is 1 * 2 * 4 = 8
+- For index 3, the product of all the elements except 4 is 1 * 2 * 3 = 6
 
 Solution in Python:
-
 ```python
-def is_palindrome(s):
-    # Removing spaces and punctuation and converting to lowercase
-    s = ''.join(e for e in s if e.isalnum()).lower()
+def product_except_self(nums):
+    n = len(nums)
+    output = [1] * n
     
-    # Checking if the string is a palindrome
-    return s == s[::-1]
+    # Calculate the product of all elements to the left of current index
+    left_product = 1
+    for i in range(n):
+        output[i] *= left_product
+        left_product *= nums[i]
+    
+    # Calculate the product of all elements to the right of current index
+    right_product = 1
+    for i in range(n-1, -1, -1):
+        output[i] *= right_product
+        right_product *= nums[i]
+    
+    return output
 
-# Test cases
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello world"))  # Output: False
+# Test the function
+nums = [1, 2, 3, 4]
+print(product_except_self(nums))  # Output: [24, 12, 8, 6]
 ```
 
-In the solution provided, we first remove spaces and punctuation from the input string and convert it to lowercase. We then check if the modified string is equal to its reverse (using slicing with `[::1]`), which determines if the string is a palindrome or not.
+In this solution, we first initialize a new array `output` with all elements as 1. We then calculate the product of all elements to the left of the current index and store it in the `output` array. Next, we calculate the product of all elements to the right of the current index and multiply it with the value already present in the `output` array. Finally, we return the `output` array.
