@@ -1,40 +1,30 @@
-Problem: 
-
-Given an array of integers, return a new array where each element is the product of all the elements in the original array except the element at that index.
+Problem:
+Given a string, reverse the order of characters in each word while maintaining the order of words in the sentence.
 
 Example:
-Input: [1, 2, 3, 4]
-Output: [24, 12, 8, 6]
+Input: "hello world"
+Output: "olleh dlrow"
 
 Explanation:
-- For index 0, the product of all the elements except 1 is 2 * 3 * 4 = 24
-- For index 1, the product of all the elements except 2 is 1 * 3 * 4 = 12
-- For index 2, the product of all the elements except 3 is 1 * 2 * 4 = 8
-- For index 3, the product of all the elements except 4 is 1 * 2 * 3 = 6
+In the input string, the word "hello" is reversed to "olleh" and the word "world" is reversed to "dlrow". The order of words remains the same, with "hello" coming before "world".
 
 Solution in Python:
 ```python
-def product_except_self(nums):
-    n = len(nums)
-    output = [1] * n
+def reverseWords(s):
+    # Split the input string into individual words
+    words = s.split()
     
-    # Calculate the product of all elements to the left of current index
-    left_product = 1
-    for i in range(n):
-        output[i] *= left_product
-        left_product *= nums[i]
+    # Iterate through each word and reverse the characters
+    for i in range(len(words)):
+        words[i] = words[i][::-1]
     
-    # Calculate the product of all elements to the right of current index
-    right_product = 1
-    for i in range(n-1, -1, -1):
-        output[i] *= right_product
-        right_product *= nums[i]
-    
-    return output
+    # Join the reversed words back together to form the final output
+    return ' '.join(words)
 
-# Test the function
-nums = [1, 2, 3, 4]
-print(product_except_self(nums))  # Output: [24, 12, 8, 6]
+# Test the function with an example input
+input_str = "hello world"
+output_str = reverseWords(input_str)
+print(output_str)  # Output: "olleh dlrow"
 ```
 
-In this solution, we first initialize a new array `output` with all elements as 1. We then calculate the product of all elements to the left of the current index and store it in the `output` array. Next, we calculate the product of all elements to the right of the current index and multiply it with the value already present in the `output` array. Finally, we return the `output` array.
+In this solution, we first split the input string `s` into individual words using the `split()` function. We then iterate through each word and reverse its characters using the slicing syntax `[::-1]`. Finally, we join the reversed words back together using the `join()` function and return the final output.
