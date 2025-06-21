@@ -1,30 +1,22 @@
-Problem:
-Given a string, reverse the order of characters in each word while maintaining the order of words in the sentence.
-
-Example:
-Input: "hello world"
-Output: "olleh dlrow"
+Problem: Given a string, determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
 
 Explanation:
-In the input string, the word "hello" is reversed to "olleh" and the word "world" is reversed to "dlrow". The order of words remains the same, with "hello" coming before "world".
+To solve this problem, we can compare the given string with its reverse. If the original string is equal to its reverse, then it is a palindrome.
 
 Solution in Python:
-```python
-def reverseWords(s):
-    # Split the input string into individual words
-    words = s.split()
-    
-    # Iterate through each word and reverse the characters
-    for i in range(len(words)):
-        words[i] = words[i][::-1]
-    
-    # Join the reversed words back together to form the final output
-    return ' '.join(words)
 
-# Test the function with an example input
-input_str = "hello world"
-output_str = reverseWords(input_str)
-print(output_str)  # Output: "olleh dlrow"
+```python
+def is_palindrome(s):
+    # Convert the string to lowercase and remove any non-alphanumeric characters
+    s = ''.join(e for e in s if e.isalnum()).lower()
+    
+    # Compare the string with its reverse
+    return s == s[::-1]
+
+# Test the function with some examples
+print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))  # Output: False
 ```
 
-In this solution, we first split the input string `s` into individual words using the `split()` function. We then iterate through each word and reverse its characters using the slicing syntax `[::-1]`. Finally, we join the reversed words back together using the `join()` function and return the final output.
+In this solution, we first remove any non-alphanumeric characters from the input string and convert it to lowercase using list comprehension. Then, we compare the modified string with its reverse using slicing (`s[::-1]`). If they are equal, we return True indicating that the string is a palindrome, otherwise we return False.
