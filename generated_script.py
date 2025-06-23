@@ -1,21 +1,23 @@
-Problem: Given a string, write a function to check if it is a palindrome. Ignore spaces, capitalization, and punctuation when checking for palindromes.
+Problem:
+Given a string, return true if the string is a palindrome, and false if it is not. Ignore case sensitivity and consider only alphanumeric characters.
 
-Explanation: A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, capitalization, and punctuation). For example, "A man, a plan, a canal, Panama" is a palindrome.
+Example:
+Input: s = "A man, a plan, a canal, Panama"
+Output: true
+
+Explanation:
+The string "A man, a plan, a canal, Panama" is a palindrome because if we remove all non-alphanumeric characters and ignore case sensitivity, it becomes "amanaplanacanalpanama", which reads the same forwards and backwards.
 
 Solution in Python:
 
 ```python
 def is_palindrome(s):
-    # Convert the string to lowercase and remove all non-alphanumeric characters
-    s = ''.join(ch for ch in s.lower() if ch.isalnum())
-    
-    # Compare the original string with its reverse
-    return s == s[::-1]
+    clean_str = ''.join(char for char in s if char.isalnum()).lower()
+    return clean_str == clean_str[::-1]
 
-# Test the function with some example strings
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello world"))  # Output: False
+# Test the function
+s = "A man, a plan, a canal, Panama"
+print(is_palindrome(s)) # Output: True
 ```
 
-In this solution, we first convert the input string to lowercase and remove all non-alphanumeric characters using a list comprehension. Then, we compare the original string with its reverse using slicing. The function returns `True` if the string is a palindrome and `False` otherwise.
+In this solution, we first clean up the input string by removing all non-alphanumeric characters and converting it to lowercase. Then, we check if the cleaned string is the same as its reverse, which determines if the input string is a palindrome.
