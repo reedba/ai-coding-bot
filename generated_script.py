@@ -1,35 +1,20 @@
-Sure, I can help with that! Here's a new DSA problem for you to work on:
-
-Problem: Remove Duplicates from Sorted Array
-Given a sorted array nums, remove the duplicates in-place such that each element appears only once and return the new length.
-Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
-
-Example:
-Input: nums = [1, 1, 2, 2, 3]
-Output: 3 (since the input array is modified to [1, 2, 3])
+Problem: Given a string, implement a function to reverse the order of words in the string.
 
 Explanation:
-To solve this problem, we can use two pointers, one to iterate through the array and another to keep track of the index where the next unique element should be placed. We will compare the current element with the next element in the array. If they are the same, we will skip over the duplicate element. If they are different, we will move the unique element to the next available index.
 
-Here's a Python solution to the problem:
+For example, given the input string "Hello World", the output should be "World Hello".
 
+Solution in Python:
 ```python
-def removeDuplicates(nums):
-    if len(nums) == 0:
-        return 0
-    
-    unique_index = 0
-    for i in range(1, len(nums)):
-        if nums[i] != nums[unique_index]:
-            unique_index += 1
-            nums[unique_index] = nums[i]
-    
-    return unique_index + 1
+def reverse_words(s):
+    words = s.split() # Split the string into a list of words
+    words.reverse() # Reverse the order of words
+    return ' '.join(words) # Join the words back together with a space
 
-# Example usage
-nums = [1, 1, 2, 2, 3]
-print(removeDuplicates(nums))  # Output: 3
-print(nums)  # Modified array: [1, 2, 3]
+# Test the function
+input_string = "Hello World"
+output_string = reverse_words(input_string)
+print(output_string) # Output: "World Hello"
 ```
 
-You can try implementing this solution and test it with different input arrays to see how it performs. Let me know if you have any questions or need further explanation!
+In this solution, we first split the input string into a list of words using the split() function. Then, we reverse the order of the words using the reverse() method. Finally, we join the words back together using the join() method with a space as the delimiter.
