@@ -1,24 +1,38 @@
-Problem: Given a string, determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward.
+Problem:
+Given an array of integers, rotate the array to the right by k steps, where k is a non-negative integer.
 
-Explanation: To solve this problem, we can compare each character in the string with its corresponding character from the end of the string. If all characters match, then the string is a palindrome. We can ignore any spaces and make the comparison case-insensitive.
+Example:
+Input: [1,2,3,4,5,6,7], k = 3
+Output: [5,6,7,1,2,3,4]
+
+Explanation:
+In the above example, the array is rotated to the right by 3 steps. The final output is [5,6,7,1,2,3,4].
 
 Solution in Python:
-
 ```python
-def is_palindrome(s):
-    s = s.lower()  # Convert string to lowercase
-    s = ''.join(e for e in s if e.isalnum())  # Remove non-alphanumeric characters
+def rotate_array(nums, k):
+    n = len(nums)
+    k = k % n  # normalize k if it is larger than the length of the array
     
-    # Check if the string is a palindrome
-    for i in range(len(s) // 2):
-        if s[i] != s[-i - 1]:
-            return False
-    return True
+    # Reverse the entire array
+    def reverse(nums, start, end):
+        while start < end:
+            nums[start], nums[end] = nums[end], nums[start]
+            start += 1
+            end -= 1
+    
+    reverse(nums, 0, n-1)
+    reverse(nums, 0, k-1)
+    reverse(nums, k, n-1)
+    
+    return nums
 
-# Test cases
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))  # Output: False
+# Test the solution with the example input
+nums = [1,2,3,4,5,6,7]
+k = 3
+result = rotate_array(nums, k)
+print(result)
 ```
 
-In this solution, we first convert the string to lowercase and remove any non-alphanumeric characters. Then, we iterate through the string and compare each character with its corresponding character from the end of the string. If any characters do not match, we return False. Otherwise, we return True at the end.
+Output:
+[5,6,7,1,2,3,4]
