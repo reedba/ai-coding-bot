@@ -1,38 +1,35 @@
-Problem:
-Given an array of integers, rotate the array to the right by k steps, where k is a non-negative integer.
+Problem: 
+Given an array of integers, find the maximum absolute difference between any two elements in the array.
 
-Example:
-Input: [1,2,3,4,5,6,7], k = 3
-Output: [5,6,7,1,2,3,4]
-
-Explanation:
-In the above example, the array is rotated to the right by 3 steps. The final output is [5,6,7,1,2,3,4].
-
-Solution in Python:
-```python
-def rotate_array(nums, k):
-    n = len(nums)
-    k = k % n  # normalize k if it is larger than the length of the array
-    
-    # Reverse the entire array
-    def reverse(nums, start, end):
-        while start < end:
-            nums[start], nums[end] = nums[end], nums[start]
-            start += 1
-            end -= 1
-    
-    reverse(nums, 0, n-1)
-    reverse(nums, 0, k-1)
-    reverse(nums, k, n-1)
-    
-    return nums
-
-# Test the solution with the example input
-nums = [1,2,3,4,5,6,7]
-k = 3
-result = rotate_array(nums, k)
-print(result)
-```
+Input:
+- An array of integers
 
 Output:
-[5,6,7,1,2,3,4]
+- An integer representing the maximum absolute difference between any two elements in the array
+
+Example:
+Input: [2, 4, 1, 7, 5]
+Output: 6
+Explanation: The maximum absolute difference can be found between the elements 1 and 7 (|7 - 1| = 6)
+
+Solution (in Python):
+```python
+def max_absolute_difference(arr):
+    if len(arr) < 2:
+        return 0
+    
+    min_val = arr[0]
+    max_val = arr[0]
+    
+    for num in arr:
+        min_val = min(min_val, num)
+        max_val = max(max_val, num)
+    
+    return abs(max_val - min_val)
+
+# Test the function with the example input
+arr = [2, 4, 1, 7, 5]
+print(max_absolute_difference(arr))
+```
+
+This solution has a time complexity of O(n) where 'n' is the number of elements in the input array.
