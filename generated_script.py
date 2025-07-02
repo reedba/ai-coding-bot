@@ -1,30 +1,22 @@
-Problem:
-Given a string, return the most common character in the string. If there are multiple characters with the same highest frequency, return all of them.
-
-Example:
-Input: "hello world"
-Output: ['l', 'o']
+Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters that reads the same forward and backward.
 
 Explanation:
-In the input string "hello world", the character 'l' and 'o' both occur 2 times, which is the highest frequency in the string. Therefore, we return ['l', 'o'].
+To determine if a string is a palindrome, we can compare the original string with its reverse. If the two strings are equal, then the original string is a palindrome.
 
 Solution in Python:
+
 ```python
-def most_common_chars(s):
-    max_freq = 0
-    char_freq = {}
-    for char in s:
-        if char.isalpha():
-            char_lower = char.lower()
-            char_freq[char_lower] = char_freq.get(char_lower, 0) + 1
-            max_freq = max(max_freq, char_freq[char_lower])
+def is_palindrome(s):
+    # Remove all non-alphanumeric characters and convert the input string to lowercase
+    s = ''.join(e for e in s if e.isalnum()).lower()
+    
+    # Compare the original string with its reverse
+    return s == s[::-1]
 
-    most_common_chars = [char for char, freq in char_freq.items() if freq == max_freq]
-    return most_common_chars
-
-# Test the function
-input_str = "hello world"
-print(most_common_chars(input_str))  # Output: ['l', 'o']
+# Test cases
+print(is_palindrome("A man, a plan, a canal, Panama")) # True
+print(is_palindrome("racecar")) # True
+print(is_palindrome("hello")) # False
 ```
 
-In this solution, we iterate through each character in the input string and keep track of the frequency of each character in a dictionary. We also keep track of the maximum frequency encountered. Finally, we filter out the characters with the maximum frequency and return them as a list.
+In this solution, we first remove all non-alphanumeric characters and convert the input string to lowercase. Next, we compare the original string with its reverse using slicing. If the two strings are equal, we return True, indicating that the string is a palindrome.
