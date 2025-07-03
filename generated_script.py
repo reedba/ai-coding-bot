@@ -1,22 +1,27 @@
-Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters that reads the same forward and backward.
+Problem: Given a string, find the longest substring with non-repeating characters.
 
-Explanation:
-To determine if a string is a palindrome, we can compare the original string with its reverse. If the two strings are equal, then the original string is a palindrome.
+Explanation: 
+Write a function named `longest_substring` that takes a string as input and returns the length of the longest substring with non-repeating characters. For example, given the input "abcabcbb", the longest substring with non-repeating characters is "abc" which has a length of 3. 
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    # Remove all non-alphanumeric characters and convert the input string to lowercase
-    s = ''.join(e for e in s if e.isalnum()).lower()
+def longest_substring(s):
+    seen = {}
+    start = 0
+    max_length = 0
     
-    # Compare the original string with its reverse
-    return s == s[::-1]
+    for i in range(len(s)):
+        if s[i] in seen:
+            start = max(start, seen[s[i]] + 1)
+        seen[s[i]] = i
+        max_length = max(max_length, i - start + 1)
+    
+    return max_length
 
-# Test cases
-print(is_palindrome("A man, a plan, a canal, Panama")) # True
-print(is_palindrome("racecar")) # True
-print(is_palindrome("hello")) # False
+# Test the function
+input_str = "abcabcbb"
+print(longest_substring(input_str))  # Output: 3
 ```
 
-In this solution, we first remove all non-alphanumeric characters and convert the input string to lowercase. Next, we compare the original string with its reverse using slicing. If the two strings are equal, we return True, indicating that the string is a palindrome.
+In the solution, we use a dictionary `seen` to store the index of each character we have seen. We also maintain a `start` pointer that marks the start of the current substring with non-repeating characters. As we iterate through the string, we update the `start` pointer whenever we encounter a repeated character, and update the `max_length` whenever we find a longer substring. Finally, we return the `max_length` as the result.
