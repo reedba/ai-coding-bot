@@ -1,27 +1,31 @@
-Problem: Given a string, find the longest substring with non-repeating characters.
+Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
 
-Explanation: 
-Write a function named `longest_substring` that takes a string as input and returns the length of the longest substring with non-repeating characters. For example, given the input "abcabcbb", the longest substring with non-repeating characters is "abc" which has a length of 3. 
+Example:
+Input: "racecar"
+Output: True
+
+Input: "hello"
+Output: False
+
+Explanation:
+To solve this problem, we can iterate through the characters of the string from both ends and compare them. If at any point we find that the characters do not match, we can return False. If we finish iterating through the entire string without finding any mismatches, we can return True.
 
 Solution in Python:
 
 ```python
-def longest_substring(s):
-    seen = {}
-    start = 0
-    max_length = 0
-    
-    for i in range(len(s)):
-        if s[i] in seen:
-            start = max(start, seen[s[i]] + 1)
-        seen[s[i]] = i
-        max_length = max(max_length, i - start + 1)
-    
-    return max_length
+def is_palindrome(s):
+    s = s.lower()  # Convert the input string to lowercase for case-insensitive comparison
+    i, j = 0, len(s) - 1
+    while i < j:
+        if s[i] != s[j]:
+            return False
+        i += 1
+        j -= 1
+    return True
 
 # Test the function
-input_str = "abcabcbb"
-print(longest_substring(input_str))  # Output: 3
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))    # Output: False
 ```
 
-In the solution, we use a dictionary `seen` to store the index of each character we have seen. We also maintain a `start` pointer that marks the start of the current substring with non-repeating characters. As we iterate through the string, we update the `start` pointer whenever we encounter a repeated character, and update the `max_length` whenever we find a longer substring. Finally, we return the `max_length` as the result.
+In the solution above, we define a function `is_palindrome` that takes a string `s` as input. We convert `s` to lowercase using the `lower()` method to make the comparison case-insensitive. We then use two pointers `i` and `j` to iterate through the string from the beginning and end respectively. If at any point the characters at the `i` and `j` indices do not match, we return False. If we successfully iterate through the entire string without returning False, we return True.
