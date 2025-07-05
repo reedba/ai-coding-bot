@@ -1,6 +1,9 @@
-Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
+Problem: Given a string, write a function to determine if it is a palindrome or not. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
 
 Example:
+Input: "A man, a plan, a canal, Panama"
+Output: True
+
 Input: "racecar"
 Output: True
 
@@ -8,24 +11,18 @@ Input: "hello"
 Output: False
 
 Explanation:
-To solve this problem, we can iterate through the characters of the string from both ends and compare them. If at any point we find that the characters do not match, we can return False. If we finish iterating through the entire string without finding any mismatches, we can return True.
+To solve this problem, we first need to remove all non-alphanumeric characters and convert the string to lowercase. Then, we can compare the string with its reverse and check if they are equal. If they are equal, then the string is a palindrome.
 
 Solution in Python:
-
 ```python
 def is_palindrome(s):
-    s = s.lower()  # Convert the input string to lowercase for case-insensitive comparison
-    i, j = 0, len(s) - 1
-    while i < j:
-        if s[i] != s[j]:
-            return False
-        i += 1
-        j -= 1
-    return True
+    s = ''.join(e.lower() for e in s if e.isalnum())
+    return s == s[::-1]
 
-# Test the function
+# Test cases
+print(is_palindrome("A man, a plan, a canal, Panama")) # Output: True
 print(is_palindrome("racecar"))  # Output: True
 print(is_palindrome("hello"))    # Output: False
 ```
 
-In the solution above, we define a function `is_palindrome` that takes a string `s` as input. We convert `s` to lowercase using the `lower()` method to make the comparison case-insensitive. We then use two pointers `i` and `j` to iterate through the string from the beginning and end respectively. If at any point the characters at the `i` and `j` indices do not match, we return False. If we successfully iterate through the entire string without returning False, we return True.
+In this solution, we first remove all non-alphanumeric characters and convert the string to lowercase using a list comprehension. Then, we compare the modified string with its reverse using slicing and return True if they are equal, indicating that the string is a palindrome.
