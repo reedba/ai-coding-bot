@@ -1,28 +1,38 @@
-Problem: Given a string, write a function to determine if it is a palindrome or not. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+Problem: Given a string, return the first non-repeating character in the string. If there are no non-repeating characters, return -1.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
-
-Input: "racecar"
-Output: True
-
 Input: "hello"
-Output: False
+Output: "h"
+
+Input: "leetcode"
+Output: "l"
+
+Input: "aabbcc"
+Output: -1
 
 Explanation:
-To solve this problem, we first need to remove all non-alphanumeric characters and convert the string to lowercase. Then, we can compare the string with its reverse and check if they are equal. If they are equal, then the string is a palindrome.
+To solve this problem, we can create a dictionary to store the count of each character in the input string. Then, we can iterate through the string again and check if the count of the character in the dictionary is equal to 1. If we find such character, we return it as the first non-repeating character.
 
 Solution in Python:
+
 ```python
-def is_palindrome(s):
-    s = ''.join(e.lower() for e in s if e.isalnum())
-    return s == s[::-1]
+def firstNonRepeatingChar(s):
+    char_count = {}
+    
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+            
+    for char in s:
+        if char_count[char] == 1:
+            return char
+    
+    return -1
 
 # Test cases
-print(is_palindrome("A man, a plan, a canal, Panama")) # Output: True
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
+print(firstNonRepeatingChar("hello")) # Output: "h"
+print(firstNonRepeatingChar("leetcode")) # Output: "l"
+print(firstNonRepeatingChar("aabbcc")) # Output: -1
 ```
-
-In this solution, we first remove all non-alphanumeric characters and convert the string to lowercase using a list comprehension. Then, we compare the modified string with its reverse using slicing and return True if they are equal, indicating that the string is a palindrome.
