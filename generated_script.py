@@ -1,38 +1,31 @@
-Problem: Given a string, return the first non-repeating character in the string. If there are no non-repeating characters, return -1.
-
-Example:
-Input: "hello"
-Output: "h"
-
-Input: "leetcode"
-Output: "l"
-
-Input: "aabbcc"
-Output: -1
+Problem: Reverse a string
 
 Explanation:
-To solve this problem, we can create a dictionary to store the count of each character in the input string. Then, we can iterate through the string again and check if the count of the character in the dictionary is equal to 1. If we find such character, we return it as the first non-repeating character.
+Write a function that takes in a string as input and returns the string reversed. For example, if the input is "hello", the output should be "olleh".
 
 Solution in Python:
-
 ```python
-def firstNonRepeatingChar(s):
-    char_count = {}
+def reverse_string(input_str):
+    # Convert the string to a list to make it mutable
+    input_list = list(input_str)
     
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-            
-    for char in s:
-        if char_count[char] == 1:
-            return char
+    # Initialize two pointers, one at the start and one at the end of the list
+    left = 0
+    right = len(input_list) - 1
     
-    return -1
+    # Swap the characters at the two pointers and move the pointers towards each other until they meet in the middle
+    while left < right:
+        input_list[left], input_list[right] = input_list[right], input_list[left]
+        left += 1
+        right -= 1
+    
+    # Convert the list back to a string and return it
+    return "".join(input_list)
 
-# Test cases
-print(firstNonRepeatingChar("hello")) # Output: "h"
-print(firstNonRepeatingChar("leetcode")) # Output: "l"
-print(firstNonRepeatingChar("aabbcc")) # Output: -1
+# Test the function with an example
+input_str = "hello"
+output_str = reverse_string(input_str)
+print(output_str)  # Output: "olleh"
 ```
+
+This solution solves the problem by swapping characters at the two ends of the string and moving towards the middle until the whole string is reversed. The time complexity of this solution is O(n) where n is the length of the input string.
