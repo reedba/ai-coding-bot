@@ -1,31 +1,22 @@
-Problem: Reverse a string
+Problem:
+Given two strings, s and t, determine if they are anagrams of each other. An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, using all the original letters exactly once.
 
 Explanation:
-Write a function that takes in a string as input and returns the string reversed. For example, if the input is "hello", the output should be "olleh".
+To determine if two strings are anagrams, we can simply check if the sorted version of each string is the same. If the sorted version of both strings is the same, then the strings are anagrams of each other.
 
-Solution in Python:
+Solution (in Python):
 ```python
-def reverse_string(input_str):
-    # Convert the string to a list to make it mutable
-    input_list = list(input_str)
-    
-    # Initialize two pointers, one at the start and one at the end of the list
-    left = 0
-    right = len(input_list) - 1
-    
-    # Swap the characters at the two pointers and move the pointers towards each other until they meet in the middle
-    while left < right:
-        input_list[left], input_list[right] = input_list[right], input_list[left]
-        left += 1
-        right -= 1
-    
-    # Convert the list back to a string and return it
-    return "".join(input_list)
+def isAnagram(s, t):
+    return sorted(s) == sorted(t)
 
-# Test the function with an example
-input_str = "hello"
-output_str = reverse_string(input_str)
-print(output_str)  # Output: "olleh"
+# Test cases
+s1 = "listen"
+t1 = "silent"
+print(isAnagram(s1, t1))  # Output: True
+
+s2 = "abc"
+t2 = "def"
+print(isAnagram(s2, t2))  # Output: False
 ```
 
-This solution solves the problem by swapping characters at the two ends of the string and moving towards the middle until the whole string is reversed. The time complexity of this solution is O(n) where n is the length of the input string.
+In the above solution, we define a function `isAnagram` that takes two strings as input and returns True if they are anagrams, and False otherwise. We then test the function with two sets of strings to demonstrate its correctness.
