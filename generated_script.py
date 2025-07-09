@@ -1,22 +1,43 @@
-Problem:
-Given two strings, s and t, determine if they are anagrams of each other. An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, using all the original letters exactly once.
+Problem: 
+
+Given a string, implement a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore spaces, capitalization, and punctuation when determining if a string is a palindrome.
+
+Example:
+
+Input: "A man, a plan, a canal, Panama"
+Output: True
+
+Input: "racecar"
+Output: True
+
+Input: "hello"
+Output: False
 
 Explanation:
-To determine if two strings are anagrams, we can simply check if the sorted version of each string is the same. If the sorted version of both strings is the same, then the strings are anagrams of each other.
 
-Solution (in Python):
+To solve this problem, we can create a function that takes a string as input and first preprocesses the string by removing spaces, punctuation, and converting all characters to lowercase. 
+
+Next, we can use two pointers technique where we start from the beginning and end of the string and compare characters at each position. If all characters match, we continue moving the pointers towards the middle of the string. If they don't match at any point, we can return False. If we reach the middle of the string and all characters match, we return True.
+
+Solution:
+
 ```python
-def isAnagram(s, t):
-    return sorted(s) == sorted(t)
+def is_palindrome(s):
+    s = ''.join(c.lower() for c in s if c.isalnum())
+    left, right = 0, len(s) - 1
+    
+    while left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+        
+    return True
 
 # Test cases
-s1 = "listen"
-t1 = "silent"
-print(isAnagram(s1, t1))  # Output: True
-
-s2 = "abc"
-t2 = "def"
-print(isAnagram(s2, t2))  # Output: False
+print(is_palindrome("A man, a plan, a canal, Panama")) # Output: True
+print(is_palindrome("racecar")) # Output: True
+print(is_palindrome("hello")) # Output: False
 ```
 
-In the above solution, we define a function `isAnagram` that takes two strings as input and returns True if they are anagrams, and False otherwise. We then test the function with two sets of strings to demonstrate its correctness.
+This function first preprocesses the input string by removing spaces and punctuation, and converting all characters to lowercase. Then, it uses two pointers to compare characters from the start and end of the string, moving towards the middle. If at any point the characters don't match, it returns False. If the pointers meet in the middle of the string, it returns True.
