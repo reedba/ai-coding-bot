@@ -1,43 +1,31 @@
-Problem: 
+Problem: Given a string, write a Python function to return the length of the longest substring without repeating characters.
 
-Given a string, implement a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore spaces, capitalization, and punctuation when determining if a string is a palindrome.
-
-Example:
-
-Input: "A man, a plan, a canal, Panama"
-Output: True
-
-Input: "racecar"
-Output: True
-
-Input: "hello"
-Output: False
-
-Explanation:
-
-To solve this problem, we can create a function that takes a string as input and first preprocesses the string by removing spaces, punctuation, and converting all characters to lowercase. 
-
-Next, we can use two pointers technique where we start from the beginning and end of the string and compare characters at each position. If all characters match, we continue moving the pointers towards the middle of the string. If they don't match at any point, we can return False. If we reach the middle of the string and all characters match, we return True.
+Explanation: We are given a string and we need to find the length of the longest substring within that string that does not contain any repeating characters. For example, in the string "abcabcbb", the longest substring without repeating characters is "abc" with a length of 3.
 
 Solution:
-
 ```python
-def is_palindrome(s):
-    s = ''.join(c.lower() for c in s if c.isalnum())
-    left, right = 0, len(s) - 1
+def longest_substring(s):
+    n = len(s)
+    if n == 0:
+        return 0
     
-    while left < right:
-        if s[left] != s[right]:
-            return False
-        left += 1
-        right -= 1
+    char_index = {} 
+    max_length = 0
+    start = 0
+    
+    for end in range(n):
+        if s[end] in char_index:
+            start = max(start, char_index[s[end]] + 1)
         
-    return True
+        char_index[s[end]] = end
+        max_length = max(max_length, end - start + 1)
+    
+    return max_length
 
-# Test cases
-print(is_palindrome("A man, a plan, a canal, Panama")) # Output: True
-print(is_palindrome("racecar")) # Output: True
-print(is_palindrome("hello")) # Output: False
+# Test the function
+print(longest_substring("abcabcbb")) # Output: 3
+print(longest_substring("bbbbb")) # Output: 1
+print(longest_substring("pwwkew")) # Output: 3
 ```
 
-This function first preprocesses the input string by removing spaces and punctuation, and converting all characters to lowercase. Then, it uses two pointers to compare characters from the start and end of the string, moving towards the middle. If at any point the characters don't match, it returns False. If the pointers meet in the middle of the string, it returns True.
+In this solution, we use a dictionary to store the index of each character as we iterate through the string. We also maintain a `start` variable that keeps track of the start index of the current substring without repeating characters. We update the `start` index whenever we encounter a repeating character. At each step, we calculate the length of the current substring and update `max_length` accordingly. Finally, we return the `max_length` as the result.
