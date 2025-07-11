@@ -1,31 +1,23 @@
-Problem: Given a string, write a Python function to return the length of the longest substring without repeating characters.
+Problem: 
+Given a string, determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization). Return True if the string is a palindrome, and False otherwise.
 
-Explanation: We are given a string and we need to find the length of the longest substring within that string that does not contain any repeating characters. For example, in the string "abcabcbb", the longest substring without repeating characters is "abc" with a length of 3.
+Example:
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
-Solution:
+Explanation:
+In this example, the input string "A man, a plan, a canal, Panama" is a palindrome because it reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+
+Solution in Python:
+
 ```python
-def longest_substring(s):
-    n = len(s)
-    if n == 0:
-        return 0
-    
-    char_index = {} 
-    max_length = 0
-    start = 0
-    
-    for end in range(n):
-        if s[end] in char_index:
-            start = max(start, char_index[s[end]] + 1)
-        
-        char_index[s[end]] = end
-        max_length = max(max_length, end - start + 1)
-    
-    return max_length
+def is_palindrome(s):
+    s = ''.join(e for e in s if e.isalnum()).lower() # Remove non-alphanumeric characters and convert to lowercase
+    return s == s[::-1] # Check if the string is equal to its reverse
 
 # Test the function
-print(longest_substring("abcabcbb")) # Output: 3
-print(longest_substring("bbbbb")) # Output: 1
-print(longest_substring("pwwkew")) # Output: 3
+input_string = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_string)) # Output: True
 ```
 
-In this solution, we use a dictionary to store the index of each character as we iterate through the string. We also maintain a `start` variable that keeps track of the start index of the current substring without repeating characters. We update the `start` index whenever we encounter a repeating character. At each step, we calculate the length of the current substring and update `max_length` accordingly. Finally, we return the `max_length` as the result.
+In this solution, we first preprocess the input string by removing all non-alphanumeric characters and converting it to lowercase. Then, we check if the processed string is equal to its reverse by using slicing. If they are equal, we return True, otherwise False.
