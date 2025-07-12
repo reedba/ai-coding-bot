@@ -1,23 +1,35 @@
-Problem: 
-Given a string, determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization). Return True if the string is a palindrome, and False otherwise.
+Problem:
 
-Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Given a string, create a function to reverse the string in-place without using any extra space.
 
 Explanation:
-In this example, the input string "A man, a plan, a canal, Panama" is a palindrome because it reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+
+In this problem, we are asked to reverse a given string in-place, meaning we cannot create a new string and must modify the original string. We can achieve this by using two pointers, one starting at the beginning of the string and one at the end of the string, and swapping the characters at these positions until we reach the middle of the string.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    s = ''.join(e for e in s if e.isalnum()).lower() # Remove non-alphanumeric characters and convert to lowercase
-    return s == s[::-1] # Check if the string is equal to its reverse
+def reverse_string_in_place(s):
+    # Convert the string to a list so that we can modify it in place
+    s = list(s)
+    
+    # Initialize two pointers, one at the beginning and one at the end of the string
+    start = 0
+    end = len(s) - 1
+    
+    while start < end:
+        # Swap the characters at the start and end pointers
+        s[start], s[end] = s[end], s[start]
+        # Move the pointers towards the middle of the string
+        start += 1
+        end -= 1
+        
+    # Convert the list back to a string
+    return ''.join(s)
 
 # Test the function
-input_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_string)) # Output: True
-```
+s = "hello"
+print(reverse_string_in_place(s))  # Output: "olleh"
+``` 
 
-In this solution, we first preprocess the input string by removing all non-alphanumeric characters and converting it to lowercase. Then, we check if the processed string is equal to its reverse by using slicing. If they are equal, we return True, otherwise False.
+This function takes a string `s` as input, converts it to a list, and then reverses the characters in-place using two pointers. Finally, it converts the reversed list back to a string and returns it.
