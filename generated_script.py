@@ -1,35 +1,29 @@
-Problem:
+Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. 
 
-Given a string, create a function to reverse the string in-place without using any extra space.
+Example:
+Input: "racecar"
+Output: True
+
+Input: "hello"
+Output: False
 
 Explanation:
 
-In this problem, we are asked to reverse a given string in-place, meaning we cannot create a new string and must modify the original string. We can achieve this by using two pointers, one starting at the beginning of the string and one at the end of the string, and swapping the characters at these positions until we reach the middle of the string.
+We can solve this problem by comparing the string with its reverse. If the reverse of the string is equal to the original string, then the string is a palindrome. We can use Python built-in functions to reverse the string and compare it with the original string.
 
 Solution in Python:
 
 ```python
-def reverse_string_in_place(s):
-    # Convert the string to a list so that we can modify it in place
-    s = list(s)
-    
-    # Initialize two pointers, one at the beginning and one at the end of the string
-    start = 0
-    end = len(s) - 1
-    
-    while start < end:
-        # Swap the characters at the start and end pointers
-        s[start], s[end] = s[end], s[start]
-        # Move the pointers towards the middle of the string
-        start += 1
-        end -= 1
-        
-    # Convert the list back to a string
-    return ''.join(s)
+def is_palindrome(s):
+    # Remove spaces and convert the string to lowercase
+    s = s.replace(" ", "").lower()
+    # Compare the original string with its reverse
+    return s == s[::-1]
 
-# Test the function
-s = "hello"
-print(reverse_string_in_place(s))  # Output: "olleh"
-``` 
+# Test the function with examples
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))  # False
+print(is_palindrome("A man a plan a canal Panama"))  # True
+```
 
-This function takes a string `s` as input, converts it to a list, and then reverses the characters in-place using two pointers. Finally, it converts the reversed list back to a string and returns it.
+In the solution above, we first remove spaces and convert the string to lowercase using the `replace()` and `lower()` functions. Then, we compare the original string with its reverse using slicing notation `s[::-1]`. If they are equal, we return `True` indicating that the string is a palindrome, otherwise `False`.
