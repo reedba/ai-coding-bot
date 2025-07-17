@@ -1,23 +1,36 @@
-Problem:
-Given a string, determine if it is a palindrome. Ignore spaces and punctuation when considering if the string is a palindrome.
+Problem: Given a string, return the most common character in the string. If there are multiple characters that occur with the same frequency, return the one that comes first in the string.
+
+Example:
+Input: "hello"
+Output: "l"
 
 Explanation:
-A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards (ignoring spaces and punctuation). For example, "racecar" is a palindrome.
+In the input string "hello", the character 'l' occurs 2 times, which is more than any other character in the string.
 
-Solution in Python:
-
-```python
-def is_palindrome(s):
-    # Convert string to lowercase and remove spaces and punctuation
-    s = ''.join(e for e in s.lower() if e.isalnum())
+Solution:
+```
+def most_common_char(input_string):
+    char_count = {}
     
-    # Check if the reversed string is equal to the original string
-    return s == s[::-1]
+    for char in input_string:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+    
+    max_count = 0
+    most_common_char = ''
+    
+    for char, count in char_count.items():
+        if count > max_count:
+            max_count = count
+            most_common_char = char
+    
+    return most_common_char
 
-# Test cases
-print(is_palindrome("A man, a plan, a canal, Panama"))  # True
-print(is_palindrome("racecar"))  # True
-print(is_palindrome("hello world"))  # False
+# Test the function
+input_string = "hello"
+print(most_common_char(input_string))  # Output: "l"
 ```
 
-In this solution, we first convert the input string to lowercase and remove all non-alphanumeric characters. Then, we check if the string is equal to its reverse using slicing. If they are equal, the function returns True, indicating that the input string is a palindrome. Otherwise, it returns False.
+In this solution, we first iterate through the input string and count the occurrences of each character in a dictionary. Then, we iterate through the dictionary to find the character with the highest count, which is the most common character in the string. Finally, we return the most common character.
