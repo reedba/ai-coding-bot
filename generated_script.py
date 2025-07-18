@@ -1,36 +1,37 @@
-Problem: Given a string, return the most common character in the string. If there are multiple characters that occur with the same frequency, return the one that comes first in the string.
+Problem:
+Given a string, return the most common character in the string. If there are multiple characters that appear the same number of times, return the character with the lowest ASCII value.
 
 Example:
 Input: "hello"
 Output: "l"
 
 Explanation:
-In the input string "hello", the character 'l' occurs 2 times, which is more than any other character in the string.
+In the input string "hello", the characters 'l' appears the most frequently, a total of 2 times. Therefore, the output should be "l".
 
 Solution:
-```
-def most_common_char(input_string):
+```python
+def most_common_character(s):
     char_count = {}
     
-    for char in input_string:
+    for char in s:
         if char in char_count:
             char_count[char] += 1
         else:
             char_count[char] = 1
     
+    most_common_char = None
     max_count = 0
-    most_common_char = ''
     
     for char, count in char_count.items():
-        if count > max_count:
-            max_count = count
+        if count > max_count or (count == max_count and ord(char) < ord(most_common_char)):
             most_common_char = char
+            max_count = count
     
     return most_common_char
 
 # Test the function
-input_string = "hello"
-print(most_common_char(input_string))  # Output: "l"
+print(most_common_character("hello"))  # Output: "l"
+print(most_common_character("abcdeedcba"))  # Output: "a"
 ```
 
-In this solution, we first iterate through the input string and count the occurrences of each character in a dictionary. Then, we iterate through the dictionary to find the character with the highest count, which is the most common character in the string. Finally, we return the most common character.
+This function takes a string as input, counts the occurrence of each character in the string, and returns the most common character (with the lowest ASCII value in case of a tie).
