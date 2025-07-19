@@ -1,37 +1,23 @@
 Problem:
-Given a string, return the most common character in the string. If there are multiple characters that appear the same number of times, return the character with the lowest ASCII value.
+
+Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
 
 Example:
-Input: "hello"
-Output: "l"
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-In the input string "hello", the characters 'l' appears the most frequently, a total of 2 times. Therefore, the output should be "l".
+The input string contains the phrase "A man, a plan, a canal, Panama", which is a palindrome when ignoring spaces, punctuation, and capitalization. Therefore, the output is True.
 
-Solution:
-```python
-def most_common_character(s):
-    char_count = {}
-    
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-    
-    most_common_char = None
-    max_count = 0
-    
-    for char, count in char_count.items():
-        if count > max_count or (count == max_count and ord(char) < ord(most_common_char)):
-            most_common_char = char
-            max_count = count
-    
-    return most_common_char
+Solution in Python:
+
+def is_palindrome(s):
+    s = ''.join(c.lower() for c in s if c.isalnum())  # Remove spaces, punctuation, and convert to lowercase
+    return s == s[::-1]  # Check if the string is equal to its reverse
 
 # Test the function
-print(most_common_character("hello"))  # Output: "l"
-print(most_common_character("abcdeedcba"))  # Output: "a"
-```
+input_str = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_str))
+# Output: True
 
-This function takes a string as input, counts the occurrence of each character in the string, and returns the most common character (with the lowest ASCII value in case of a tie).
+In this solution, we first remove spaces, punctuation, and convert the input string to lowercase using a list comprehension. Then, we check if the modified string is equal to its reverse using Python's string slicing syntax. Finally, we return True if the string is a palindrome and False otherwise.
