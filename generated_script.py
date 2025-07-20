@@ -1,23 +1,30 @@
 Problem:
 
-Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters that reads the same forward and backward.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
+Input: "racecar"
 Output: True
 
+Input: "hello"
+Output: False
+
 Explanation:
-The input string contains the phrase "A man, a plan, a canal, Panama", which is a palindrome when ignoring spaces, punctuation, and capitalization. Therefore, the output is True.
+To solve this problem, we can compare the string with its reverse to check if it is a palindrome. If the original string is equal to its reverse, then it is a palindrome.
 
 Solution in Python:
 
+```python
 def is_palindrome(s):
-    s = ''.join(c.lower() for c in s if c.isalnum())  # Remove spaces, punctuation, and convert to lowercase
-    return s == s[::-1]  # Check if the string is equal to its reverse
+    # Convert the input string to lowercase and remove spaces
+    s = s.lower().replace(" ", "")
+    
+    # Check if the string is equal to its reverse
+    return s == s[::-1]
 
-# Test the function
-input_str = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_str))
-# Output: True
+# Test cases
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))    # Output: False
+```
 
-In this solution, we first remove spaces, punctuation, and convert the input string to lowercase using a list comprehension. Then, we check if the modified string is equal to its reverse using Python's string slicing syntax. Finally, we return True if the string is a palindrome and False otherwise.
+In this solution, we first convert the input string to lowercase and remove any spaces using the `lower()` and `replace()` functions. Then, we check if the string is equal to its reverse using slicing. If they are equal, we return True, indicating that the string is a palindrome.
