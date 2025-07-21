@@ -1,30 +1,34 @@
 Problem:
-
-Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters that reads the same forward and backward.
+Given a string, find the first non-repeating character and return its index. If there is no non-repeating character, return -1.
 
 Example:
-Input: "racecar"
-Output: True
-
-Input: "hello"
-Output: False
+Input: "leetcode"
+Output: 0
 
 Explanation:
-To solve this problem, we can compare the string with its reverse to check if it is a palindrome. If the original string is equal to its reverse, then it is a palindrome.
+In the input string "leetcode", the first non-repeating character is 'l' at index 0.
 
 Solution in Python:
 
 ```python
-def is_palindrome(s):
-    # Convert the input string to lowercase and remove spaces
-    s = s.lower().replace(" ", "")
+def firstNonRepeatingChar(s):
+    char_count = {}
     
-    # Check if the string is equal to its reverse
-    return s == s[::-1]
+    # Count the occurrences of each character in the string
+    for char in s:
+        char_count[char] = char_count.get(char, 0) + 1
+    
+    # Find the first non-repeating character and return its index
+    for i in range(len(s)):
+        if char_count[s[i]] == 1:
+            return i
+    
+    return -1
 
-# Test cases
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
+# Test the function with the example input
+input_str = "leetcode"
+index = firstNonRepeatingChar(input_str)
+print(index)
 ```
 
-In this solution, we first convert the input string to lowercase and remove any spaces using the `lower()` and `replace()` functions. Then, we check if the string is equal to its reverse using slicing. If they are equal, we return True, indicating that the string is a palindrome.
+This solution uses a dictionary to store the count of each character in the string. Then, it iterates through the string to find the first non-repeating character and returns its index. If there is no non-repeating character, it returns -1.
