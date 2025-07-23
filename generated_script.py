@@ -1,33 +1,18 @@
-Problem: Given a string, return the first non-repeating character in the string. If there are no non-repeating characters, return None.
+Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
 
-Example:
-Input: "leetcode"
-Output: "l"
-
-Explanation:
-In the input string "leetcode", the first non-repeating character is 'l'.
+Explanation: To check if a string is a palindrome, we can compare the string with its reverse. If the reversed string is the same as the original string, then the string is a palindrome.
 
 Solution in Python:
 
 ```python
-def first_non_repeating_char(s):
-    char_count = {}
-    
-    for char in s:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-    
-    for char in s:
-        if char_count[char] == 1:
-            return char
-    
-    return None
+def is_palindrome(s):
+    return s == s[::-1]
 
-# Test the function
-input_str = "leetcode"
-print(first_non_repeating_char(input_str))  # Output: "l"
+# Test cases
+print(is_palindrome("racecar")) # Output: True
+print(is_palindrome("hello")) # Output: False
+print(is_palindrome("1221")) # Output: True
+print(is_palindrome("apple")) # Output: False
 ```
 
-In this solution, we first create a dictionary `char_count` to store the count of each character in the input string. We then iterate through the string to populate the dictionary. Finally, we iterate through the input string again and return the first character with a count of 1, signifying that it is a non-repeating character. If no non-repeating characters are found, we return None.
+In the above solution, the `is_palindrome` function takes a string `s` as input and returns `True` if it is a palindrome, and `False` otherwise. The function uses slicing (`[::-1]`) to reverse the string and compare it with the original string.
