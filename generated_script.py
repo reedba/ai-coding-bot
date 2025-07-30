@@ -1,24 +1,37 @@
-Problem:
+Problem: 
 
-Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore spaces, punctuation, and capitalization when determining if a string is a palindrome.
+Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same backward as forward. Ignore spaces, punctuation, and capitalization when checking for a palindrome.
 
 Example:
+
 Input: "A man, a plan, a canal, Panama"
 Output: True
 
+Input: "racecar"
+Output: True
+
+Input: "hello world"
+Output: False
+
 Explanation:
-The input string "A man, a plan, a canal, Panama" can be read the same way forwards and backwards when ignoring spaces, punctuation, and capitalization. Therefore, the output is True.
+
+To determine if a string is a palindrome, we can compare the string with its reverse. To ignore spaces, punctuation, and capitalization, we can preprocess the string by converting it to lowercase and removing any non-alphanumeric characters.
 
 Solution in Python:
 
 ```python
 def is_palindrome(s):
-    s = ''.join(char for char in s if char.isalnum()).lower()
+    # Preprocess the string
+    s = ''.join(c for c in s if c.isalnum())
+    s = s.lower()
+    
+    # Compare the string with its reverse
     return s == s[::-1]
 
-# Test the function with example input
-input_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_string))  # Output: True
+# Test the function
+print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello world"))  # Output: False
 ```
 
-In the solution, the `is_palindrome` function takes a string as input and first removes all non-alphanumeric characters (using list comprehension and the `isalnum()` method) and converts all characters to lowercase. Then, it checks if the cleaned string is equal to its reverse (achieved by slicing with `[::-1]`), returning `True` if it is a palindrome.
+This function takes a string as input, preprocesses it by removing non-alphanumeric characters and converting it to lowercase, and then compares the string with its reverse using slicing. If the string is equal to its reverse, the function returns True, indicating that the string is a palindrome. Otherwise, it returns False.
