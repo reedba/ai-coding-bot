@@ -1,36 +1,24 @@
 Problem:
-Given a string, return the most common character in the string. If there are multiple characters that are equally common, return the character that appears first in the input string. 
+Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. Ignore spaces, punctuation, and capitalization.
 
 Example:
-Input: "abracadabra"
-Output: "a"
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-In the input string "abracadabra", the character "a" appears 5 times, which is more than any other character in the string. Therefore, the output is "a".
+The input string "A man, a plan, a canal, Panama" when stripped of spaces, punctuation, and converted to lowercase is "amanaplanacanalpanama", which is a palindrome.
 
 Solution in Python:
 
 ```python
-def most_common_char(input_string):
-    char_count = {}
-    for char in input_string:
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            char_count[char] = 1
-    
-    max_count = 0
-    most_common_char = None
-    for char, count in char_count.items():
-        if count > max_count:
-            max_count = count
-            most_common_char = char
-    
-    return most_common_char
+def is_palindrome(s):
+    s = ''.join(c for c in s if c.isalnum()).lower()
+    return s == s[::-1]
 
 # Test the function
-input_string = "abracadabra"
-print(most_common_char(input_string))  # Output: "a"
+print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
+print(is_palindrome("racecar"))                           # Output: True
+print(is_palindrome("hello"))                             # Output: False
 ```
 
-In the above solution, we first create a dictionary `char_count` to store the count of each character in the input string. We then loop through the input string to populate this dictionary. Finally, we iterate through the dictionary to find the character with the highest count and return it as the most common character in the string.
+In the above solution, the `is_palindrome` function takes a string `s` as input and removes all non-alphanumeric characters and converts the string to lowercase using list comprehension. Then, it checks if the cleaned string is equal to its reverse (using slicing `[::-1]`) to determine if it is a palindrome.
