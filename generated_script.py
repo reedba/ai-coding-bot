@@ -1,24 +1,35 @@
-Problem:
-Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward. Ignore spaces, punctuation, and capitalization.
+Problem: Given a string, return the first non-repeating character in it. If there are no non-repeating characters, return -1.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Input: "leetcode"
+Output: "l"
 
 Explanation:
-The input string "A man, a plan, a canal, Panama" when stripped of spaces, punctuation, and converted to lowercase is "amanaplanacanalpanama", which is a palindrome.
+In the input string "leetcode", the first non-repeating character is 'l'.
 
 Solution in Python:
-
 ```python
-def is_palindrome(s):
-    s = ''.join(c for c in s if c.isalnum()).lower()
-    return s == s[::-1]
+def firstUniqChar(s: str) -> str:
+    # Create a dictionary to store the frequency of each character in the string
+    freq = {}
+    
+    # Count the frequency of each character
+    for char in s:
+        if char in freq:
+            freq[char] += 1
+        else:
+            freq[char] = 1
+            
+    # Find the first non-repeating character in the string
+    for char in s:
+        if freq[char] == 1:
+            return char
+    
+    return -1
 
-# Test the function
-print(is_palindrome("A man, a plan, a canal, Panama"))  # Output: True
-print(is_palindrome("racecar"))                           # Output: True
-print(is_palindrome("hello"))                             # Output: False
+# Test the function with the given example
+input_str = "leetcode"
+print(firstUniqChar(input_str))  # Output: "l"
 ```
 
-In the above solution, the `is_palindrome` function takes a string `s` as input and removes all non-alphanumeric characters and converts the string to lowercase using list comprehension. Then, it checks if the cleaned string is equal to its reverse (using slicing `[::-1]`) to determine if it is a palindrome.
+In this solution, we first count the frequency of each character in the input string using a dictionary. Then, we iterate through the string again to find the first non-repeating character by checking if its frequency is 1. If we find such a character, we return it. If no non-repeating character is found, we return -1.
