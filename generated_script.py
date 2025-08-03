@@ -1,35 +1,33 @@
-Problem: Given a string, return the first non-repeating character in it. If there are no non-repeating characters, return -1.
+Problem:
+
+Given an array of integers, write a function to check if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
 
 Example:
-Input: "leetcode"
-Output: "l"
+Input: [1, 2, 3, 1]
+Output: true
+
+Input: [1, 2, 3, 4]
+Output: false
 
 Explanation:
-In the input string "leetcode", the first non-repeating character is 'l'.
+To solve this problem, we can create a set to store the elements we have seen so far while iterating through the array. If we encounter an element that is already in the set, we return true. If we reach the end of the array without finding any duplicates, we return false.
 
 Solution in Python:
-```python
-def firstUniqChar(s: str) -> str:
-    # Create a dictionary to store the frequency of each character in the string
-    freq = {}
-    
-    # Count the frequency of each character
-    for char in s:
-        if char in freq:
-            freq[char] += 1
-        else:
-            freq[char] = 1
-            
-    # Find the first non-repeating character in the string
-    for char in s:
-        if freq[char] == 1:
-            return char
-    
-    return -1
 
-# Test the function with the given example
-input_str = "leetcode"
-print(firstUniqChar(input_str))  # Output: "l"
+```python
+def containsDuplicate(nums):
+    num_set = set()
+    
+    for num in nums:
+        if num in num_set:
+            return True
+        num_set.add(num)
+    
+    return False
+
+# Test cases
+print(containsDuplicate([1, 2, 3, 1])) # Output: true
+print(containsDuplicate([1, 2, 3, 4])) # Output: false
 ```
 
-In this solution, we first count the frequency of each character in the input string using a dictionary. Then, we iterate through the string again to find the first non-repeating character by checking if its frequency is 1. If we find such a character, we return it. If no non-repeating character is found, we return -1.
+This function has a time complexity of O(n) where n is the number of elements in the input array. The space complexity is also O(n) due to the set we are using to store the elements.
