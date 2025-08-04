@@ -1,33 +1,29 @@
-Problem:
-
-Given an array of integers, write a function to check if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+Problem: Given a list of words, write a Python function that returns the longest word in the list. If there are multiple words with the same length, return the word that appears first in the list.
 
 Example:
-Input: [1, 2, 3, 1]
-Output: true
-
-Input: [1, 2, 3, 4]
-Output: false
+Input: ["apple", "banana", "orange", "kiwi", "pineapple"]
+Output: "pineapple"
 
 Explanation:
-To solve this problem, we can create a set to store the elements we have seen so far while iterating through the array. If we encounter an element that is already in the set, we return true. If we reach the end of the array without finding any duplicates, we return false.
+To solve this problem, we can iterate through the list of words and keep track of the longest word seen so far. We can start by initializing a variable to store the current longest word and set it to an empty string. Then, we can iterate through each word in the list and compare its length with the length of the current longest word. If the current word is longer, we update the current longest word. Finally, we return the longest word found.
 
-Solution in Python:
+Solution:
 
 ```python
-def containsDuplicate(nums):
-    num_set = set()
+def longest_word(words):
+    longest = ""
     
-    for num in nums:
-        if num in num_set:
-            return True
-        num_set.add(num)
-    
-    return False
+    for word in words:
+        if len(word) > len(longest):
+            longest = word
+            
+    return longest
 
-# Test cases
-print(containsDuplicate([1, 2, 3, 1])) # Output: true
-print(containsDuplicate([1, 2, 3, 4])) # Output: false
+words = ["apple", "banana", "orange", "kiwi", "pineapple"]
+print(longest_word(words))
 ```
 
-This function has a time complexity of O(n) where n is the number of elements in the input array. The space complexity is also O(n) due to the set we are using to store the elements.
+Output:
+"pineapple"
+
+This solution has a time complexity of O(n), where n is the number of words in the list.
