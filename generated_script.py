@@ -1,29 +1,21 @@
-Problem: Given a list of words, write a Python function that returns the longest word in the list. If there are multiple words with the same length, return the word that appears first in the list.
+Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
 
 Example:
-Input: ["apple", "banana", "orange", "kiwi", "pineapple"]
-Output: "pineapple"
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-To solve this problem, we can iterate through the list of words and keep track of the longest word seen so far. We can start by initializing a variable to store the current longest word and set it to an empty string. Then, we can iterate through each word in the list and compare its length with the length of the current longest word. If the current word is longer, we update the current longest word. Finally, we return the longest word found.
+In the above example, the input string "A man, a plan, a canal, Panama" is a palindrome when we ignore spaces, punctuation, and capitalization. When we remove the spaces, punctuation, and capitalize all characters, we get "amanaplanacanalpanama", which reads the same forward and backward.
 
 Solution:
-
 ```python
-def longest_word(words):
-    longest = ""
-    
-    for word in words:
-        if len(word) > len(longest):
-            longest = word
-            
-    return longest
+def is_palindrome(s):
+    s = ''.join(e for e in s if e.isalnum()).lower() # Remove non-alphanumeric characters and convert to lowercase
+    return s == s[::-1]
 
-words = ["apple", "banana", "orange", "kiwi", "pineapple"]
-print(longest_word(words))
+# Test the function
+input_str = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_str))  # Output: True
 ```
 
-Output:
-"pineapple"
-
-This solution has a time complexity of O(n), where n is the number of words in the list.
+In the solution, we first remove all non-alphanumeric characters from the input string and convert it to lowercase. Then, we check if the modified string is equal to its reverse. If they are equal, then the input string is a palindrome and we return True.
