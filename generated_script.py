@@ -1,21 +1,36 @@
-Problem: Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
+Problem: 
+Given a string, return the most common character in the string. If there are multiple characters with the same maximum frequency, return all of them in a list.
 
 Example:
-Input: "A man, a plan, a canal, Panama"
-Output: True
+Input: "abbcccdddeee"
+Output: ['c', 'd', 'e']
 
 Explanation:
-In the above example, the input string "A man, a plan, a canal, Panama" is a palindrome when we ignore spaces, punctuation, and capitalization. When we remove the spaces, punctuation, and capitalize all characters, we get "amanaplanacanalpanama", which reads the same forward and backward.
+In the input string "abbcccdddeee", the most common characters are 'c', 'd', and 'e' with a frequency of 3.
 
-Solution:
+Solution in Python:
+
 ```python
-def is_palindrome(s):
-    s = ''.join(e for e in s if e.isalnum()).lower() # Remove non-alphanumeric characters and convert to lowercase
-    return s == s[::-1]
+def most_common_character(s):
+    char_freq = {}
+    
+    for char in s:
+        if char in char_freq:
+            char_freq[char] += 1
+        else:
+            char_freq[char] = 1
+    
+    max_freq = max(char_freq.values())
+    
+    most_common_chars = [char for char, freq in char_freq.items() if freq == max_freq]
+    
+    return most_common_chars
 
-# Test the function
-input_str = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_str))  # Output: True
+# Test the function with the example
+input_str = "abbcccdddeee"
+output = most_common_character(input_str)
+print(output)
 ```
 
-In the solution, we first remove all non-alphanumeric characters from the input string and convert it to lowercase. Then, we check if the modified string is equal to its reverse. If they are equal, then the input string is a palindrome and we return True.
+Output:
+['c', 'd', 'e']
