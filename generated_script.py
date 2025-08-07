@@ -1,36 +1,26 @@
-Problem: 
-Given a string, return the most common character in the string. If there are multiple characters with the same maximum frequency, return all of them in a list.
-
-Example:
-Input: "abbcccdddeee"
-Output: ['c', 'd', 'e']
+Problem: Given a string, write a Python function to check if it is a palindrome, ignoring spaces and capitalization. Return True if the string is a palindrome, and False otherwise.
 
 Explanation:
-In the input string "abbcccdddeee", the most common characters are 'c', 'd', and 'e' with a frequency of 3.
+- A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
+- In this problem, we will ignore spaces and capitalization when checking for palindromes. For example, "A man, a plan, a canal, Panama" should be considered a palindrome.
 
-Solution in Python:
-
+Solution:
 ```python
-def most_common_character(s):
-    char_freq = {}
+def is_palindrome(s):
+    # Remove spaces and convert all characters to lowercase
+    cleaned_str = ''.join(char.lower() for char in s if char.isalnum())
     
-    for char in s:
-        if char in char_freq:
-            char_freq[char] += 1
-        else:
-            char_freq[char] = 1
-    
-    max_freq = max(char_freq.values())
-    
-    most_common_chars = [char for char, freq in char_freq.items() if freq == max_freq]
-    
-    return most_common_chars
+    # Check if the cleaned string is equal to its reverse
+    return cleaned_str == cleaned_str[::-1]
 
-# Test the function with the example
-input_str = "abbcccdddeee"
-output = most_common_character(input_str)
-print(output)
+# Test cases
+print(is_palindrome("A man, a plan, a canal, Panama"))  # True
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("hello"))  # False
 ```
 
-Output:
-['c', 'd', 'e']
+In the solution code:
+1. We first clean the input string by removing spaces and converting all characters to lowercase using list comprehension.
+2. Next, we check if the cleaned string is equal to its reverse using slicing.
+3. The function returns True if the string is a palindrome and False otherwise.
+4. We provide a few test cases to demonstrate the function's correctness.
