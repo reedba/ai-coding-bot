@@ -1,27 +1,24 @@
 Problem: 
-Given a string, write a Python function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, capitalization, and punctuation).
+
+Given a string, determine if it is a palindrome or not. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. Ignore whitespaces, punctuation, and capitalization.
+
+Example:
+Input: "A man, a plan, a canal, Panama"
+Output: True
 
 Explanation:
-To solve this problem, we can remove all non-alphanumeric characters from the input string and convert it to lowercase. Then we can compare the original string with its reverse to determine if it is a palindrome.
+The input string, "A man, a plan, a canal, Panama", is a palindrome when we remove whitespaces, punctuation, and capitalization. The string reads the same forwards and backwards.
 
-Solution:
+Solution in Python:
 
 ```python
 def is_palindrome(s):
-    # Remove non-alphanumeric characters and convert to lowercase
-    s = "".join(char.lower() for char in s if char.isalnum())
-    
-    # Compare original string with its reverse
+    s = ''.join(filter(str.isalnum, s)).lower()
     return s == s[::-1]
 
 # Test the function
-test_string1 = "A man, a plan, a canal, Panama!"
-test_string2 = "racecar"
-test_string3 = "hello"
-
-print(is_palindrome(test_string1))  # True
-print(is_palindrome(test_string2))  # True
-print(is_palindrome(test_string3))  # False
+input_str = "A man, a plan, a canal, Panama"
+print(is_palindrome(input_str))  # Output: True
 ```
 
-This function first removes all non-alphanumeric characters from the input string using list comprehension and the `isalnum()` method. Then it converts the remaining characters to lowercase. Finally, it checks if the modified string is equal to its reverse using slicing.
+In this solution, the `is_palindrome` function takes a string as input. We remove whitespaces and punctuation using `filter(str.isalnum, s)` and convert the string to lowercase using `lower()`. Then we compare the string to its reverse (`s == s[::-1]`) to determine if it is a palindrome.
