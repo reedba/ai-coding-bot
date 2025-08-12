@@ -1,24 +1,32 @@
-Problem: 
-Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
+Problem:
+Given a string, find the longest substring without repeating characters.
 
 Example:
-Input: "racecar"
-Output: True
-
-Input: "hello"
-Output: False
+Input: "abcabcbb"
+Output: 3 (The longest substring without repeating characters is "abc")
 
 Explanation:
-To solve this problem, we can compare the original string with the reverse of the string. If they are equal, then the string is a palindrome. We can create the reverse of the string by using slicing in Python.
+One way to solve this problem is by using a sliding window approach. We can keep track of the characters seen so far in a dictionary and update the start index of the window whenever we encounter a repeating character.
 
-Solution:
+Solution (in Python):
+
 ```python
-def is_palindrome(s):
-    return s == s[::-1]
+def longest_substring_without_repeating(s):
+    char_dict = {}
+    start = 0
+    max_length = 0
+    
+    for end in range(len(s)):
+        if s[end] in char_dict:
+            start = max(start, char_dict[s[end]] + 1)
+        char_dict[s[end]] = end
+        max_length = max(max_length, end - start + 1)
+    
+    return max_length
 
-#Test cases
-print(is_palindrome("racecar")) #True
-print(is_palindrome("hello")) #False
+# Test the function
+input_string = "abcabcbb"
+print(longest_substring_without_repeating(input_string))  # Output: 3
 ```
 
-In this solution, we are using string slicing in Python to reverse the string `s`. Then, we are comparing the original string `s` with the reversed string `s[::-1]`. If they are equal, then the function returns True indicating that the string is a palindrome, otherwise it returns False.
+In this solution, we maintain a dictionary `char_dict` to keep track of the last seen index of each character. We iterate over the input string with a sliding window defined by the `start` and `end` indices. Whenever we encounter a repeating character, we update the `start` index to the next index after the last occurrence of that character. We update the maximum length if necessary and return the final result.
