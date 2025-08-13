@@ -1,32 +1,20 @@
-Problem:
-Given a string, find the longest substring without repeating characters.
-
-Example:
-Input: "abcabcbb"
-Output: 3 (The longest substring without repeating characters is "abc")
+Problem: Given a string, determine if it is a palindrome (i.e. reads the same forwards and backwards).
 
 Explanation:
-One way to solve this problem is by using a sliding window approach. We can keep track of the characters seen so far in a dictionary and update the start index of the window whenever we encounter a repeating character.
+A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (excluding spaces, punctuation, and capitalization). For example, "racecar" and "madam" are palindromes.
 
-Solution (in Python):
+Solution in Python:
 
 ```python
-def longest_substring_without_repeating(s):
-    char_dict = {}
-    start = 0
-    max_length = 0
-    
-    for end in range(len(s)):
-        if s[end] in char_dict:
-            start = max(start, char_dict[s[end]] + 1)
-        char_dict[s[end]] = end
-        max_length = max(max_length, end - start + 1)
-    
-    return max_length
+def is_palindrome(s):
+    s = s.lower() # Convert string to lowercase for case-insensitivity
+    s = ''.join(char for char in s if char.isalnum()) # Remove non-alphanumeric characters
+    return s == s[::-1] # Check if the string is equal to its reverse
 
-# Test the function
-input_string = "abcabcbb"
-print(longest_substring_without_repeating(input_string))  # Output: 3
+# Test cases
+print(is_palindrome("racecar")) # Output: True
+print(is_palindrome("madam")) # Output: True
+print(is_palindrome("hello")) # Output: False
 ```
 
-In this solution, we maintain a dictionary `char_dict` to keep track of the last seen index of each character. We iterate over the input string with a sliding window defined by the `start` and `end` indices. Whenever we encounter a repeating character, we update the `start` index to the next index after the last occurrence of that character. We update the maximum length if necessary and return the final result.
+In the solution above, we first convert the input string to lowercase and remove any non-alphanumeric characters using a list comprehension. We then compare the cleaned string with its reverse using slicing. If the original string is equal to its reverse, then it is a palindrome and we return True. Otherwise, we return False. We test the function with some example strings to verify its correctness.
