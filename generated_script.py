@@ -1,23 +1,26 @@
-Problem: Given a string, write a function to check if the string is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forwards and backwards. Ignore spaces, punctuation, and capitalization when checking for palindromes.
+Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
 
-Example: 
-Input: "A man, a plan, a canal, Panama"
+Example:
+Input: "racecar"
 Output: True
 
+Input: "hello"
+Output: False
+
 Explanation:
-The input string, "A man, a plan, a canal, Panama", is a palindrome when ignoring spaces, punctuation, and capitalization. When we remove all spaces and punctuation and convert all characters to lowercase, the resulting string is "amanaplanacanalpanama", which reads the same forwards and backwards.
+To solve this problem, we can compare the given string with its reversed version. If they are the same, then the string is a palindrome. Otherwise, it is not a palindrome.
 
 Solution in Python:
 
 ```python
 def is_palindrome(s):
-    s = ''.join(e for e in s if e.isalnum()).lower()
+    # Remove whitespace and convert to lowercase
+    s = s.replace(" ", "").lower()
     return s == s[::-1]
 
-# Test the function with the example input
-input_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_string))
+# Test cases
+print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("hello"))    # Output: False
 ```
 
-Output:
-True
+In this solution, we first remove any whitespace in the input string and convert it to lowercase to handle case insensitivity. Then, we compare the string with its reversed version using slicing `s[::-1]`. If they are equal, we return True indicating that the string is a palindrome.
