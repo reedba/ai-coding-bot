@@ -1,26 +1,23 @@
-Problem: Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.
+Problem:
+Given a string, write a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward. The function should return True if the string is a palindrome, and False otherwise. Ignore spaces and non-alphanumeric characters when checking for palindromes.
 
 Example:
-Input: "racecar"
+Input: "A man, a plan, a canal: Panama"
 Output: True
 
-Input: "hello"
-Output: False
-
 Explanation:
-To solve this problem, we can compare the given string with its reversed version. If they are the same, then the string is a palindrome. Otherwise, it is not a palindrome.
+In the given input, after ignoring spaces and non-alphanumeric characters, the string becomes "amanaplanacanalpanama" which is a palindrome when read backwards.
 
 Solution in Python:
 
 ```python
 def is_palindrome(s):
-    # Remove whitespace and convert to lowercase
-    s = s.replace(" ", "").lower()
-    return s == s[::-1]
+    clean_s = ''.join(char.lower() for char in s if char.isalnum())
+    return clean_s == clean_s[::-1]
 
-# Test cases
-print(is_palindrome("racecar"))  # Output: True
-print(is_palindrome("hello"))    # Output: False
+# Test the function with the example input
+input_string = "A man, a plan, a canal: Panama"
+print(is_palindrome(input_string))  # Output: True
 ```
 
-In this solution, we first remove any whitespace in the input string and convert it to lowercase to handle case insensitivity. Then, we compare the string with its reversed version using slicing `s[::-1]`. If they are equal, we return True indicating that the string is a palindrome.
+In this solution, we first clean the input string by removing spaces and non-alphanumeric characters using list comprehension and `isalnum()` method. Then, we check if the cleaned string is equal to its reverse (read backward). If they are equal, we return True as the string is a palindrome, otherwise False.
