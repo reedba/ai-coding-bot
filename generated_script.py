@@ -1,24 +1,32 @@
-Problem: 
+Problem: Given a string, implement a function to check if it is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
 
-Given a string, write a function to determine if it is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters which reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
-
-Example:
+For example:
 Input: "A man, a plan, a canal, Panama"
 Output: True
 
-Explanation:
-Removing spaces, punctuation, and capitalization, the string becomes "amanaplanacanalpanama", which is a palindrome.
+Input: "racecar"
+Output: True
 
-Solution in Python:
+Input: "hello"
+Output: False
 
+Solution:
 ```python
 def is_palindrome(s):
-    s = ''.join([c.lower() for c in s if c.isalnum()]) # Remove spaces, punctuation and convert to lowercase
-    return s == s[::-1] # Check if the string is equal to its reverse
+    # Remove spaces and punctuation, convert to lowercase
+    s = ''.join(e.lower() for e in s if e.isalnum())
+    # Check if the string is equal to its reverse
+    return s == s[::-1]
 
-# Test the function
-input_string = "A man, a plan, a canal, Panama"
-print(is_palindrome(input_string)) # Output: True
+# Test cases
+print(is_palindrome("A man, a plan, a canal, Panama"))   # Output: True
+print(is_palindrome("racecar"))                           # Output: True
+print(is_palindrome("hello"))                             # Output: False
 ```
 
-In the solution above, we first remove all spaces and punctuation from the input string and convert the characters to lowercase. We then check if the modified string is equal to its reverse using string slicing. If they are equal, the function returns True, indicating that the input string is a palindrome.
+Explanation:
+1. The `is_palindrome` function takes a string `s` as input.
+2. Using a list comprehension, we remove spaces and punctuation using the `isalnum` function and convert all characters to lowercase.
+3. We check if the modified string is equal to its reverse using the slicing notation `[::-1]`.
+4. The function returns `True` if the string is a palindrome and `False` otherwise.
+5. Test cases are provided to verify the function's correctness.
